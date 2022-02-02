@@ -1,0 +1,19 @@
+:root { 
+  --black: #000000;
+  --caribbean-green: #27ceac;
+  --charade: #232c33;
+  --kashmir-blue: #4c5f94;
+  --lynch: #6b7eb3;
+  --mystic: #e4e9f1;
+  --wild-sand: #f2f4f8;
+ 
+  --font-size-l: 24px;
+  --font-size-m: 18px;
+  --font-size-s: 16px;
+  --font-size-xl: 28px;
+  --font-size-xs: 14px;
+  --font-size-xxl: 48px;
+  --font-size-xxs: 12px;
+ 
+  --font-family-chivo: "Chivo", Helvetica;
+}
