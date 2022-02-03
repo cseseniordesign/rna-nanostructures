@@ -9,14 +9,19 @@ const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-export default function InputSlider() {
+export default function InputSlider(props) {
   const [value, setValue] = React.useState(30);
 
   const handleSliderChange = (event, newValue) => {
+    event.target.name = props.name;
+    //sliderChange(event);
+    //console.log(props);
+    props.sliderChange(event);
     setValue(newValue);
   };
 
   const handleInputChange = (event) => {
+    //sliderChange(event);
     setValue(event.target.value === '' ? '' : Number(event.target.value));
   };
 
@@ -38,6 +43,7 @@ export default function InputSlider() {
           <Slider
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
+            name = {props.name}
             aria-labelledby="input-slider"
           />
         </Grid>
@@ -47,6 +53,7 @@ export default function InputSlider() {
             size="small"
             onChange={handleInputChange}
             onBlur={handleBlur}
+            name={props.name}
             inputProps={{
               step: 10,
               min: 0,

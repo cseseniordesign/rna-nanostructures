@@ -4,8 +4,10 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import BasicMenu from '../components/BasicMenu';
 import InputSlider from '../components/InputSlider';
+import { useState } from 'react';
 
-export default function JobName() {
+export default function JobName(props) {
+  //const [myValue, setValue] = useState('');
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -19,6 +21,7 @@ export default function JobName() {
             name="name"
             label="Name"
             fullWidth
+            onChange={props.handleChange}
             variant="standard"
           />
         </Grid>
@@ -29,6 +32,7 @@ export default function JobName() {
             label="Description"
             fullWidth
             maxRows = "5"
+            onChange={props.handleChange}
             variant="standard"
           />
         </Grid>
@@ -36,16 +40,16 @@ export default function JobName() {
           {/*spacer*/}
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography id="input-slider-1" gutterBottom>
+        <Typography id="designCount" gutterBottom>
         Number of Designs
       </Typography>
-          <InputSlider />
+          <InputSlider name="designs" sliderChange={props.sliderChange} />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography id="input-slider-2" gutterBottom>
+        <Typography id="scaffoldCount" gutterBottom>
         Number of Scaffolds per Design
       </Typography>
-          <InputSlider />
+          <InputSlider name="scaffolds" sliderChange={props.sliderChange} />
         </Grid>
         <Grid item xs={12 }>
         <BasicMenu />
