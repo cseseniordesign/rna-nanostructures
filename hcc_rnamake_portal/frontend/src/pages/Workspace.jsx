@@ -12,7 +12,7 @@ function Workspace() {
        <div>
            <div className='home-left'>
                <div className='home-group'>
-                   <text className='rna-title'>RNAMake webhook</text>
+                   <text className='rna-title'>RNAMake</text>
                    <h2 className='rna-subtitle'>3D Design Toolkit</h2>
                    <div className='scaffold-button'>
                    <Button
