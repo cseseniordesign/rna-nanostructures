@@ -43,13 +43,13 @@ export default function JobName(props) {
         <Typography id="designCount" gutterBottom>
         Number of Designs
       </Typography>
-          <InputSlider name="designs" sliderChange={props.sliderChange} />
+          <InputSlider name="designs" sliderChange={props.handleChange} />
         </Grid>
         <Grid item xs={12} sm={6}>
         <Typography id="scaffoldCount" gutterBottom>
         Number of Scaffolds per Design
       </Typography>
-          <InputSlider name="scaffolds" sliderChange={props.sliderChange} />
+          <InputSlider name="scaffolds" sliderChange={props.handleChange} />
         </Grid>
         <Grid item xs={12 }>
         <BasicMenu />

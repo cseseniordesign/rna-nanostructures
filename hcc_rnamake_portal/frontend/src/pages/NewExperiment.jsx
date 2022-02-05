@@ -28,7 +28,7 @@ const steps = ['Name', 'PDB Settings', 'Review'];
 function getStepContent(step,handleChange,handleSliderChange) {
   switch (step) {
     case 0:
-      return <JobName handleChange={handleChange} sliderChange={handleChange} />;
+      return <JobName handleChange={handleChange} />;
     case 1:
       return <PDBSettings />;
     case 2:
