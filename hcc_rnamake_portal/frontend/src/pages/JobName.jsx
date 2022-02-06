@@ -43,16 +43,22 @@ export default function JobName(props) {
         <Typography id="designCount" gutterBottom>
         Number of Designs
       </Typography>
-          <InputSlider name="designs" sliderChange={props.handleChange} />
+          <InputSlider name="designs" min={1} max = {100} step={1} sliderChange={props.handleChange} />
         </Grid>
         <Grid item xs={12} sm={6}>
         <Typography id="scaffoldCount" gutterBottom>
         Number of Scaffolds per Design
       </Typography>
-          <InputSlider name="scaffolds" sliderChange={props.handleChange} />
+          <InputSlider name="scaffolds" min={1} max = {100} step={1} sliderChange={props.handleChange} />
         </Grid>
         <Grid item xs={12 }>
-        <BasicMenu />
+        {/*If we decide to put a project selection menu back here this is where it goes */}
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <Typography id="timelimit" gutterBottom>
+        Time limit (minutes)
+      </Typography>
+          <InputSlider name="timelimit" min={5} max = {300} step={15} sliderChange={props.handleChange} />
         </Grid>
       </Grid>
     </React.Fragment>

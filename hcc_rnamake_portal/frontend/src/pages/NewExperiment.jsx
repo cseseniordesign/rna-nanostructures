@@ -70,6 +70,7 @@ export default function Checkout() {
     description:"",
     designs:"",
     scaffolds:"",
+    timelimit:"",
   });
 
   const handleChange = e => {

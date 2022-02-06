@@ -20,7 +20,7 @@ export default function Review(props) {
   const col2 = [
     { name: 'Number of Designs', detail: props.settings.designs },
     { name: 'Number of Sequences', detail: props.settings.scaffolds },
-    { name: 'Time Limit', detail: '60 minutes' },
+    { name: 'Time Limit', detail: props.settings.timelimit },
     { name: 'Other Arguments', detail: '--search_type mc --motif_path...' },
   ]
 
