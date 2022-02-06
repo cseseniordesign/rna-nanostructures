@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Typography from '@mui/material/Typography';
 //import List from '@mui/material/List';
 //import ListItem from '@mui/material/ListItem';
@@ -6,21 +6,24 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
 
-const col1 = [
-  { name: 'Experiment Name', detail: 'Example Name' },
-  { name: 'Description', detail: 'Testkejwlsdjflskjdfl' },
-  { name: 'PDB File', detail: 'examplepdb.pdb' },
-  { name: 'Start Base Pair', detail: 'A141-A162' },
-  { name: 'End Base Pair', detail: 'A225-A261' },
-];
 
-const col2 = [
-  { name: 'Number of Designs', detail: '10' },
-  { name: 'Number of Sequences', detail: '3' },
-  { name: 'Time Limit', detail: '60 minutes' },
-  { name: 'Other Arguments', detail: '--search_type mc --motif_path...' },
-]
-export default function Review() {
+export default function Review(props) {
+  
+  const col1 = [
+    { name: 'Experiment Name', detail: props.settings.name },
+    { name: 'Description', detail: props.settings.description },
+    { name: 'PDB File', detail: 'examplepdb.pdb' },
+    { name: 'Start Base Pair', detail: 'A141-A162' },
+    { name: 'End Base Pair', detail: 'A225-A261' },
+  ];
+  
+  const col2 = [
+    { name: 'Number of Designs', detail: props.settings.designs },
+    { name: 'Number of Sequences', detail: props.settings.scaffolds },
+    { name: 'Time Limit', detail: '60 minutes' },
+    { name: 'Other Arguments', detail: '--search_type mc --motif_path...' },
+  ]
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

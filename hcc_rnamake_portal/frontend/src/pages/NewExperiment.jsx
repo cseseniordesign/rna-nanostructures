@@ -25,14 +25,14 @@ function Copyright() {
 const steps = ['Name', 'PDB Settings', 'Review'];
 
 
-function getStepContent(step,handleChange,handleSliderChange) {
+function getStepContent(step,handleChange,settings) {
   switch (step) {
     case 0:
       return <JobName handleChange={handleChange} />;
     case 1:
       return <PDBSettings />;
     case 2:
-      return <Review />;
+      return <Review settings={settings}/>;
   //  case 3:
   //    return <Designs />;
   //  case 4:
@@ -136,7 +136,7 @@ const handleSliderChange = e => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep,handleChange,handleSliderChange)}
+                {getStepContent(activeStep,handleChange,submissionInfo)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
