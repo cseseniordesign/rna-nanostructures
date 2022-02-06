@@ -8,7 +8,8 @@ import FileExplorer from '../components/FileExplorer'
 import {useDropzone} from 'react-dropzone';
 import dragNDropBox from '../graphics/dragNDropBox.png';
 import styled from 'styled-components';
-import { TextField } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
+import { ExpandMore } from '@mui/icons-material';
 import { Box, flexbox } from '@mui/system';
 
 export default function PDBSettings() {
@@ -24,6 +25,14 @@ export default function PDBSettings() {
         <TextField id='starting-base' label='Starting Base Pair' variant='filled' required/>
         <TextField id='ending-base' label='Ending Base Pair' variant='filled' required/>
       </Box>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
+          <Typography>Advanced settings</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <TextField id='cli-args' label='CLI Arguments' variant='filled'/>
+        </AccordionDetails>
+      </Accordion>
       
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
