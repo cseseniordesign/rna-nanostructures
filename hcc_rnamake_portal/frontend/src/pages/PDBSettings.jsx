@@ -8,6 +8,8 @@ import FileExplorer from '../components/FileExplorer'
 import {useDropzone} from 'react-dropzone';
 import dragNDropBox from '../graphics/dragNDropBox.png';
 import styled from 'styled-components';
+import { TextField } from '@mui/material';
+import { Box, flexbox } from '@mui/system';
 
 export default function PDBSettings() {
 
@@ -15,6 +17,14 @@ export default function PDBSettings() {
 
   return (
     <React.Fragment>
+      <Typography variant='h6' gutterBottom>
+        Application Configuration
+      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <TextField id='starting-base' label='Starting Base Pair' variant='filled' required/>
+        <TextField id='ending-base' label='Ending Base Pair' variant='filled' required/>
+      </Box>
+      
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
       </Typography>
