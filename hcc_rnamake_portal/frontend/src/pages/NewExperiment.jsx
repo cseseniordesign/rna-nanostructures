@@ -25,14 +25,14 @@ function Copyright() {
 const steps = ['Name', 'PDB Settings', 'Review'];
 
 
-function getStepContent(step) {
+function getStepContent(step,handleChange,settings) {
   switch (step) {
     case 0:
-      return <JobName />;
+      return <JobName handleChange={handleChange} />;
     case 1:
       return <PDBSettings />;
     case 2:
-      return <Review />;
+      return <Review settings={settings}/>;
   //  case 3:
   //    return <Designs />;
   //  case 4:
@@ -48,32 +48,54 @@ function getStepContent(step) {
 
 const theme = createTheme();
 
-  async function submitExperiment(name) {
+  async function submitExperiment(info) {
     // Construct experiment object
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
         applicationInterfaceId: "Test_71e1a6f2-00d4-4cbe-9a90-b4cbb2f39010",
         computeResourceName: "js-168-229.jetstream-cloud.org",
-        experimentName: "Test " + name,
+        experimentName: "Test"
     });
+    console.log(info);
     // Save experiment
     console.log("submitted?");
-    const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
+    //const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
     // Launch experiment
-    await window.AiravataAPI.services.ExperimentService.launch({ lookup: experiment.experimentId });
+    //await window.AiravataAPI.services.ExperimentService.launch({ lookup: experiment.experimentId });
   };
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [submissionInfo, setSubmissionInfo] = React.useState({
+    name:"",
+    description:"",
+    designs:"",
+    scaffolds:"",
+    timelimit:"",
+  });
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    console.log({name,value});
+    setSubmissionInfo(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+};
+
+const handleSliderChange = e => {
+  console.log(e);
+};
+
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
     console.log(window);
     if(activeStep===2)
     {
-      submitExperiment("Static experiment name");
+      submitExperiment(submissionInfo);
     }
   };
-
+ 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -115,7 +137,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep,handleChange,submissionInfo)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

@@ -9,22 +9,27 @@ const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-export default function InputSlider() {
+export default function InputSlider(props) {
   const [value, setValue] = React.useState(30);
 
   const handleSliderChange = (event, newValue) => {
+    event.target.name = props.name;
+    //sliderChange(event);
+    //console.log(props);
+    props.sliderChange(event);
     setValue(newValue);
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
+    props.sliderChange(event);
   };
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    if (value < props.min) {
+      setValue(props.min);
+    } else if (value > props.max) {
+      setValue(props.max);
     }
   };
 
@@ -38,6 +43,10 @@ export default function InputSlider() {
           <Slider
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
+            name = {props.name}
+            min = {props.min}
+            step = {props.step}
+            max = {props.max}
             aria-labelledby="input-slider"
           />
         </Grid>
@@ -47,10 +56,11 @@ export default function InputSlider() {
             size="small"
             onChange={handleInputChange}
             onBlur={handleBlur}
+            name={props.name}
             inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
+              step: props.step,
+              min: props.min,
+              max: props.max,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
