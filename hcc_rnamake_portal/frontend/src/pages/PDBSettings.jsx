@@ -25,15 +25,7 @@ export default function PDBSettings() {
         <TextField id='starting-base' label='Starting Base Pair' variant='filled' required/>
         <TextField id='ending-base' label='Ending Base Pair' variant='filled' required/>
       </Box>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
-          <Typography>Advanced settings</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <TextField id='cli-args' label='CLI Arguments' variant='filled'/>
-        </AccordionDetails>
-      </Accordion>
-      
+      <br/>
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
       </Typography>
@@ -65,6 +57,15 @@ export default function PDBSettings() {
           <FileExplorer cloudUpload={cloudUpload} setCloudUpload={setCloudUpload} />
         </Grid>
       </Grid>
+
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
+          <Typography>Advanced settings</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <TextField id='cli-args' label='CLI Arguments' variant='filled'/>
+        </AccordionDetails>
+      </Accordion>
     </React.Fragment>
   );
 }
