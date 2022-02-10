@@ -1,2 +1,0 @@
-recursive-include hcc_rnamake_portal/static *
-recursive-include hcc_rnamake_portal/templates *

@@ -1,0 +1,14 @@
+.desktop-web-home {
+  align-items: flex-start;
+  background-color: var(--wild-sand);
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.main-text {
+  width: 66%;
+  height: 100%;
+  align-items: center;
+}

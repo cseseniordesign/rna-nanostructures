@@ -1,12 +1,9 @@
-## Quick Setup Instructions
-1. `cd airavata-django-portal`
-2. Follow the instructions in the [Airavata Django Portal](https://github.com/apache/airavata-django-portal) for this folder.
-3. `cd ../hcc_rnamake_portal`
-4. `pip install -e .`
-5. `cd frontend`
-6. `npm i`
-7. `npm run-script build`
-8. `cd ../../airavata-django-portal`
-9. `python manage.py runserver` to run the portal.
+[![Build Status](https://app.travis-ci.com/ahamad2/HCC-rnamake-frontend.svg?token=St2QcD8ArRBFuxPR88Xz&branch=main)](https://app.travis-ci.com/ahamad2/HCC-rnamake-frontend)
 
-portal should be running now.
+## Quickstart 
+
+run `npm install`
+
+run `npm i react-router-dom`
+
+run `npm start` to start the current project in your browser.

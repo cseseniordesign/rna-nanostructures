@@ -55,16 +55,3 @@
 4. `git merge branch-I-want-to-merge-to-dev`
 
 5. Commit and push changes.
-
-### Rebasing master from develop
-
-1. `git checkout dev`
-2. `git pull origin dev`
-3. `git checkout main`
-4. `git rebase dev`
-5. Fix conflicts if they exist:
-    * `git add -A` add the fixed files that had conflicts
-    * `git rebase --continue` 
-    * Repeat step 5 if there is any other conflict
-6. `git push --force-with-lease origin HEAD` safe force push that doesn't discard or overwrite any commits waiting. (Recommended)
-    * `git push origin HEAD -f` hard overwrite, discards any other commtis in remote.

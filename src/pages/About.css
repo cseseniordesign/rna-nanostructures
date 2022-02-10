@@ -1,0 +1,10 @@
+.desktop-about {
+  align-items: flex-end;
+  background-color: var(--wild-sand);
+  display: flex;
+  flex-direction: column;
+  height: 1200px;
+  position: relative;
+  width: 1440px;
+}
+
