@@ -21,7 +21,8 @@ async function loadExperiments()
   return data;
 }
 
-function BasicTable() {
+function BasicTable() 
+{
     //const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -34,7 +35,6 @@ function BasicTable() {
           setIsLoaded(true);
         }
       )
-    
   
    if (!isLoaded)
     {
