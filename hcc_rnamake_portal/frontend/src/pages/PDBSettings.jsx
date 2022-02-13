@@ -10,9 +10,13 @@ import dragNDropBox from '../graphics/dragNDropBox.png';
 import styled from 'styled-components';
 import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
+import CloudIcon from '@mui/icons-material/Cloud';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox } from '@mui/system';
 
-export default function PDBSettings() {
+
+
+export default function PDBSettings(props) {
 
   const [cloudUpload, setCloudUpload] = useState(0);
 
@@ -22,8 +26,8 @@ export default function PDBSettings() {
         Application Configuration
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <TextField id='starting-base' label='Starting Base Pair' variant='filled' required/>
-        <TextField id='ending-base' label='Ending Base Pair' variant='filled' required/>
+        <TextField name='startingBase' label='Starting Base Pair' variant='filled' onChange={props.handleChange} required/>
+        <TextField name='endingBase' label='Ending Base Pair' variant='filled' onChange={props.handleChange} required/>
       </Box>
       <br/>
       <Typography variant="h6" gutterBottom>
@@ -32,15 +36,16 @@ export default function PDBSettings() {
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <input
+            name='localUpload'
             accept="*"
-            //className={className.input}
             style={{ display: 'none' }}
             id="raised-button-file"
             multiple
             type="file"
+            onChange={props.handleUpload}
           />
           <label htmlFor="raised-button-file">
-            <Button variant="raised" component="span" >
+            <Button variant="contained" endIcon={ <ArrowCircleUpIcon/> } component="span" style={{ backgroundColor:'#4C5F94' }}>
               Local Upload
             </Button>
           </label> 
@@ -49,7 +54,7 @@ export default function PDBSettings() {
           </FlexRow>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Button onClick={() => {cloudUpload ? setCloudUpload(0): setCloudUpload(1)}}>
+          <Button variant='contained' endIcon={ <CloudIcon/> } style={{ backgroundColor:'#4C5F94' }} onClick={() => {cloudUpload ? setCloudUpload(0): setCloudUpload(1)}}>
             Cloud Upload
           </Button>
         </Grid>
@@ -58,14 +63,14 @@ export default function PDBSettings() {
         </Grid>
       </Grid>
 
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
           <Typography>Advanced settings</Typography>
         </AccordionSummary>
         <AccordionDetails>
         <TextField id='cli-args' label='CLI Arguments' variant='filled'/>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </React.Fragment>
   );
 }

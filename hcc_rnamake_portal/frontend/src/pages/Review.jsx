@@ -12,9 +12,9 @@ export default function Review(props) {
   const col1 = [
     { name: 'Experiment Name', detail: props.settings.name },
     { name: 'Description', detail: props.settings.description },
-    { name: 'PDB File', detail: 'examplepdb.pdb' },
-    { name: 'Start Base Pair', detail: 'A141-A162' },
-    { name: 'End Base Pair', detail: 'A225-A261' },
+    { name: 'PDB File', detail: props.settings.localUpload.name },
+    { name: 'Start Base Pair', detail: props.settings.startingBase },
+    { name: 'End Base Pair', detail: props.settings.endingBase},
   ];
   
   const col2 = [
