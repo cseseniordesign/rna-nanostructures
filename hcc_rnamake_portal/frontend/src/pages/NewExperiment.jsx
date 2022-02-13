@@ -22,15 +22,15 @@ function Copyright() {
   );
 }
 
-const steps = ['Name', 'PDB Settings', 'Review'];
+const steps = ['Description', 'Settings', 'Review'];
 
 
-function getStepContent(step,handleChange,settings) {
+function getStepContent(step, handleChange, settings, handleUpload) {
   switch (step) {
     case 0:
       return <JobName handleChange={handleChange} />;
     case 1:
-      return <PDBSettings />;
+      return <PDBSettings handleChange={handleChange} handleUpload={handleUpload}/>;
     case 2:
       return <Review settings={settings}/>;
   //  case 3:
@@ -66,11 +66,14 @@ const theme = createTheme();
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [submissionInfo, setSubmissionInfo] = React.useState({
-    name:"",
-    description:"",
-    designs:"",
-    scaffolds:"",
-    timelimit:"",
+    name:'',
+    description:'',
+    designs:'',
+    scaffolds:'',
+    timeLimit:'',
+    startingBase:'',
+    endingBase:'',
+    localUpload:''
   });
 
   const handleChange = e => {
@@ -80,11 +83,20 @@ export default function Checkout() {
         ...prevState,
         [name]: value
     }));
-};
+  };
 
-const handleSliderChange = e => {
-  console.log(e);
-};
+  const handleUpload = e => {
+    const name = e.target.name;
+    const file = e.target.files[0];
+
+    console.log({name, file});
+
+    setSubmissionInfo(prevState => ({
+      ...prevState,
+      [name]: file
+    }));
+  };
+
 
 
   const handleNext = () => {
@@ -137,19 +149,15 @@ const handleSliderChange = e => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep,handleChange,submissionInfo)}
+                {getStepContent(activeStep, handleChange, submissionInfo, handleUpload)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                    <Button style={{ color:'#4C5F94' }} onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                       Back
                     </Button>
                   )}
 
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
+                  <Button variant="contained" style={{ backgroundColor:'#4C5F94' }} onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
                     {activeStep === steps.length - 1 ? 'Submit Job' : 'Next'}
                   </Button>
                 </Box>
