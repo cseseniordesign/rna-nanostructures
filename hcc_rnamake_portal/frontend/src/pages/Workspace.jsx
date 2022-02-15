@@ -58,10 +58,8 @@ function BasicTable()
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead className="PastExperimentsHeader">
               <TableRow>
+                <TableCell align="left">Status</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell align="right">Application</TableCell>
-                <TableCell align="right">Creation Time</TableCell>
-                <TableCell align="right">Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -70,6 +68,7 @@ function BasicTable()
                   key={row.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
+                  <TableCell align="left">{row.experimentStatus.name}</TableCell>
                   <TableCell component="th" scope="row">
                     <a href="#">{row.name}</a>
                   </TableCell>
