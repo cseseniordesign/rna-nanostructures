@@ -26,15 +26,22 @@ function BasicTable()
     //const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-  
-    useEffect( results = loadExperiments() )
-      .then(results => results.json())
+
+    useEffect(()=>{
+      loadExperiments()
+     // console.log(res)
+      .then(result => result.results)
       .then(
-        (result)=> {
+        (result) =>{
           setItems(result);
+          console.log(result);
           setIsLoaded(true);
         }
       )
+      //console.log(results);
+     // setItems(results.json());
+     // setIsLoaded(true);
+    },[])
   
    if (!isLoaded)
     {
@@ -42,7 +49,9 @@ function BasicTable()
     }
     else
     {
-      console.log(items['results'])
+      items.map((test) => (
+        console.log(test)
+      ));
       
       return (
         <TableContainer component={Paper}>
@@ -56,7 +65,7 @@ function BasicTable()
               </TableRow>
             </TableHead>
             <TableBody>
-              {(items['results']).map((row) => (
+              {items.map((row) => (
                 <TableRow
                   key={row.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -64,11 +73,7 @@ function BasicTable()
                   <TableCell component="th" scope="row">
                     <a href="#">{row.name}</a>
                   </TableCell>
-                  <TableCell align="right">{row.application}</TableCell>
-                  <TableCell align="right">{row.userName}</TableCell>
-                  <TableCell align="right">{row.creationTime}</TableCell>
-                  <TableCell align="right">{row.experimentStatus}</TableCell>
-                  <TableCell align="right"><a href="#">{row.actions} <ContentCopyIcon fontSize="inherit"/></a></TableCell> {/* eventually replace with dynamic changing icon */}
+                  
                 </TableRow>
               ))}
             </TableBody>
