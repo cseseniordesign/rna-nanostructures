@@ -12,7 +12,7 @@ install:
   - pip install -r requirements-dev.txt
 script:
   - cp django_airavata/settings_local.py.sample django_airavata/settings_local.py
-  - cd ./airavata-django-portal/
+  - cd ../../../airavata-django-portal/
   - python manage.py migrate
   - python manage.py check
   - flake8 .
