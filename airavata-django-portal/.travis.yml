@@ -4,7 +4,7 @@ python:
   - "3.7"
   - "3.8"
   - "3.9"
-  # - "3.10"
+  - "3.10"
 install:
   - nvm install
   - nvm use
@@ -12,7 +12,11 @@ install:
   - pip install -r requirements-dev.txt
 script:
   - cp django_airavata/settings_local.py.sample django_airavata/settings_local.py
+<<<<<<< HEAD
   - cd ../../../airavata-django-portal/
+=======
+  - cd ./airavata-django-portal/
+>>>>>>> ebf61998fbdc13b822ee32c5fd49ccd7d2dc0347
   - python manage.py migrate
   - python manage.py check
   - flake8 .
