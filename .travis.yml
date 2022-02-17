@@ -1,8 +1,0 @@
-language: node_js
-
-node_js:
-  - "14.17.6"
-
-script:
-    - npm i react-router-dom
-    - npm run-script build
