@@ -6,4 +6,4 @@ node_js:
 script:
     - cd hcc_rnamake_portal/frontend/
     - npm i
-    - npm run-script build
+    - yarn build
