@@ -77,7 +77,7 @@ const theme = createTheme();
     // Save experiment
     const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
     // Launch experiment
-    //await window.AiravataAPI.services.ExperimentService.launch({ lookup: experiment.experimentId });
+    await window.AiravataAPI.services.ExperimentService.launch({ lookup: experiment.experimentId });
   };
 
 export default function Checkout() {
