@@ -14,6 +14,8 @@ import JobName from './JobName';
 import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
+import Cookies from 'js-cookie';
+import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 function Copyright() {
   return (
@@ -22,15 +24,15 @@ function Copyright() {
   );
 }
 
-const steps = ['Name', 'PDB Settings', 'Review'];
+const steps = ['Description', 'Settings', 'Review'];
 
 
-function getStepContent(step,handleChange,settings) {
+function getStepContent(step, handleChange, settings, handleUpload) {
   switch (step) {
     case 0:
       return <JobName handleChange={handleChange} />;
     case 1:
-      return <PDBSettings />;
+      return <PDBSettings handleChange={handleChange} handleUpload={handleUpload}/>;
     case 2:
       return <Review settings={settings}/>;
   //  case 3:
@@ -49,16 +51,31 @@ function getStepContent(step,handleChange,settings) {
 const theme = createTheme();
 
   async function submitExperiment(info) {
+    
+    while(info.localUpload==='');
     // Construct experiment object
+    console.log(info);
+
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
-        applicationInterfaceId: "Test_71e1a6f2-00d4-4cbe-9a90-b4cbb2f39010",
-        computeResourceName: "js-168-229.jetstream-cloud.org",
-        experimentName: "Test"
+        applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
+        computeResourceName: "149.165.169.152",
+        experimentName: info.name,
+        experimentInputs: {
+          "pdb" : info.localUpload,
+          "start_bp": info.startingBase,
+          "end_bp" : info.endingBase,
+          "designs" : info.designs,
+          "sequences_per_design" : info.scaffolds,
+          "search_cutoff" : 15.0,
+          "dump_pdbs":"",
+          "skip_sequence_optimization": "",
+          "search_max_size":75,
+          
+      },
     });
     console.log(info);
     // Save experiment
-    console.log("submitted?");
-    //const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
+    const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
     // Launch experiment
     //await window.AiravataAPI.services.ExperimentService.launch({ lookup: experiment.experimentId });
   };
@@ -66,11 +83,14 @@ const theme = createTheme();
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [submissionInfo, setSubmissionInfo] = React.useState({
-    name:"",
-    description:"",
-    designs:"",
-    scaffolds:"",
-    timelimit:"",
+    name:'',
+    description:'',
+    designs:'',
+    scaffolds:'',
+    timeLimit:'',
+    startingBase:'',
+    endingBase:'',
+    localUpload:''
   });
 
   const handleChange = e => {
@@ -80,16 +100,41 @@ export default function Checkout() {
         ...prevState,
         [name]: value
     }));
-};
+  };
 
-const handleSliderChange = e => {
-  console.log(e);
-};
+  const handleUpload = e => {
+    const name = e.target.name;
+    const file = e.target.files[0];
+    const formData  = new FormData();
+    formData.append('file', file);
+    console.log(formData);
+    console.log(Cookies.get('csrftoken'));
+    fetch("http://localhost:8000/api/upload",{
+      credentials: 'include',
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken')
+      },
+      body : formData,
+    })
+    .then(result => result.json())
+    .then(
+      (result)=> {
+        console.log(result['data-product']['productUri']);
+        setSubmissionInfo(prevState => ({
+          ...prevState,
+          [name]: result['data-product']['productUri']
+        }));
+      }
+    )
+    console.log({name, file});
+  };
+
 
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log(window);
     if(activeStep===2)
     {
       submitExperiment(submissionInfo);
@@ -137,19 +182,15 @@ const handleSliderChange = e => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep,handleChange,submissionInfo)}
+                {getStepContent(activeStep, handleChange, submissionInfo, handleUpload)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                    <Button style={{ color:'#4C5F94' }} onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                       Back
                     </Button>
                   )}
 
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
+                  <Button variant="contained" style={{ backgroundColor:'#4C5F94' }} onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
                     {activeStep === steps.length - 1 ? 'Submit Job' : 'Next'}
                   </Button>
                 </Box>
