@@ -8,11 +8,10 @@ import FileExplorer from '../components/FileExplorer'
 import {useDropzone} from 'react-dropzone';
 import dragNDropBox from '../graphics/dragNDropBox.png';
 import styled from 'styled-components';
-import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
-import { ExpandMore } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-import { Box, flexbox } from '@mui/system';
+import { Box } from '@mui/system';
 
 
 
@@ -84,7 +83,7 @@ function MyDropline() {
 
  return (
    <div {...getRootProps()}>
-     <img src = {dragNDropBox}/>
+     <img src = {dragNDropBox} alt=""/>
      <input {...getInputProps()} />
      {
        isDragActive ?
@@ -95,7 +94,7 @@ function MyDropline() {
           </a>
         </p> :
         <p>
-          <a>Submision requires a PDB containing RNA
+          <a>Submission requires a PDB containing RNA
             <br></br> that has at least two basepair ends
             <br></br> (Drag and drop here)
           </a>

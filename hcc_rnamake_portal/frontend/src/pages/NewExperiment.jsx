@@ -15,7 +15,6 @@ import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
-import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 function Copyright() {
   return (

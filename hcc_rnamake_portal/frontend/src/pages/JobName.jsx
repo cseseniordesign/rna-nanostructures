@@ -2,9 +2,7 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import BasicMenu from '../components/BasicMenu';
 import InputSlider from '../components/InputSlider';
-import { useState } from 'react';
 
 export default function JobName(props) {
   return (

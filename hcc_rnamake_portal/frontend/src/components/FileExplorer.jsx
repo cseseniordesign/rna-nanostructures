@@ -31,7 +31,7 @@ export default function FileExplorer(props)
     createData('results-1-7-21.pdb', '140 MB', '1/7/2021'),
     createData('prototype.pdb', '220 kB', '6/18/2021'),
   ];
-  if(props.cloudUpload && fileChosen == "none")
+  if(props.cloudUpload && fileChosen === "none")
   {
     return(
 <TableContainer component={Paper}>
@@ -61,7 +61,7 @@ export default function FileExplorer(props)
     </TableContainer>
     );
   }
-  else if(fileChosen != "none")
+  else if(fileChosen !== "none")
   {
     return(
       <React.Fragment>
