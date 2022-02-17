@@ -109,7 +109,7 @@ export default function Checkout() {
     formData.append('file', file);
     console.log(formData);
     console.log(Cookies.get('csrftoken'));
-    fetch("http://dev.rnamake.scigap.org/api/upload",{
+    fetch("https://dev.rnamake.scigap.org/api/upload",{
       credentials: 'include',
       mode: 'cors',
       method: 'POST',
