@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navigation,  Workspace, PastExperiments, NewExperiment, FileUpload } from './index.js';
 // import helix from './Graphics/helix.svg';
 import './App.css';
+import JobSummary from './pages/JobSummary.jsx';
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
                   <Route path="/past-experiments" exact component={() => <PastExperiments />} />
                   <Route path="/file-upload" exact component={() => <FileUpload />} />
                   <Route path="/new-experiment" exact component={() => <NewExperiment />} />
+                  <Route path="/job-summary" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
+
               </Switch>
           </Router>
           {/* <header className="App-header">

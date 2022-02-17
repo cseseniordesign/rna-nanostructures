@@ -45,10 +45,11 @@ function GetSummary(experimentId)
     }
 }
 
-function JobSummary() {
+function JobSummary(experimentId) {
+    console.log(experimentId);
     return (
        <div>
-            <GetSummary />
+            <GetSummary experimentId={experimentId}/>
        </div>
     );
 }
