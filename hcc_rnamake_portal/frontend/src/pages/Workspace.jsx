@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Paper from '@mui/material/Paper';
 import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
 import { Button } from '../components/Button';
@@ -25,17 +26,22 @@ function BasicTable()
     //const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-    let data, results;
-  
-    useEffect( data = loadExperiments() )
-      .then( data => data.json() )
-      .then( results = data.results )
+
+    useEffect(()=>{
+      loadExperiments()
+     // console.log(res)
+      .then(result => result.results)
       .then(
-        (results)=> {
-          setItems(results);
+        (result) =>{
+          setItems(result);
+          console.log(result);
           setIsLoaded(true);
         }
       )
+      //console.log(results);
+     // setItems(results.json());
+     // setIsLoaded(true);
+    },[])
   
    if (!isLoaded)
     {
@@ -43,30 +49,30 @@ function BasicTable()
     }
     else
     {
-      console.log(items['results'])
+      items.map((test) => (
+        console.log(test)
+      ));
       
       return (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead className="PastExperimentsHeader">
               <TableRow>
-                <TableCell align="right">Application</TableCell>
-                <TableCell align="right">Creation Time</TableCell>
-                <TableCell align="right">Status</TableCell>
+                <TableCell align="left">Status</TableCell>
+                <TableCell>Name</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {(items['results']).map((row) => (
+              {items.map((row) => (
                 <TableRow
                   key={row.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
+                  <TableCell align="left">{row.experimentStatus.name}</TableCell>
                   <TableCell component="th" scope="row">
                     <a href="#">{row.name}</a>
                   </TableCell>
-                  <TableCell align="right">{row.application}</TableCell>
-                  <TableCell align="right">{row.creationTime}</TableCell>
-                  <TableCell align="right">{row.experimentStatus}</TableCell>
+                  
                 </TableRow>
               ))}
             </TableBody>
