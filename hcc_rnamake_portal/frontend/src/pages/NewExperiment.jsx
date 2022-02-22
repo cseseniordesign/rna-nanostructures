@@ -85,7 +85,7 @@ export default function Checkout() {
     name:'',
     description:'',
     designs:'',
-    scaffolds:'',
+    scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
