@@ -16,8 +16,8 @@ function FAQ() {
                     The basepair name in the format chain is appended to its residue number.
                     In the case of A141-A162, it means that there is a basepair between residue 141 on chain A to residue 161 also on chain A. 
                 </Grid>
-                <Grid item lg={6}>
-                    <image src={basepair} alt='Image of Base Pair' />
+                <Grid>
+                    <img src={basepair} alt=''></img>
                 </Grid>
             </Grid>
         </div>
