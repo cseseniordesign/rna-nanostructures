@@ -67,9 +67,8 @@ function BasicTable()
                 >
                   <TableCell align="left">{row.experimentStatus.name}</TableCell>
                   <TableCell component="th" scope="row">
-                   <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
-                  </TableCell>
-                  
+                  <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
+                  </TableCell>                  
                 </TableRow>
               ))}
             </TableBody>

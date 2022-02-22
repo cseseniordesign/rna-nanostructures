@@ -23,7 +23,7 @@ function App() {
                   <Route path="/past-experiments" exact component={() => <PastExperiments />} />
                   <Route path="/file-upload" exact component={() => <FileUpload />} />
                   <Route path="/new-experiment" exact component={() => <NewExperiment />} />
-                  <Route path="/job-summary" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
+                  <Route path="/job-summary/:experimentId" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
 
               </Switch>
           </Router>

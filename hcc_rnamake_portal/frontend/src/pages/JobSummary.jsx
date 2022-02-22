@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
+import { useParams } from "react-router-dom";
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 
 async function loadExperimentDetails(experimentId)
 {
-
+  console.log(experimentId);
   const experiment = await window.AiravataAPI.services.ExperimentService.retrieve({
         lookup: experimentId,
   });
+  console.log(experiment);
   return experiment;
 }
 
-function GetSummary(experimentId) 
+function GetSummary(props) 
 {
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
-    useEffect((experimentId)=>{
-        loadExperimentDetails(experimentId)
+    useEffect(()=>{
+      loadExperimentDetails(props.experimentId)
       .then(result => result.results)
       .then(
         (result) =>{
@@ -34,10 +36,7 @@ function GetSummary(experimentId)
     }
     else
     {
-      items.map((test) => (
-        console.log(test)
-      ));
-      
+     console.log(items);
       return (
         <TableContainer component={Paper}>
         </TableContainer>
@@ -45,11 +44,11 @@ function GetSummary(experimentId)
     }
 }
 
-function JobSummary(experimentId) {
-    console.log(experimentId);
+function JobSummary() {
+    const params = useParams();
     return (
        <div>
-            <GetSummary experimentId={experimentId}/>
+            <GetSummary experimentId={params.experimentId}/>
        </div>
     );
 }
