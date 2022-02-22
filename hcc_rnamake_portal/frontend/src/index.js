@@ -16,6 +16,7 @@ export { default as Workspace } from './pages/Workspace';
 export { default as PastExperiments } from './pages/PastExperiments';
 export { default as FileUpload } from './pages/FileUpload';
 export { default as NewExperiment } from './pages/NewExperiment';
+export { default as FAQ } from './pages/FAQ';
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

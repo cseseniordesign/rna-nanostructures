@@ -29,6 +29,12 @@ function Navigation() {
                                     <span className="sr-only">(current)</span>
                                 </Link>
                             </li>
+                            <li className={'nav-item /faq'}>
+                                <Link class="nav-link" to="/faq">
+                                    FAQ
+                                    <span className="sr-only">(current)</span>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
