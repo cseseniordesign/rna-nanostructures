@@ -34,7 +34,6 @@ function BasicTable()
       .then(
         (result) =>{
           setItems(result);
-          console.log(result);
           setIsLoaded(true);
         }
       )
@@ -46,9 +45,6 @@ function BasicTable()
     }
     else
     {
-      items.map((test) => (
-        console.log(test)
-      ));
       
       return (
         <TableContainer component={Paper}>
