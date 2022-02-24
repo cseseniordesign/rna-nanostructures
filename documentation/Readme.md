@@ -7,4 +7,4 @@ Included in this documentation folder is
 - Wagtail CMS Documentation (`wagtail-dev.md`, `wagtail-user.md`, `cms_default_theme`)
 - Selected Documentation from the Previous Team (`/2020-21-docs`)
 
-Documentation is also available in the (repository wiki)[https://github.com/cseseniordesign/rna-nanostructures/wiki]
+Documentation is also available in the [repository wiki](https://github.com/cseseniordesign/rna-nanostructures/wiki)
