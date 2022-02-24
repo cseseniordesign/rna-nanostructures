@@ -144,88 +144,75 @@ It uses multiple Material components
 
 #### Typography
 
-Notes from MUI:
+Demos:
+- [Breadcrumbs](https://mui.com/components/breadcrumbs/)
+- [Typography](https://mui.com/components/typography/)
 
-```js
-/**
- *
- * Demos:
- *
- * - [Breadcrumbs](https://mui.com/components/breadcrumbs/)
- * - [Typography](https://mui.com/components/typography/)
- *
- * API:
- *
- * - [Typography API](https://mui.com/api/typography/)
- */
-```
+API:
+
+- [Typography API](https://mui.com/api/typography/)
+
+(from API documentation)
 
 #### TextField
 
-Notes from MUI:
+The `TextField` is a convenience wrapper for the most common cases (80%).
+It cannot be all things to all people, otherwise the API would grow out of control.
 
-```js
-/**
- * The `TextField` is a convenience wrapper for the most common cases (80%).
- * It cannot be all things to all people, otherwise the API would grow out of control.
- *
- * ## Advanced Configuration
- *
- * It's important to understand that the text field is a simple abstraction
- * on top of the following components:
- *
- * *   [FormControl](https://mui.com/api/form-control/)
- * *   [InputLabel](https://mui.com/api/input-label/)
- * *   [FilledInput](https://mui.com/api/filled-input/)
- * *   [OutlinedInput](https://mui.com/api/outlined-input/)
- * *   [Input](https://mui.com/api/input/)
- * *   [FormHelperText](https://mui.com/api/form-helper-text/)
- *
- * If you wish to alter the props applied to the `input` element, you can do so as follows:
- *
- * ```jsx
- * const inputProps = {
- *   step: 300,
- * };
- *
- * return <TextField id="time" type="time" inputProps={inputProps} />;
- * ```
- *
- * For advanced cases, please look at the source of TextField by clicking on the
- * "Edit this page" button above. Consider either:
- *
- * *   using the upper case props for passing values directly to the components
- * *   using the underlying components directly as shown in the demos
- *
- * Demos:
- *
- * - [Autocomplete](https://mui.com/components/autocomplete/)
- * - [Pickers](https://mui.com/components/pickers/)
- * - [Text Fields](https://mui.com/components/text-fields/)
- *
- * API:
- *
- * - [TextField API](https://mui.com/api/text-field/)
- * - inherits [FormControl API](https://mui.com/api/form-control/)
- */
+###### Advanced Configuration
+
+It's important to understand that the text field is a simple abstraction
+on top of the following components:
+
+*   [FormControl](https://mui.com/api/form-control/)
+*   [InputLabel](https://mui.com/api/input-label/)
+*   [FilledInput](https://mui.com/api/filled-input/)
+*   [OutlinedInput](https://mui.com/api/outlined-input/)
+*   [Input](https://mui.com/api/input/)
+*   [FormHelperText](https://mui.com/api/form-helper-text/)
+
+If you wish to alter the props applied to the `input` element, you can do so as follows:
+
+```jsx
+const inputProps = {
+  step: 300,
+};
+
+return <TextField id="time" type="time" inputProps={inputProps} />;
 ```
+
+For advanced cases, please look at the source of TextField by clicking on the
+"Edit this page" button above. Consider either:
+
+*   using the upper case props for passing values directly to the components
+*   using the underlying components directly as shown in the demos
+
+Demos:
+
+- [Autocomplete](https://mui.com/components/autocomplete/)
+- [Pickers](https://mui.com/components/pickers/)
+- [Text Fields](https://mui.com/components/text-fields/)
+
+API:
+
+- [TextField API](https://mui.com/api/text-field/)
+- inherits [FormControl API](https://mui.com/api/form-control/)
+
+
+(from API documentation)
+
 
 #### Grid
 
-Notes from MUI:
+Demos:
 
-```js
-/**
- *
- * Demos:
- *
- * - [Grid](https://mui.com/components/grid/)
- *
- * API:
- *
- * - [Grid API](https://mui.com/api/grid/)
- */
-```
+- [Grid](https://mui.com/components/grid/)
+
+API:
+
+- [Grid API](https://mui.com/api/grid/)
+
+(from API documentation)
 
 ### New Experiment.jsx
 
