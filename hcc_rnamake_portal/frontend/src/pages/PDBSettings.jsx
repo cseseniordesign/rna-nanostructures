@@ -12,7 +12,7 @@ import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/m
 import { ExpandMore } from '@mui/icons-material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-import { Box, flexbox } from '@mui/system';
+import { Box, flexbox, textAlign } from '@mui/system';
 
 
 
@@ -29,13 +29,15 @@ export default function PDBSettings(props) {
         <TextField name='startingBase' label='Starting Base Pair' variant='filled' onChange={props.handleChange} required/>
         <TextField name='endingBase' label='Ending Base Pair' variant='filled' onChange={props.handleChange} required/>
       </Box>
-      <div>
+      <br/>
+      <div style={{ textAlign: 'left' }}>
         <p>
           <a
             className='App-link'
-            href='http://localhost:8000/faq'
+            href='http://localhost:8000/rnmake_portal/faq'
             target="_blank"
             rel="noopener noreferrer"
+            style={{ color:'#4C5F94'}}
           >
             What are base pairs?
           </a>
