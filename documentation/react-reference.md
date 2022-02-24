@@ -144,8 +144,6 @@ It uses multiple Material components
 
 #### Typography
 
-Notes from MUI:
-
 Demos:
 - [Breadcrumbs](https://mui.com/components/breadcrumbs/)
 - [Typography](https://mui.com/components/typography/)
@@ -154,14 +152,14 @@ API:
 
 - [Typography API](https://mui.com/api/typography/)
 
-#### TextField
+(from API documentation)
 
-Notes from MUI:
+#### TextField
 
 The `TextField` is a convenience wrapper for the most common cases (80%).
 It cannot be all things to all people, otherwise the API would grow out of control.
 
-## Advanced Configuration
+###### Advanced Configuration
 
 It's important to understand that the text field is a simple abstraction
 on top of the following components:
@@ -201,9 +199,10 @@ API:
 - inherits [FormControl API](https://mui.com/api/form-control/)
 
 
-#### Grid
+(from API documentation)
 
-Notes from MUI:
+
+#### Grid
 
 Demos:
 
@@ -212,6 +211,8 @@ Demos:
 API:
 
 - [Grid API](https://mui.com/api/grid/)
+
+(from API documentation)
 
 ### New Experiment.jsx
 
