@@ -94,7 +94,7 @@ function Workspace() {
                    <div className='scaffold-button'>
                    <Button
                         onClick={() => {
-                            history.push('/new-experiment');
+                            history.push('/rnamake_portal/new-experiment');
                         }}
                         type="button"
                         buttonStyle="btn--primary--solid"
