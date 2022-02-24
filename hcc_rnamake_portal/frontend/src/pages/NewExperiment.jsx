@@ -85,7 +85,7 @@ export default function Checkout() {
     name:'',
     description:'',
     designs:'',
-    scaffolds:'',
+    scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
@@ -176,7 +176,7 @@ export default function Checkout() {
                   Job Submitted.
                 </Typography>
                 <Typography variant="subtitle1">
-                  <a href="/workspace">Return to portal</a>
+                  <a href="/rnamake_portal/workspace">Return to portal</a>
                 </Typography>
               </React.Fragment>
             ) : (
