@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import InputSlider from '../components/InputSlider';
 // import { useState } from 'react';
 
+// const scaffoldCount = 1;
+
 export default function JobName(props) {
   return (
     <React.Fragment>
@@ -39,25 +41,19 @@ export default function JobName(props) {
           {/*spacer*/}
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography id="designCount" gutterBottom>
-        Number of Designs
-      </Typography>
-          <InputSlider name="designs" min={1} max = {100} step={1} sliderChange={props.handleChange} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Typography id="scaffoldCount" gutterBottom>
-        Number of Scaffolds per Design
-      </Typography>
-          <InputSlider name="scaffolds" min={1} max = {100} step={1} sliderChange={props.handleChange} />
+          <Typography id="designCount" gutterBottom>
+            Number of Designs
+          </Typography>
+          <InputSlider name="designs" value={30} min={10} max = {100} step={1} sliderChange={props.handleChange} />
         </Grid>
         <Grid item xs={12 }>
-        {/*If we decide to put a project selection menu back here this is where it goes */}
+        {/* If we decide to put a project selection menu back here this is where it goes */}
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography gutterBottom>
-        Time limit (minutes)
-      </Typography>
-          <InputSlider name="timeLimit" min={5} max = {300} step={15} sliderChange={props.handleChange} />
+          <Typography gutterBottom>
+            Time limit (minutes)
+          </Typography>
+          <InputSlider name="timeLimit" value={30}  min={5} max = {300} step={15} sliderChange={props.handleChange} />
         </Grid>
       </Grid>
     </React.Fragment>
