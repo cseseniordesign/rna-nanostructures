@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+// import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Paper from '@mui/material/Paper';
 import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
 import { Button } from '../components/Button';
