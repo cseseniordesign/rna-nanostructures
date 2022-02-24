@@ -29,6 +29,18 @@ export default function PDBSettings(props) {
         <TextField name='startingBase' label='Starting Base Pair' variant='filled' onChange={props.handleChange} required/>
         <TextField name='endingBase' label='Ending Base Pair' variant='filled' onChange={props.handleChange} required/>
       </Box>
+      <div>
+        <p>
+          <a
+            className='App-link'
+            href='http://localhost:8000/faq'
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            What are base pairs?
+          </a>
+        </p>    
+      </div>
       <br/>
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
