@@ -24,7 +24,7 @@ function App() {
                   <Route path="/rnamake_portal/file-upload" exact component={() => <FileUpload />} />
                   <Route path="/rnamake_portal/new-experiment" exact component={() => <NewExperiment />} />
                   <Route path="/rnamake_portal/FAQ" exact component={() => <FAQ />} />
-                  <Route path="/rnamake_portal/job-summary/:experimentId" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
+                  <Route exact path="/rnamake_portal/job-summary/:experimentId" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
               </Switch>
           </Router>
           {/* <header className="App-header">

@@ -78,7 +78,7 @@ function BasicTable() {
           <TableBody>
             {items.map((row) =>
             <TableRow key={row.name}>
-              <TableCell align="center"><a href="#">{row.name}</a></TableCell>
+              <TableCell align="center"><a href={`/rnamake_portal/job-summary/${row.experimentId}`}>{row.name}</a></TableCell>
               <TableCell align="center">{row.creationTime.toDateString() + " " + row.creationTime.toTimeString()}</TableCell>
               <TableCell align="center">{row.experimentStatus.name}</TableCell>
             </TableRow>
