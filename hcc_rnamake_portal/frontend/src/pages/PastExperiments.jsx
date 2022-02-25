@@ -73,7 +73,6 @@ function BasicTable() {
               <TableCell align="center">Name</TableCell>
               <TableCell align="center">Creation Time</TableCell>
               <TableCell align="center">Status</TableCell>
-              <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,7 +81,6 @@ function BasicTable() {
               <TableCell align="center"><a href="#">{row.name}</a></TableCell>
               <TableCell align="center">{row.creationTime.toDateString() + " " + row.creationTime.toTimeString()}</TableCell>
               <TableCell align="center">{row.experimentStatus.name}</TableCell>
-              <TableCell align="center">Actions</TableCell>
             </TableRow>
             )}
           </TableBody>
