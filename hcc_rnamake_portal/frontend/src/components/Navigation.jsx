@@ -12,20 +12,26 @@ function Navigation() {
                     <div>
                         <ul className="navbar-nav ml-auto">
                             <li className={`nav-item  /`} >
-                                <Link class="nav-link" to="/">
+                                <Link class="nav-link" to="/rnamake_portal/workspace">
                                     Workspace
                                     <span className="sr-only">(current)</span>
                                 </Link>
                             </li>
                             <li className={`nav-item  /past-experiments`} >
-                                <Link class="nav-link" to="/past-experiments">
+                                <Link class="nav-link" to="/rnamake_portal/past-experiments">
                                     Past Experiments
                                     <span className="sr-only">(current)</span>
                                 </Link>
                             </li>
                             <li className={`nav-item  /file-upload`} >
-                                <Link class="nav-link" to="/file-upload">
+                                <Link class="nav-link" to="/rnamake_portal/file-upload">
                                     File Upload
+                                    <span className="sr-only">(current)</span>
+                                </Link>
+                            </li>
+                            <li className={'nav-item /faq'}>
+                                <Link class="nav-link" to="/rnamake_portal/faq">
+                                    FAQ
                                     <span className="sr-only">(current)</span>
                                 </Link>
                             </li>

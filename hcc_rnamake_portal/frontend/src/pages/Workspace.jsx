@@ -6,9 +6,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+// import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Paper from '@mui/material/Paper';
 import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
+import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { useHistory } from 'react-router-dom';
 
@@ -34,13 +35,9 @@ function BasicTable()
       .then(
         (result) =>{
           setItems(result);
-          console.log(result);
           setIsLoaded(true);
         }
       )
-      //console.log(results);
-     // setItems(results.json());
-     // setIsLoaded(true);
     },[])
   
    if (!isLoaded)
@@ -49,9 +46,6 @@ function BasicTable()
     }
     else
     {
-      items.map((test) => (
-        console.log(test)
-      ));
       
       return (
         <TableContainer component={Paper}>
@@ -70,9 +64,8 @@ function BasicTable()
                 >
                   <TableCell align="left">{row.experimentStatus.name}</TableCell>
                   <TableCell component="th" scope="row">
-                    <a href="#">{row.name}</a>
-                  </TableCell>
-                  
+                  <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
+                  </TableCell>                  
                 </TableRow>
               ))}
             </TableBody>
@@ -94,7 +87,7 @@ function Workspace() {
                    <div className='scaffold-button'>
                    <Button
                         onClick={() => {
-                            history.push('/new-experiment');
+                            history.push('/rnamake_portal/new-experiment');
                         }}
                         type="button"
                         buttonStyle="btn--primary--solid"

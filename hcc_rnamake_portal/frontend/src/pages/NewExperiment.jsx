@@ -15,7 +15,7 @@ import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
-import { responsiveProperty } from '@mui/material/styles/cssUtils';
+// import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 function Copyright() {
   return (
@@ -85,7 +85,7 @@ export default function Checkout() {
     name:'',
     description:'',
     designs:'',
-    scaffolds:'',
+    scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
@@ -176,7 +176,7 @@ export default function Checkout() {
                   Job Submitted.
                 </Typography>
                 <Typography variant="subtitle1">
-                  <a href="/workspace">Return to portal</a>
+                  <a href="/rnamake_portal/workspace">Return to portal</a>
                 </Typography>
               </React.Fragment>
             ) : (
