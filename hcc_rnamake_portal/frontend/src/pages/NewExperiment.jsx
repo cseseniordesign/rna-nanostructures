@@ -86,7 +86,7 @@ export default function Checkout() {
     description:'',
     designs:'',
     scaffolds:'1',
-    timeLimit:'',
+    timeLimit:'360',
     startingBase:'',
     endingBase:'',
     localUpload:''
