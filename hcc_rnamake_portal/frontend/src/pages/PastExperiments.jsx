@@ -5,9 +5,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Paper from '@mui/material/Paper';
-import corner_swoosh from '../graphics/corner_swoosh.svg'
+import corner_swoosh from '../graphics/corner_swoosh.svg';
+import { Link } from 'react-router-dom';
 
 //function createData(name, application, user, creationTime, status, actions) {
 //  return {name, application, user, creationTime, status, actions};
@@ -61,9 +61,9 @@ function BasicTable() {
       console.log(test)
     ));
     console.log("Some text", items)
-    {items.map((row) =>
+    items.map((row) =>
       console.log(row.creationTime.toString())
-      )}
+    )
  
     return (
       <TableContainer component={Paper}>
@@ -78,7 +78,9 @@ function BasicTable() {
           <TableBody>
             {items.map((row) =>
             <TableRow key={row.name}>
-              <TableCell align="center"><a href={`/rnamake_portal/job-summary/${row.experimentId}`}>{row.name}</a></TableCell>
+              <TableCell component="th" scope="row">
+                  <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
+                  </TableCell>
               <TableCell align="center">{row.creationTime.toDateString() + " " + row.creationTime.toTimeString()}</TableCell>
               <TableCell align="center">{row.experimentStatus.name}</TableCell>
             </TableRow>
