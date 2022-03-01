@@ -7,14 +7,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 // import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { useHistory } from 'react-router-dom';
 
-async function loadExperiments()
-{
+async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
     limit: 5,
     [window.AiravataAPI.models.ExperimentSearchFields.USER_NAME.name]:
@@ -22,8 +26,7 @@ async function loadExperiments()
   return data;
 }
 
-function BasicTable() 
-{
+function BasicTable() {
     //const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -40,12 +43,9 @@ function BasicTable()
       )
     },[])
   
-   if (!isLoaded)
-    {
+   if (!isLoaded) {
       return <div>Loading...</div>;
-    }
-    else
-    {
+    } else {
       
       return (
         <TableContainer component={Paper}>
@@ -77,7 +77,6 @@ function BasicTable()
 
 function Workspace() {
     let history = useHistory(); // used for rerouting to another page.
-
     return (
        <div>
            <div className='home-left'>
