@@ -49,12 +49,6 @@ export default function JobName(props) {
         <Grid item xs={12 }>
         {/* If we decide to put a project selection menu back here this is where it goes */}
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography gutterBottom>
-            Time limit (minutes)
-          </Typography>
-          <InputSlider name="timeLimit" value={30}  min={5} max = {300} step={15} sliderChange={props.handleChange} />
-        </Grid>
       </Grid>
     </React.Fragment>
   );
