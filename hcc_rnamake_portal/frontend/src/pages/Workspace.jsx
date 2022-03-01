@@ -17,6 +17,11 @@ import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { useHistory } from 'react-router-dom';
+import ImageIcon from '@mui/icons-material/Image';
+import Box from '@mui/material/Box';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { ListItemButton, ListItemIcon } from '@mui/material';
+// import { FolderList } from '../components/FolderList';
 
 async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -48,29 +53,46 @@ function BasicTable() {
     } else {
       
       return (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead className="PastExperimentsHeader">
-              <TableRow>
-                <TableCell align="left">Status</TableCell>
-                <TableCell>Name</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {items.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell align="left">{row.experimentStatus.name}</TableCell>
-                  <TableCell component="th" scope="row">
-                  <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
-                  </TableCell>                  
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Box>
+        <List>
+            {items.map((row) => (
+                <React.Fragment>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <CheckCircleIcon/>
+                      </ListItemIcon>
+                      <ListItemText primary={row.name}/>
+                    </ListItemButton>
+                  </ListItem>
+                </React.Fragment>
+            ))}
+        </List>
+        </Box>
+        // <TableContainer component={Paper}>
+        //   <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        //     <TableHead className="PastExperimentsHeader">
+        //       <TableRow>
+        //         <TableCell align="left">Status</TableCell>
+        //         <TableCell>Name</TableCell>
+        //       </TableRow>
+        //     </TableHead>
+        //     <TableBody>
+        //       {items.map((row) => (
+        //         <TableRow
+        //           key={row.name}
+        //           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        //         >
+        //           <TableCell align="left">{row.experimentStatus.name}</TableCell>
+        //           <TableCell component="th" scope="row">
+        //           <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
+        //           </TableCell>                  
+        //         </TableRow>
+        //       ))}
+        //     </TableBody>
+        //   </Table>
+        // </TableContainer>
+
       );
     }
 }
