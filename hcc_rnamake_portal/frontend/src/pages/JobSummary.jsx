@@ -1,10 +1,11 @@
 import React, { useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography'
-import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 async function loadExperimentDetails(experimentId)
 {
@@ -37,6 +38,17 @@ function GetSummary(props)
     const [stdErr, setStdErr] = useState();
     const [pdbCollection, setPdbCollection] = useState([]);
     
+    const [viewStdout, setViewStdout] = React.useState(false);
+    const [viewStderr, setViewStderr] = React.useState(false);
+
+    const handleStdOutChange = () => {
+      setViewStdout((prev) => !prev);
+    }
+
+    const handleStdErrChange = () => {
+      setViewStderr((prev) => !prev);
+    }
+
     useEffect(()=>{
       loadExperimentDetails(props.experimentId)
       .then(
@@ -52,12 +64,12 @@ function GetSummary(props)
             {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdOut(result)});
             }
-            else if(result['files'][i]['name'].startsWith('design'))
-            {
-              this.setState({
-                pdbCollection: [...this.state.pdbCollection, result['files'][i]['downloadURL']]
-              })
-            }
+            //else if(result['files'][i]['name'].startsWith('design'))
+            //{
+              //this.setState({
+              //  pdbCollection: [...this.state.pdbCollection, result['files'][i]['downloadURL']]
+              //})
+            //}
             else 
             {
               //Something whack happened 
@@ -74,19 +86,24 @@ function GetSummary(props)
     }
     else
     {
-      console.log(pdbCollection);
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
           <Grid container spacing={3}>
-            <Grid item lg={6} align={"left"}>
-              <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
-                {stdOut}
-              </Typography>
+            <Grid item lg={6} align={"left"}>    
+            <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Show"/>
+            <Collapse orientation="vertical" in={viewStdout}>
+            <textarea wrap="off" id="stderrtextbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
+            </Collapse>
             </Grid>
-            <Grid item lg={6} align={"left"}>
-              <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
-                {stdErr}
-              </Typography>
+          </Grid>
+          <Grid item lg={6} align={"left"}>
+          <Grid item lg={6} align={"left"}>
+            <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdErrChange} />} label="Show"/>
+            <Collapse orientation="vertical" in={viewStdout}>
+            <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
+                    {stdErr}
+            </Typography>
+            </Collapse>
             </Grid>
           </Grid>
         </Box>
@@ -104,4 +121,3 @@ function JobSummary() {
 }
 
 export default JobSummary;
-
