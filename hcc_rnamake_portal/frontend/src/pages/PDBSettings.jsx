@@ -39,7 +39,7 @@ export default function PDBSettings(props) {
             rel="noopener noreferrer"
             style={{ color:'#4C5F94'}}
           >
-            What are base pairs?
+            What are base pair names?
           </a>
         </p>    
       </div>
