@@ -35,49 +35,34 @@ function GetSummary(props)
     const [isLoaded, setIsLoaded] = useState(false);
     const [stdOut, setStdOut] = useState();
     const [stdErr, setStdErr] = useState();
-    const [uriCollection, setUriCollection] = useState([]);
-    const [files, setFileInfo] = React.useState({
-      stdout:'',
-      stderr:'',
-      output_pdbs:''
-    });
+    const [pdbCollection, setPdbCollection] = useState([]);
     
     useEffect(()=>{
       loadExperimentDetails(props.experimentId)
       .then(
         (result) =>{
           console.log(result['files']);
-          setUriCollection(result['files']);
           for (var i=0; i<result['files'].length; i++)
           {
             if(result['files'][i]['name'].endsWith('stderr'))
             {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdErr(result)});
-                //setStdErr(getUriData(result['files'][i]['downloadURL']));
             }
             else if(result['files'][i]['name'].endsWith('stdout'))
             {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdOut(result)});
-                //setStdOut(getUriData(result['files'][i]['downloadURL']));
             }
             else if(result['files'][i]['name'].startsWith('design'))
             {
-
+              this.setState({
+                pdbCollection: [...this.state.pdbCollection, result['files'][i]['downloadURL']]
+              })
             }
             else 
             {
               //Something whack happened 
             }
-            //const file = getUriData(result['files'][i]['downloadURL']);
-            //split is required as name is prepended with application name, eg: RNAMake.stderr
-            const name = result['files'][i]['name'].split('.')[1];
-            console.log(typeof(name))
-           // setFileInfo(prevState => ({
-           //   ...prevState,
-           //   [name]: file
-           // }));
           }
-          console.log(files);
           setIsLoaded(true);
         }
       )
@@ -89,13 +74,20 @@ function GetSummary(props)
     }
     else
     {
-      console.log(stdOut);
+      console.log(pdbCollection);
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
-          <Grid item lg={6} align={"left"}>
-            <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
-              {stdOut}
-            </Typography>
+          <Grid container spacing={3}>
+            <Grid item lg={6} align={"left"}>
+              <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
+                {stdOut}
+              </Typography>
+            </Grid>
+            <Grid item lg={6} align={"left"}>
+              <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
+                {stdErr}
+              </Typography>
+            </Grid>
           </Grid>
         </Box>
       );
