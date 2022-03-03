@@ -66,10 +66,9 @@ function GetSummary(props)
             }
             else if(result['files'][i]['name'].startsWith('design'))
             {
-              //this.setState({
-              //  pdbCollection: [...this.state.pdbCollection, result['files'][i]['downloadURL']]
-              //})
-              console.log(result['files'][i]['downloadURL']);
+              //Doesn't respect reacts immutable state design paradighm but react doesn't respect my need to have nominally working code
+              //Also, this literally will not change after first load so it's probably fine
+              pdbCollection.push([result['files'][i]['name'],result['files'][i]['downloadURL']]);
             }
             else 
             {
@@ -87,6 +86,7 @@ function GetSummary(props)
     }
     else
     {
+      console.log(pdbCollection);
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
           <Grid container spacing={3}>
