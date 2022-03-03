@@ -64,12 +64,13 @@ function GetSummary(props)
             {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdOut(result)});
             }
-            //else if(result['files'][i]['name'].startsWith('design'))
-            //{
+            else if(result['files'][i]['name'].startsWith('design'))
+            {
               //this.setState({
               //  pdbCollection: [...this.state.pdbCollection, result['files'][i]['downloadURL']]
               //})
-            //}
+              console.log(result['files'][i]['downloadURL']);
+            }
             else 
             {
               //Something whack happened 
@@ -90,19 +91,17 @@ function GetSummary(props)
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
           <Grid container spacing={3}>
             <Grid item lg={6} align={"left"}>    
-            <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Show"/>
+            <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
             <Collapse orientation="vertical" in={viewStdout}>
-            <textarea wrap="off" id="stderrtextbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
+            <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
             </Collapse>
             </Grid>
           </Grid>
           <Grid item lg={6} align={"left"}>
           <Grid item lg={6} align={"left"}>
-            <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdErrChange} />} label="Show"/>
-            <Collapse orientation="vertical" in={viewStdout}>
-            <Typography style={{whiteSpace: 'pre'}} variant = "body1" align="left">
-                    {stdErr}
-            </Typography>
+            <FormControlLabel control={<Switch checked={viewStderr} onChange={handleStdErrChange} />} label="Preview Standard Error"/>
+            <Collapse orientation="vertical" in={viewStderr}>
+            <textarea wrap="off" id="stderrbox" rows="90" cols="120" name="w3review" readonly="true" value={stdErr}>  </textarea>
             </Collapse>
             </Grid>
           </Grid>
