@@ -21,7 +21,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import Box from '@mui/material/Box';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ListItemButton, ListItemIcon } from '@mui/material';
-// import { FolderList } from '../components/FolderList';
+import Helix from '../graphics/helix.svg';
 
 async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -31,8 +31,24 @@ async function loadExperiments() {
   return data;
 }
 
+function renderStatusIcon(experimentStatus) {
+  if (experimentStatus === 'LAUNCHED' || experimentStatus === 'EXECUTING') {
+    return (
+      <React.Fragment>
+        <img src={Helix} alt='' className='helix-icon'/>
+      </React.Fragment>
+    );
+  } else if (experimentStatus === 'COMPLETED') {
+    return (
+      <React.Fragment>
+        <CheckCircleIcon sx={{ fill:'green' }}/>
+      </React.Fragment>
+    );
+  }
+}
+
 function BasicTable() {
-    //const [error, setError] = useState(null);
+    let history = useHistory();
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
@@ -51,6 +67,7 @@ function BasicTable() {
    if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
+
       
       return (
         <Box>
@@ -58,41 +75,19 @@ function BasicTable() {
             {items.map((row) => (
                 <React.Fragment>
                   <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => {
+                      history.push('job-summary/' + row.experimentId);
+                    }}>
                       <ListItemIcon>
-                        <CheckCircleIcon/>
+                        { renderStatusIcon(row.experimentStatus.name) }
                       </ListItemIcon>
-                      <ListItemText primary={row.name}/>
+                      <ListItemText primary={row.name} secondary={row.experimentStatus.name} style={{ textAlign: 'center' }}/>
                     </ListItemButton>
                   </ListItem>
                 </React.Fragment>
             ))}
         </List>
         </Box>
-        // <TableContainer component={Paper}>
-        //   <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        //     <TableHead className="PastExperimentsHeader">
-        //       <TableRow>
-        //         <TableCell align="left">Status</TableCell>
-        //         <TableCell>Name</TableCell>
-        //       </TableRow>
-        //     </TableHead>
-        //     <TableBody>
-        //       {items.map((row) => (
-        //         <TableRow
-        //           key={row.name}
-        //           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        //         >
-        //           <TableCell align="left">{row.experimentStatus.name}</TableCell>
-        //           <TableCell component="th" scope="row">
-        //           <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
-        //           </TableCell>                  
-        //         </TableRow>
-        //       ))}
-        //     </TableBody>
-        //   </Table>
-        // </TableContainer>
-
       );
     }
 }
@@ -120,7 +115,7 @@ function Workspace() {
                 </div>
 
                 <div className='rna-svg'>
-                    <img src={small_RNA_SVG} alt=''></img>
+                    <img src={small_RNA_SVG} alt='' style={{ height:'700px' }}></img>
                 </div>
             </div>
 
