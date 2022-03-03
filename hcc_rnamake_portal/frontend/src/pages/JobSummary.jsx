@@ -90,19 +90,24 @@ function GetSummary(props)
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
           <Grid container spacing={3}>
+            <Grid item lg={6} align={"left"}> 
+            {(pdbCollection).map((design) => (
+              <a class="action-link" href={design[1]}>{design[0]}</a>
+            ))}
+            </Grid>
             <Grid item lg={6} align={"left"}>    
-            <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
-            <Collapse orientation="vertical" in={viewStdout}>
-            <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
-            </Collapse>
+              <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
+              <Collapse orientation="vertical" in={viewStdout}>
+                <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
+              </Collapse>
             </Grid>
           </Grid>
           <Grid item lg={6} align={"left"}>
           <Grid item lg={6} align={"left"}>
             <FormControlLabel control={<Switch checked={viewStderr} onChange={handleStdErrChange} />} label="Preview Standard Error"/>
-            <Collapse orientation="vertical" in={viewStderr}>
-            <textarea wrap="off" id="stderrbox" rows="90" cols="120" name="w3review" readonly="true" value={stdErr}>  </textarea>
-            </Collapse>
+              <Collapse orientation="vertical" in={viewStderr}>
+                <textarea wrap="off" id="stderrbox" rows="90" cols="120" name="w3review" readonly="true" value={stdErr}>  </textarea>
+              </Collapse>
             </Grid>
           </Grid>
         </Box>
