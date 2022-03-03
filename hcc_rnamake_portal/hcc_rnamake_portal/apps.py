@@ -29,7 +29,7 @@ class HccRnamakePortalConfig(AppConfig):
 
     # Set url_home to a namespaced URL that will be the homepage when the custom
     # app is selected from the main menu
-    url_home = "hcc_rnamake_portal:demo"
+    url_home = "hcc_rnamake_portal:home"
 
     # Set fa_icon_class to a FontAwesome CSS class for an icon to associate with
     # the custom app. Find an icon class at https://fontawesome.com/icons?d=gallery&p=2&s=regular,solid&m=free
@@ -42,3 +42,5 @@ class HccRnamakePortalConfig(AppConfig):
     # https://apache-airavata-django-portal.readthedocs.io/en/latest/dev/new_django_app/#appconfig-settings
     # for more details for more details.
     settings = Settings()
+    
+    url_prefix = 'rnamake_portal'
