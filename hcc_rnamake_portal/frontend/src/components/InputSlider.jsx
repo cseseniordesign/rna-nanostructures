@@ -37,7 +37,7 @@ export default function InputSlider(props) {
   return (
     <Box sx={{ width: 540 }}>
 
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={2} alignItems="center" fullwidth>
         <Grid item>
         </Grid>
         <Grid item xs>
@@ -49,6 +49,7 @@ export default function InputSlider(props) {
             step = {props.step}
             max = {props.max}
             aria-labelledby="input-slider"
+            width="inherit"
           />
         </Grid>
         <Grid item>

@@ -15,7 +15,7 @@ export default function JobName(props) {
         Project Name/Description
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={8}>
           <TextField
             required
             id="name"
@@ -26,12 +26,13 @@ export default function JobName(props) {
             variant="filled"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={8}>
           <TextField
             id="description"
             name="description"
             label="Description"
             fullWidth
+            multiline
             maxRows = "5"
             onChange={props.handleChange}
             variant="filled"
@@ -40,21 +41,12 @@ export default function JobName(props) {
         <Grid item xs={12}>
           {/*spacer*/}
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography id="designCount" gutterBottom>
-            Number of Designs
-          </Typography>
-          <InputSlider name="designs" value={30} min={10} max = {100} step={1} sliderChange={props.handleChange} />
-        </Grid>
-        <Grid item xs={12 }>
-        {/* If we decide to put a project selection menu back here this is where it goes */}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography gutterBottom>
-            Time limit (minutes)
-          </Typography>
-          <InputSlider name="timeLimit" value={30}  min={5} max = {300} step={15} sliderChange={props.handleChange} />
-        </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography id="designCount" gutterBottom>
+              Number of Designs
+            </Typography>
+            <InputSlider name="designs" value={30} min={10} max = {100} step={1} sliderChange={props.handleChange} />
+          </Grid>
       </Grid>
     </React.Fragment>
   );
