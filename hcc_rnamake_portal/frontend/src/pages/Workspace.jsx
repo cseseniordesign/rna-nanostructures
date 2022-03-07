@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './Workspace.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-// import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Paper from '@mui/material/Paper';
 import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
-import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { useHistory } from 'react-router-dom';
-import ImageIcon from '@mui/icons-material/Image';
 import Box from '@mui/material/Box';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ListItemButton, ListItemIcon } from '@mui/material';
 import Helix from '../graphics/helix.svg';
-import DangerousIcon from '@mui/icons-material/Dangerous';
+import ReportIcon from '@mui/icons-material/Report';
+import Divider from '@mui/material/Divider';
 
 async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -42,13 +31,13 @@ function renderStatusIcon(experimentStatus) {
   } else if (experimentStatus === 'COMPLETED') {
     return (
       <React.Fragment>
-        <CheckCircleIcon sx={{ fill:'green' }}/>
+        <CheckCircleIcon style={{ fill:'green', fontSize:'50px' }}/>
       </React.Fragment>
     );
   } else if (experimentStatus === 'FAILED') {
     return (
       <React.Fragment>
-        <DangerousIcon sx={{ fill:'red', height:'150px' }}/>
+        <ReportIcon style={{ fill:'#d01818', fontSize:'50px' }}/>
       </React.Fragment>
     );
   }
@@ -81,8 +70,9 @@ function BasicTable() {
         <List>
             {items.map((row) => (
                 <React.Fragment>
+                  <Divider/>
                   <ListItem disablePadding>
-                    <ListItemButton onClick={() => {
+                    <ListItemButton sx={{ height:'150px' }} onClick={() => {
                       history.push('job-summary/' + row.experimentId);
                     }}>
                       <ListItemIcon>
@@ -91,6 +81,7 @@ function BasicTable() {
                       <ListItemText primary={row.name} secondary={row.experimentStatus.name} style={{ textAlign: 'center' }}/>
                     </ListItemButton>
                   </ListItem>
+                  <Divider/>
                 </React.Fragment>
             ))}
         </List>
