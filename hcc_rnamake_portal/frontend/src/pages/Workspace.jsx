@@ -63,7 +63,7 @@ function BasicTable() {
    if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-
+      // console.log(items);
       
       return (
         <Box>
