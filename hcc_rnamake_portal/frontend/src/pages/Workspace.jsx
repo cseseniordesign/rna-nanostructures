@@ -22,6 +22,7 @@ import Box from '@mui/material/Box';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ListItemButton, ListItemIcon } from '@mui/material';
 import Helix from '../graphics/helix.svg';
+import DangerousIcon from '@mui/icons-material/Dangerous';
 
 async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -42,6 +43,12 @@ function renderStatusIcon(experimentStatus) {
     return (
       <React.Fragment>
         <CheckCircleIcon sx={{ fill:'green' }}/>
+      </React.Fragment>
+    );
+  } else if (experimentStatus === 'FAILED') {
+    return (
+      <React.Fragment>
+        <DangerousIcon sx={{ fill:'red', height:'150px' }}/>
       </React.Fragment>
     );
   }
