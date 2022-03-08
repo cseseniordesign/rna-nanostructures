@@ -35,9 +35,8 @@ export default function InputSlider(props) {
   };
 
   return (
-    <Box sx={{ width: 540 }}>
-
-      <Grid container spacing={2} alignItems="center">
+    <Box>
+      <Grid container spacing={2} alignItems="center" fullwidth>
         <Grid item>
         </Grid>
         <Grid item xs>
@@ -48,16 +47,18 @@ export default function InputSlider(props) {
             min = {props.min}
             step = {props.step}
             max = {props.max}
+            marks={props.marks}
             aria-labelledby="input-slider"
+            width="95%"
           />
         </Grid>
         <Grid item>
           <Input
             value={value}
-            size="small"
             onChange={handleInputChange}
             onBlur={handleBlur}
             name={props.name}
+            width="100%"
             inputProps={{
               step: props.step,
               min: props.min,
