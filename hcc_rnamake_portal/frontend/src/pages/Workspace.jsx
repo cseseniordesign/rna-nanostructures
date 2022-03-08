@@ -9,7 +9,8 @@ import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ListItemButton, ListItemIcon } from '@mui/material';
-import Helix from '../graphics/helix.svg';
+// import Helix from '../graphics/helix.svg';
+import rnaHelix from '../graphics/rna-helix.png';
 import ReportIcon from '@mui/icons-material/Report';
 import Divider from '@mui/material/Divider';
 
@@ -25,7 +26,7 @@ function renderStatusIcon(experimentStatus) {
   if (experimentStatus === 'LAUNCHED' || experimentStatus === 'EXECUTING') {
     return (
       <React.Fragment>
-        <img src={Helix} alt='' className='helix-icon'/>
+        <img src={rnaHelix} alt='' className='helix-icon'/>
       </React.Fragment>
     );
   } else if (experimentStatus === 'COMPLETED') {
@@ -43,7 +44,7 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
-function BasicTable() {
+function BasicList() {
     let history = useHistory();
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -62,9 +63,8 @@ function BasicTable() {
   
    if (!isLoaded) {
       return <div>Loading...</div>;
+
     } else {
-      // console.log(items);
-      
       return (
         <Box>
         <List>
@@ -119,7 +119,7 @@ function Workspace() {
 
            <div className='recent-exp'>
                 <p className='exp-font'>Recent Experiments</p>
-                <BasicTable />
+                <BasicList />
            </div>
        </div>
     );

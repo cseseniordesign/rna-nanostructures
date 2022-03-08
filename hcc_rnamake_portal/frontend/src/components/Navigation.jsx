@@ -6,7 +6,7 @@ function Navigation() {
         <div className="navigation" width="100%">
             <nav className="navbar navbar-expand bg-transparent">
                 <div className="container">
-                    <Link class="navbar-brand" to="/">
+                    <Link class="navbar-brand" to="/rnamake_portal/workspace">
                         RNAMake
                     </Link>
                     <div>
