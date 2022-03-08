@@ -6,6 +6,7 @@ import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import Container from '@mui/material/Container';
 
 async function loadExperimentDetails(experimentId)
 {
@@ -31,12 +32,29 @@ async function getUriData(uri)
     return result;
 }
 
+function formatDesignLinks(design,index)
+{
+    if(index % 10 === 0 && index !== 0)
+    {
+      return(
+        <><a class="action-link" href={design[1]}>{design[0]}</a><br /></>
+      )
+    }
+    else 
+    {
+      return (
+       <><span>&nbsp;</span><a class="action-link" href={design[1]}>{design[0]}</a></> 
+      )
+    }
+}
+
 function GetSummary(props) 
 {
     const [isLoaded, setIsLoaded] = useState(false);
     const [stdOut, setStdOut] = useState();
     const [stdErr, setStdErr] = useState();
     const [pdbCollection, setPdbCollection] = useState([]);
+    const [archive, setArchive] = useState();
     
     const [viewStdout, setViewStdout] = React.useState(false);
     const [viewStderr, setViewStderr] = React.useState(false);
@@ -53,7 +71,7 @@ function GetSummary(props)
       loadExperimentDetails(props.experimentId)
       .then(
         (result) =>{
-          console.log(result['files']);
+          console.log(result);
           for (var i=0; i<result['files'].length; i++)
           {
             if(result['files'][i]['name'].endsWith('stderr'))
@@ -75,6 +93,7 @@ function GetSummary(props)
               //Something whack happened 
             }
           }
+          setArchive("/sdk/download-experiment-dir/"+props.experimentId+"/?path=ARCHIVE");
           setIsLoaded(true);
         }
       )
@@ -86,24 +105,28 @@ function GetSummary(props)
     }
     else
     {
-      console.log(pdbCollection);
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
-          <Grid container spacing={3}>
-            <Grid item lg={6} align={"left"}> 
-            {(pdbCollection).map((design) => (
-              <a class="action-link" href={design[1]}>{design[0]}</a>
-            ))}
+          <Grid container spacing={2} columns={16}>
+            <Grid item xs={16} align={"left"}> 
+            <Typography>Download individual Designs</Typography>
             </Grid>
-            <Grid item lg={6} align={"left"}>    
+            <Grid item xs={16} align={"left"}> 
+            {(pdbCollection).map((design,index) => formatDesignLinks(design,index))}  
+            </Grid>
+            <Grid item xs={16} align={"left"}> 
+            <Typography>Download archive of entire experiment</Typography>
+            </Grid>
+            <Grid item xs={16} align={"left"}> 
+            <a class="action-link" href={archive}>{props.experimentId}+.zip</a>
+            </Grid>
+            <Grid item xs={8} align={"left"}>    
               <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
               <Collapse orientation="vertical" in={viewStdout}>
                 <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
               </Collapse>
             </Grid>
-          </Grid>
-          <Grid item lg={6} align={"left"}>
-          <Grid item lg={6} align={"left"}>
+            <Grid item xs={8} align={"left"}>
             <FormControlLabel control={<Switch checked={viewStderr} onChange={handleStdErrChange} />} label="Preview Standard Error"/>
               <Collapse orientation="vertical" in={viewStderr}>
                 <textarea wrap="off" id="stderrbox" rows="90" cols="120" name="w3review" readonly="true" value={stdErr}>  </textarea>
