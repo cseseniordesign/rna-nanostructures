@@ -58,7 +58,7 @@ const theme = createTheme();
 
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
         applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
-        computeResourceName: "149.165.169.152",
+        computeResourceName: "149.165.171.24",
         experimentName: info.name,
         experimentInputs: {
           "pdb" : info.localUpload,
