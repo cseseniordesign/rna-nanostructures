@@ -17,6 +17,7 @@ The process documentation will include (release by release)
 ### Release 3
 
 
+
 ### Release 4
 
 
@@ -24,28 +25,4 @@ The process documentation will include (release by release)
 
 
 ### Release 6
-
-
-
-## Specific Processes for Release 1
-
-
-
-## Specific Processes for Release 2
-
-
-
-## Specific Processes for Release 3
-
-
-
-## Specific Processes for Release 4
-
-
-
-## Specific Processes for Release 5
-
-
-
-## Specific Processes for Release 6
 
