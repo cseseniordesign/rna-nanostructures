@@ -1,6 +1,6 @@
 {
   "name": "hcc-rnamake-frontend",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
@@ -92,7 +92,7 @@
       "patterns": [
         "src"
       ],
-      "extensions": "js,jsx"
+      "extensions": "js,jsx,css"
     }
   },
   "eslintConfig": {
@@ -114,12 +114,9 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
-    "eslint-plugin-react": "^7.26.1",
     "styled-components": "^5.3.3",
     "webpack-bundle-tracker": "^0.4.3"
   },

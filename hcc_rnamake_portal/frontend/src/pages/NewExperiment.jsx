@@ -15,7 +15,7 @@ import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
-import { responsiveProperty } from '@mui/material/styles/cssUtils';
+// import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 function Copyright() {
   return (
@@ -58,7 +58,7 @@ const theme = createTheme();
 
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
         applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
-        computeResourceName: "149.165.169.152",
+        computeResourceName: "149.165.171.24",
         experimentName: info.name,
         experimentInputs: {
           "pdb" : info.localUpload,
@@ -86,7 +86,7 @@ export default function Checkout() {
     name:'',
     description:'',
     designs:'',
-    scaffolds:'',
+    scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
@@ -109,7 +109,7 @@ export default function Checkout() {
     formData.append('file', file);
     console.log(formData);
     console.log(Cookies.get('csrftoken'));
-    fetch("https://dev.rnamake.scigap.org/api/upload",{
+    fetch("http://localhost:8000/api/upload",{
       credentials: 'include',
       mode: 'cors',
       method: 'POST',
@@ -177,7 +177,7 @@ export default function Checkout() {
                   Job Submitted.
                 </Typography>
                 <Typography variant="subtitle1">
-                  <a href="/workspace">Return to portal</a>
+                  <a href="/rnamake_portal/workspace">Return to portal</a>
                 </Typography>
               </React.Fragment>
             ) : (
