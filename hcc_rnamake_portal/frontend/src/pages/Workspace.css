@@ -1,45 +1,65 @@
 .rna-title {
-    font-family: 'Chivo';
-    font-size: 96px;
-    text-align: center;
-    color: #6B7EB3;
+  font-family: "Chivo";
+  font-size: 96px;
+  text-align: center;
+  color: #6b7eb3;
 }
 
 .rna-subtitle {
-    font-family: 'Chivo';
-    font-size: 28px;
-    text-align: center;
+  font-family: "Chivo";
+  font-size: 28px;
+  text-align: center;
 }
 
 .home-left {
-    width: 66.67%;
-    float: left;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 66.67%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .recent-exp {
-    background-color: #E4E9F1;
-    width: 33.33%;
-    float: right;
-    min-height: 400px;
+  background-color: #fff;
+  width: 20%;
+  float: right;
+  min-height: 400px;
 }
 
 .home-group {
-    width: 50%;
+  width: 50%;
 }
 
 .rna-svg {
-    float: right;
-    width: 15%;
+  float: right;
+  /* width: 25%; */
 }
 
 .exp-font {
-    font-family: 'Chivo';
-    font-size: 24px;
+  font-family: "Chivo";
+  font-size: 24px;
 }
 
 .scaffold-button {
-    margin-top: 50%;
+  margin-top: 50%;
+}
+
+.helix-icon {
+  height: 80px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .helix-icon {
+    animation: helix-icon-spin infinite 2s linear;
+  }
+}
+
+@keyframes helix-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

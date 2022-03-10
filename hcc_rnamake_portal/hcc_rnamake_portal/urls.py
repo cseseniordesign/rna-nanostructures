@@ -1,10 +1,10 @@
 
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
 app_name = 'hcc_rnamake_portal'
 urlpatterns = [
-    path('home/', views.home, name='home'),
-    path('demo/', views.demo, name='demo'),
+    path('workspace/', views.demo, name='home'),
+    re_path(r"^", views.demo, name='demo'),
 ]
