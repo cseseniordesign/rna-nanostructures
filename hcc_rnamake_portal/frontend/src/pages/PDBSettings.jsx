@@ -14,7 +14,8 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox, textAlign } from '@mui/system';
 
-
+// to automate switching URLs when developing and when in the online portal.
+const BASEURL = window.location.origin;
 
 export default function PDBSettings(props) {
 
@@ -34,7 +35,7 @@ export default function PDBSettings(props) {
         <p>
           <a
             className='App-link'
-            href='http://localhost:8000/rnmake_portal/faq'
+            href={ BASEURL + '/rnamake_portal/faq' } 
             target="_blank"
             rel="noopener noreferrer"
             style={{ color:'#4C5F94'}}
