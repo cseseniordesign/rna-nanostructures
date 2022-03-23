@@ -24,6 +24,9 @@ function Copyright() {
   );
 }
 
+// to automate switching URLs when developing and when in the online portal.
+const BASEURL = window.location.origin;
+
 const steps = ['Description', 'Settings', 'Review'];
 
 
@@ -109,7 +112,7 @@ export default function Checkout() {
     formData.append('file', file);
     console.log(formData);
     console.log(Cookies.get('csrftoken'));
-    fetch("http://localhost:8000/api/upload",{
+    fetch(BASEURL + "/api/upload",{
       credentials: 'include',
       mode: 'cors',
       method: 'POST',
