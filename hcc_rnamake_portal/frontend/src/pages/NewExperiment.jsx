@@ -57,7 +57,7 @@ const theme = createTheme();
     console.log(info);
 
     //Some sort of case statement to build experiment inputs for each profile type should go here
-    var input = 
+    const input = 
     {
       "pdb" : info.localUpload,
       "start_bp": info.startingBase,
@@ -87,7 +87,7 @@ export default function Checkout() {
     name:'',
     description:'',
     designs:'10',
-    scaffolds:'10',
+    scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
