@@ -5,6 +5,7 @@
 .App {
   text-align: center;
   background-color: var(--wild-sand);
+  max-width: none;
 }
 
 .App-logo {
