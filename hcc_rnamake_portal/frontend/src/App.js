@@ -15,7 +15,7 @@ function App() {
         document.body.appendChild(script);
       }, []);
   return (
-      <div className="App">
+      <div className="App main-content">
           <Router>
               <Navigation />
               <Switch>
