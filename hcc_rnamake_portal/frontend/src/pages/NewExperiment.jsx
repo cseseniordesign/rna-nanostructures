@@ -59,22 +59,24 @@ const theme = createTheme();
     // Construct experiment object
     console.log(info);
 
+    //Some sort of case statement to build experiment inputs for each profile type should go here
+    const input = 
+    {
+      "pdb" : info.localUpload,
+      "start_bp": info.startingBase,
+      "end_bp" : info.endingBase,
+      "designs" : info.designs,
+      "sequences_per_design" : info.scaffolds,
+      "search_cutoff" : info.searchCutoff,
+      "other_cli_arguments":"--dump_pdbs",
+      "log_level" : info.logLevel,
+    }
+
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
         applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
         computeResourceName: "149.165.171.24",
         experimentName: info.name,
-        experimentInputs: {
-          "pdb" : info.localUpload,
-          "start_bp": info.startingBase,
-          "end_bp" : info.endingBase,
-          "designs" : info.designs,
-          "sequences_per_design" : info.scaffolds,
-          "search_cutoff" : 15.0,
-          "dump_pdbs":"",
-          "skip_sequence_optimization": "",
-          "search_max_size":75,
-          
-      },
+        experimentInputs: input,
     });
     // Save experiment
     const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
@@ -87,12 +89,14 @@ export default function Checkout() {
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
-    designs:'',
+    designs:'10',
     scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
-    localUpload:''
+    localUpload:'',
+    searchCutoff:'5',
+    logLevel: "debug",
   });
 
   const handleChange = e => {
