@@ -57,6 +57,11 @@ const theme = createTheme();
     console.log(info);
 
     //Some sort of case statement to build experiment inputs for each profile type should go here
+
+    /* other_cli_arguments should be where the binary options whose existence is the true/false value (i.e --dump_pdbs)
+     * should exist.  Airavata removes CLI arguments that don't have a value 
+    */
+
     const input = 
     {
       "pdb" : info.localUpload,
@@ -92,7 +97,7 @@ export default function Checkout() {
     startingBase:'',
     endingBase:'',
     localUpload:'',
-    searchCutoff:'5',
+    searchCutoff:'',
     logLevel: "debug",
   });
 
