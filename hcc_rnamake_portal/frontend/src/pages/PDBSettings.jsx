@@ -72,9 +72,7 @@ export default function PDBSettings(props) {
             </Button>
           </label> 
           {/* Drag and Drop Box */}
-          <FlexRow>
-              <MyDropline></MyDropline>
-          </FlexRow>
+            <MyDropline></MyDropline>
         </Grid>
         <Grid item xs={12} md={6}>
           <Button variant='contained' endIcon={ <CloudIcon/> } style={{ backgroundColor:'#4C5F94' }} onClick={() => {cloudUpload ? setCloudUpload(0): setCloudUpload(1)}}>
@@ -121,11 +119,3 @@ function MyDropline() {
    </div>
  )
 }
-
-const FlexRow = styled.div`
-margin-top: 0px;
-margin-left: 100px;
-display: flex;
-align-items: flex-start;
-min-width: 996px;
-`;
