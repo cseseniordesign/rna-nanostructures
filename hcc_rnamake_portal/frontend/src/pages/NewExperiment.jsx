@@ -61,18 +61,35 @@ const theme = createTheme();
     /* other_cli_arguments should be where the binary options whose existence is the true/false value (i.e --dump_pdbs)
      * should exist.  Airavata removes CLI arguments that don't have a value 
     */
-
-    const input = 
+    var input = {};
+    if(info.preset==="TTR")
     {
-      "pdb" : info.localUpload,
-      "start_bp": info.startingBase,
-      "end_bp" : info.endingBase,
-      "designs" : info.designs,
-      "sequences_per_design" : info.scaffolds,
-      "search_cutoff" : info.searchCutoff,
-      "other_cli_arguments":"--dump_pdbs",
-      "log_level" : info.logLevel,
+      input = {
+        "pdb" : info.localUpload,
+        "start_bp": info.startingBase,
+        "end_bp" : info.endingBase,
+        "designs" : info.designs,
+        "sequences_per_design" : info.scaffolds,
+        "search_cutoff" : info.searchCutoff,
+        "other_cli_arguments":"--dump_pdbs",
+        "log_level" : info.logLevel,
+      }
     }
+    else if(info.preset ==="TTR_MC")
+    {
+      input = {
+        "pdb" : info.localUpload,
+        "start_bp": info.startingBase,
+        "end_bp" : info.endingBase,
+        "designs" : info.designs,
+        "sequences_per_design" : info.scaffolds,
+        "other_cli_arguments" : "--dump_pdbs",
+        "log_level" : info.logLevel,
+        "search_type" :"mc",
+        "motif_path" : info.motifPath,
+      }
+    }
+
 
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
         applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
@@ -88,6 +105,7 @@ const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  //This is becoming something of a God object
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
@@ -99,6 +117,8 @@ export default function Checkout() {
     localUpload:'',
     searchCutoff:'',
     logLevel: "debug",
+    motifPath:'',
+    preset:''
   });
 
   const handleChange = e => {
