@@ -16,4 +16,4 @@ Included in this documentation folder is
 
 
 
-Documentation is also available in the (repository wiki)[https://github.com/cseseniordesign/rna-nanostructures/wiki]
+Documentation is also available in the [repository wiki](https://github.com/cseseniordesign/rna-nanostructures/wiki)
