@@ -6,22 +6,25 @@ import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import Container from '@mui/material/Container';
+import corner_swoosh from '../graphics/corner_swoosh.svg';
+import zipFileImage from '../images/zip-card-dark.png';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea } from '@mui/material';
 
-async function loadExperimentDetails(experimentId)
-{
+async function loadExperimentDetails(experimentId) {
   const data = await window.AiravataAPI.utils.FetchUtils.get(
       "/api/experiment-storage/"+experimentId,
       ""
   );
-//  const experiment = await window.AiravataAPI.services.ExperimentService.retrieve({
-//        lookup: experimentId,
-//  });
+
+  console.log('Data from api: ');
+  console.log(data);
   return data;
 }
 
-async function getUriData(uri)
-{
+async function getUriData(uri) {
     const result = await window.AiravataAPI.utils.FetchUtils.get(
       uri,
       "",
@@ -32,24 +35,19 @@ async function getUriData(uri)
     return result;
 }
 
-function formatDesignLinks(design,index)
-{
-    if(index % 10 === 0 && index !== 0)
-    {
-      return(
+function formatDesignLinks(design, index) {
+    if(index % 10 === 0 && index !== 0) {
+      return (
         <><a class="action-link" href={design[1]}>{design[0]}</a><br /></>
       )
-    }
-    else 
-    {
+    } else {
       return (
        <><span>&nbsp;</span><a class="action-link" href={design[1]}>{design[0]}</a></> 
       )
     }
 }
 
-function GetSummary(props) 
-{
+function GetSummary(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [stdOut, setStdOut] = useState();
     const [stdErr, setStdErr] = useState();
@@ -68,29 +66,19 @@ function GetSummary(props)
     }
 
     useEffect(()=>{
-      loadExperimentDetails(props.experimentId)
-      .then(
-        (result) =>{
-          console.log(result);
-          for (var i=0; i<result['files'].length; i++)
-          {
-            if(result['files'][i]['name'].endsWith('stderr'))
-            {
+      loadExperimentDetails(props.experimentId).then(
+        (result) => {
+          for (var i=0; i<result['files'].length; i++) {
+            if(result['files'][i]['name'].endsWith('stderr')) {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdErr(result)});
-            }
-            else if(result['files'][i]['name'].endsWith('stdout'))
-            {
+            } else if(result['files'][i]['name'].endsWith('stdout')) {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdOut(result)});
-            }
-            else if(result['files'][i]['name'].startsWith('design'))
-            {
+            } else if(result['files'][i]['name'].startsWith('design')) {
               //Doesn't respect reacts immutable state design paradighm but react doesn't respect my need to have nominally working code
               //Also, this literally will not change after first load so it's probably fine
-              pdbCollection.push([result['files'][i]['name'],result['files'][i]['downloadURL']]);
-            }
-            else 
-            {
-              //Something whack happened 
+              pdbCollection.push([result['files'][i]['name'], result['files'][i]['downloadURL']]);
+            } else {
+              //Something whack happened TODO: error handling
             }
           }
           setArchive("/sdk/download-experiment-dir/"+props.experimentId+"/?path=ARCHIVE");
@@ -99,26 +87,38 @@ function GetSummary(props)
       )
     },[])
   
-   if (!isLoaded)
-    {
+   if (!isLoaded) {
       return <div>Loading...</div>;
-    }
-    else
-    {
+    } else {
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
           <Grid container spacing={2} columns={16}>
-            <Grid item xs={16} align={"left"}> 
+            {/* <Grid item xs={16} align={"left"}> 
             <Typography>Download individual Designs</Typography>
             </Grid>
             <Grid item xs={16} align={"left"}> 
             {(pdbCollection).map((design,index) => formatDesignLinks(design,index))}  
+            </Grid> */}
+            <Grid item xs={16} align={"left"}> 
+            <Typography variant='h3'>Download Job Results</Typography>
             </Grid>
             <Grid item xs={16} align={"left"}> 
-            <Typography>Download archive of entire experiment</Typography>
-            </Grid>
-            <Grid item xs={16} align={"left"}> 
-            <a class="action-link" href={archive}>{props.experimentId}+.zip</a>
+            <Card sx={{maxWidth: 345}}>
+              <CardActionArea href={archive}>
+                <CardMedia
+                component='img'
+                height='140'
+                image={zipFileImage}
+                alt='ZIP FILE'
+                sx={{fontSize:20}}
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {props.experimentId}.zip
+                </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
             </Grid>
             <Grid item xs={8} align={"left"}>    
               <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
@@ -141,9 +141,14 @@ function GetSummary(props)
 function JobSummary() {
     const params = useParams();
     return (
-       <div>
-            <GetSummary experimentId={params.experimentId}/>
-       </div>
+      <div>
+      <div>
+        <GetSummary experimentId={params.experimentId}/>
+      </div>
+      <div id='footer'>
+        <img src={corner_swoosh} alt='' style={{float: 'right'}}/>
+      </div>
+      </div>
     );
 }
 
