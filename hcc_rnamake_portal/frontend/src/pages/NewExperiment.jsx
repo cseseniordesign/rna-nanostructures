@@ -62,24 +62,58 @@ const theme = createTheme();
  * Experiment submission
  * @param {*} info 
  */
-async function submitExperiment(info) {
-  
-  while(info.localUpload==='');
-  // Construct experiment object
-  console.log(info);
+  async function submitExperiment(info) {
+    
+    while(info.localUpload==='');
+    // Construct experiment object
+    console.log(info);
 
-  //Some sort of case statement to build experiment inputs for each profile type should go here
-  const input = 
-  {
-    "pdb" : info.localUpload,
-    "start_bp": info.startingBase,
-    "end_bp" : info.endingBase,
-    "designs" : info.designs,
-    "sequences_per_design" : info.scaffolds,
-    "search_cutoff" : info.searchCutoff,
-    "other_cli_arguments":"--dump_pdbs",
-    "log_level" : info.logLevel,
-  }
+    //Some sort of case statement to build experiment inputs for each profile type should go here
+
+    /* other_cli_arguments should be where the binary options whose existence is the true/false value (i.e --dump_pdbs)
+     * should exist.  Airavata removes CLI arguments that don't have a value 
+    */
+    var input = {};
+    if(info.preset==="TTR")
+    {
+      input = {
+        "pdb" : info.localUpload,
+        "start_bp": info.startingBase,
+        "end_bp" : info.endingBase,
+        "designs" : info.designs,
+        "sequences_per_design" : info.scaffolds,
+        "search_cutoff" : info.searchCutoff,
+        "other_cli_arguments":"--dump_pdbs",
+        "log_level" : info.logLevel,
+      }
+    }
+    else if(info.preset ==="TTR_MC")
+    {
+      input = {
+        "pdb" : info.localUpload,
+        "start_bp": info.startingBase,
+        "end_bp" : info.endingBase,
+        "designs" : info.designs,
+        "sequences_per_design" : info.scaffolds,
+        "other_cli_arguments" : "--dump_pdbs",
+        "log_level" : info.logLevel,
+        "search_type" :"mc",
+        "motif_path" : info.motifPath,
+      }
+    }
+
+
+    const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
+        applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
+        computeResourceName: "149.165.171.24",
+        experimentName: info.name,
+        experimentInputs: input,
+    });
+    // Save experiment
+    const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
+    // Launch experiment
+    await window.AiravataAPI.services.ExperimentService.launch({ lookup: experiment.experimentId });
+  };
 
   const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
       applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
@@ -99,6 +133,7 @@ async function submitExperiment(info) {
  */
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  //This is becoming something of a God object
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
@@ -108,8 +143,10 @@ export default function Checkout() {
     startingBase:'',
     endingBase:'',
     localUpload:'',
-    searchCutoff:'5',
+    searchCutoff:'',
     logLevel: "debug",
+    motifPath:'',
+    preset:''
   });
 
   const handleChange = e => {
