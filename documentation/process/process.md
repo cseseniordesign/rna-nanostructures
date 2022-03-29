@@ -170,26 +170,6 @@ The process documentation will include (release by release)
 2. Team was down with the sickness (not in a good way)
 3. Slowdown with ReactJS/Django integration
 
-### Comments and Notes from Sponsors
-
-	Clean up dashboard
-	
-		- 10 to 100 for # of designs
-
-		- sequences per scaffold should be removed and set to 1
-
-		- search type always mc 
-
-		- motif path requires mc
-
-		- possibly different applications 
-
-		- look at TTR example, those should be defaults
-
-		- each test case is representative of a different use case
-
-		- on output page show command that would be used to run to run command
-
 ## Release 5
 
 ### Overview
