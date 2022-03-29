@@ -14,8 +14,8 @@ import { Box, flexbox, textAlign } from '@mui/system';
 
 /**
  * Upload page for the Submitted PBD File
+ * @returns PDBSettings Component
  */
-
 
 // to automate switching URLs when developing and when in the online portal.
 const BASEURL = window.location.origin;
@@ -91,6 +91,7 @@ export default function PDBSettings(props) {
 
 /**
  * Drag and Drop functionality
+ * @returns Interactive Drag and Drop item
  */
 function MyDropline() {
  const onDrop = useCallback(acceptedFiles => {
