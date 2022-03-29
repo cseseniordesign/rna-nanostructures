@@ -1,7 +1,3 @@
-/**
- * Upload for the Submitted PBD File
- */
-
 import React, { useState, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -15,6 +11,11 @@ import { ExpandMore } from '@mui/icons-material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox, textAlign } from '@mui/system';
+
+/**
+ * Upload page for the Submitted PBD File
+ */
+
 
 // to automate switching URLs when developing and when in the online portal.
 const BASEURL = window.location.origin;
