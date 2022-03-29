@@ -1,7 +1,7 @@
 import {React,useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navigation,  Workspace, PastExperiments, NewExperiment, FileUpload, FAQ } from './index.js';
-
+// import helix from './Graphics/helix.svg';
 import './App.css';
 import JobSummary from './pages/JobSummary.jsx';
 
@@ -27,6 +27,10 @@ function App() {
                   <Route path="/rnamake_portal/job-summary/:experimentId" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
               </Switch>
           </Router>
+          {/* <header className="App-header">
+              <img src={helix} className="App-logo" alt="logo" />
+            <p>RNAMake </p>
+          </header> */}
       </div>
   );
 }
