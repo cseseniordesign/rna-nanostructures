@@ -1,9 +1,10 @@
-/**
- * Page for Frequently Asked Questions during Job Submission
- */
 import React from "react";
 import Grid from '@mui/material/Grid';
 import basepair from "../images/basepair.png";
+
+/**
+ * Page for Frequently Asked Questions during Job Submission
+ */
 
 function FAQ() {
     return (
