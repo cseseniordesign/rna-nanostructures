@@ -9,14 +9,11 @@ import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ListItemButton, ListItemIcon } from '@mui/material';
+// import Helix from '../graphics/helix.svg';
 import rnaHelix from '../graphics/rna-helix.png';
 import ReportIcon from '@mui/icons-material/Report';
 import Divider from '@mui/material/Divider';
 
-/**
- * Fetches Experiments from ExperimentSearchService by username
- * @returns past experiments
- */
 async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
     limit: 5,
@@ -25,11 +22,6 @@ async function loadExperiments() {
   return data;
 }
 
-/**
- * Renders relevant icon based on experiment status
- * @param {*} experimentStatus 
- * @returns 
- */
 function renderStatusIcon(experimentStatus) {
   if (experimentStatus === 'LAUNCHED' || experimentStatus === 'EXECUTING') {
     return (
@@ -52,9 +44,6 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
-/**
- * @returns List of Experiments and status or Loading message
- */
 function BasicList() {
     let history = useHistory();
     const [isLoaded, setIsLoaded] = useState(false);
@@ -101,9 +90,6 @@ function BasicList() {
     }
 }
 
-/**
- * @returns Formatted Workspace
- */
 function Workspace() {
     let history = useHistory(); // used for rerouting to another page.
     return (
