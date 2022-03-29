@@ -1,5 +1,5 @@
 /**
- * Settings for the Submitted PBD File
+ * Upload for the Submitted PBD File
  */
 
 import React, { useState, useCallback } from 'react';
