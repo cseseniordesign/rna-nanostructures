@@ -13,6 +13,8 @@ Included in this documentation folder is
     - `process/requirements.md`
 - Code Reference
     - `reference/react-reference.md`
+- User Manual
+    - `user-manual.md`
 
 
 
