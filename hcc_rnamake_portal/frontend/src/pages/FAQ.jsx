@@ -4,6 +4,7 @@ import basepair from "../images/basepair.png";
 
 /**
  * Page for Frequently Asked Questions during Job Submission
+ * @returns FAQ Component
  */
 
 function FAQ() {
