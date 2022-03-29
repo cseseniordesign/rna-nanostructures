@@ -2,17 +2,15 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-// import BasicMenu from '../components/BasicMenu';
 import InputSlider from '../components/InputSlider';
-import BasicSelect from '../components/BasicSelect';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-// import { useState } from 'react';
+import { alignProperty } from '@mui/material/styles/cssUtils';
+import { width } from '@mui/system';
 
-// const scaffoldCount = 1;
+/**
+ * Input for Project Name, Description, and Design Count
+ * @param {*} props 
+ * @returns JobName Component
+ */
 
 function conditionalComponents(props,preset,pathLength,path,handlePathLengthChange)
 {
@@ -90,6 +88,7 @@ export default function JobName(props) {
         Project Name/Description
       </Typography>
       <Grid container spacing={3}>
+        {/* Project Name */}
         <Grid item xs={12} sm={8} sx={{alignProperty:"left", width:"50%"}}>
           <TextField
             required
@@ -102,6 +101,7 @@ export default function JobName(props) {
             variant="filled"
           />
         </Grid>
+        {/* Description */}
         <Grid item xs={12} sm={8} sx={{alignProperty:"center", width:"100%"}}>
           <TextField
             id="description"
@@ -121,6 +121,7 @@ export default function JobName(props) {
           <Typography textAlign="left" id="designCount" gutterBottom>
             Number of Designs
           </Typography>
+          {/* Design count from 10-100 with default at 30 */}
           <InputSlider name="designs" value={30} min={10} max = {100} step={1} sliderChange={props.handleChange} marks={marks} sx={{width:100}} />
         </Grid>
         <Grid item xs={12} sx={{alignProperty:"center", width:"100%"}}>

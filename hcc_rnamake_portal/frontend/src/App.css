@@ -7,6 +7,16 @@
   background-color: var(--wild-sand);
 }
 
+/* To allow the react plugin to scale */
+.main-content {
+  max-width: none;
+}
+
+/* Hide the left sidebar in the plugin */
+.c-nav {
+  visibility: hidden;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
