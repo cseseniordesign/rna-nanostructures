@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
  * @returns Review summary
  */
 export default function Review(props) {
-  
+  // sets of data for summary
   const col1 = [
     { name: 'Experiment Name', detail: props.settings.name },
     { name: 'Description', detail: props.settings.description },
@@ -33,6 +33,7 @@ export default function Review(props) {
       <Grid container spacing={2}>
         <Grid item container direction="column" xs={12} sm={6}>
         <Grid container>
+            {/* Data from col1 mapped to table rows */}
             {col1.map((col1) => (
               <React.Fragment key={col1.name}>
                 <Grid item xs={6}>
@@ -47,6 +48,7 @@ export default function Review(props) {
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Grid container>
+            {/* Data from col2 mapped to table rows */}
             {col2.map((col2) => (
               <React.Fragment key={col2.name}>
                 <Grid item xs={6}>
