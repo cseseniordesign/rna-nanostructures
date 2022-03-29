@@ -9,6 +9,10 @@ import Paper from '@mui/material/Paper';
 import corner_swoosh from '../graphics/corner_swoosh.svg';
 import { Link } from 'react-router-dom';
 
+/**
+ * Fetches data from ExperimentSearchService for given username
+ * @returns Experiments data
+ */
 async function loadExperiments()
 {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -18,6 +22,10 @@ async function loadExperiments()
   return data;
 }
 
+/**
+ * Past Experiments table with Name, Creation Time, and Status
+ * @returns Table of Past Experiments or Loading message
+ */
 function BasicTable() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -34,7 +42,7 @@ function BasicTable() {
     )
   },[])
 
- if (!isLoaded)
+  if (!isLoaded)
   {
     return <div>Loading...</div>;
   }
@@ -75,6 +83,9 @@ function BasicTable() {
   }
 }
 
+/**
+ * @returns formatted BasicTable
+ */
 function PastExperiments() {
   return (
       <div className="past-experiments">
