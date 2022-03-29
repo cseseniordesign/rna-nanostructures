@@ -1,5 +1,7 @@
+/**
+ * Settings for the Submitted PBD File
+ */
 
-//import * as React from 'react';
 import React, { useState, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -33,6 +35,7 @@ export default function PDBSettings(props) {
       <br/>
       <div style={{ textAlign: 'left' }}>
         <p>
+          {/* redirects to FAQ*/}
           <a
             className='App-link'
             href={ BASEURL + '/rnamake_portal/faq' } 
@@ -45,9 +48,12 @@ export default function PDBSettings(props) {
         </p>    
       </div>
       <br/>
+
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
       </Typography>
+
+      {/* Upload for file, includes Cloud and Local Upload */}
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <input
@@ -64,6 +70,7 @@ export default function PDBSettings(props) {
               Local Upload
             </Button>
           </label> 
+          {/* Drag and Drop Box */}
           <FlexRow>
               <MyDropline></MyDropline>
           </FlexRow>
@@ -77,22 +84,15 @@ export default function PDBSettings(props) {
           <FileExplorer cloudUpload={cloudUpload} setCloudUpload={setCloudUpload} />
         </Grid>
       </Grid>
-
-      {/* <Accordion>
-        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
-          <Typography>Advanced settings</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <TextField id='cli-args' label='CLI Arguments' variant='filled'/>
-        </AccordionDetails>
-      </Accordion> */}
     </React.Fragment>
   );
 }
 
+/**
+ * Drag and Drop functionality
+ */
 function MyDropline() {
  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
    return acceptedFiles;
  }, [])
  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
