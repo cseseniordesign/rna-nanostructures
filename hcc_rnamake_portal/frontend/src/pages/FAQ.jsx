@@ -2,6 +2,11 @@ import React from "react";
 import Grid from '@mui/material/Grid';
 import basepair from "../images/basepair.png";
 
+/**
+ * Page for Frequently Asked Questions during Job Submission
+ * @returns FAQ Component
+ */
+
 function FAQ() {
     return (
         <div className='faq'>
@@ -17,11 +22,15 @@ function FAQ() {
                     In the case of A141-A162, it means that there is a basepair between residue 141 on chain A to residue 161 also on chain A. 
                 </Grid>
                 <Grid item lg={6}>
+                    {/* Image demonstrating basepairs on an RNA structure */}
                     <img src={basepair} alt='' width={"75%"} height={"100%"}></img>
                 </Grid>
             </Grid>
+            {/* To add more 2-column FAQ items, use the same grid format as above*/}
+            {/* For 1-column FAQ items, use lg={12} instead of lg={6} and just use one Grid item*/}
         </div>
     );
 }
+
 
 export default FAQ;

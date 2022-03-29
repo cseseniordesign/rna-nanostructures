@@ -9,18 +9,10 @@ import Paper from '@mui/material/Paper';
 import corner_swoosh from '../graphics/corner_swoosh.svg';
 import { Link } from 'react-router-dom';
 
-//function createData(name, application, user, creationTime, status, actions) {
-//  return {name, application, user, creationTime, status, actions};
-//}
-
-//const rows = [
-//  createData('Clone of Design RNA Scaffold on May 25, 2021 4:11 PM', "Design RNA Scaffold", "default-admin", "3 days ago", "Canceling", "Clone"),
-//  createData('Clone of Design RNA Scaffold on May 25, 2021 4:12 PM', "Design RNA Scaffold", "default-admin", "3 days ago", "Creating", "Clone"),
-//  createData('Design RNA Scaffold on May 25, 2021 4:11 PM', "Design RNA Scaffold", "default-admin", "3 days ago", "Failed", "Clone"),
-//  createData('Clone of Design RNA Scaffold on Apr 30, 2021 4:25 AM', "Design RNA Scaffold", "default-admin", "3 days ago", "Created", "Clone"),
-//  createData('Clone of Clone of Clone of Design RNA Scaffold on Apr 30, 2021 4:25 AM', "Design RNA Scaffold", "default-admin", "3 days ago", "Created", "Clone"),
-//];
-
+/**
+ * Fetches data from ExperimentSearchService for given username
+ * @returns Experiments data
+ */
 async function loadExperiments()
 {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -30,14 +22,16 @@ async function loadExperiments()
   return data;
 }
 
+/**
+ * Past Experiments table with Name, Creation Time, and Status
+ * @returns Table of Past Experiments or Loading message
+ */
 function BasicTable() {
-  //const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
   useEffect(()=>{
     loadExperiments()
-   // console.log(res)
     .then(result => result.results)
     .then(
       (result) =>{
@@ -46,12 +40,9 @@ function BasicTable() {
         setIsLoaded(true);
       }
     )
-    //console.log(results);
-   // setItems(results.json());
-   // setIsLoaded(true);
   },[])
 
- if (!isLoaded)
+  if (!isLoaded)
   {
     return <div>Loading...</div>;
   }
@@ -92,6 +83,9 @@ function BasicTable() {
   }
 }
 
+/**
+ * @returns formatted BasicTable
+ */
 function PastExperiments() {
   return (
       <div className="past-experiments">
