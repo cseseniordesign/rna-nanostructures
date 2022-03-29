@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-//import List from '@mui/material/List';
-//import ListItem from '@mui/material/ListItem';
-//import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
 
-
+/**
+ * Review of content before final submission
+ * @param {*} props 
+ * @returns Review summary
+ */
 export default function Review(props) {
   
   const col1 = [
