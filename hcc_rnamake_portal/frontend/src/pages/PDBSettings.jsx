@@ -12,9 +12,10 @@ import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/m
 import { ExpandMore } from '@mui/icons-material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-import { Box, flexbox } from '@mui/system';
+import { Box, flexbox, textAlign } from '@mui/system';
 
-
+// to automate switching URLs when developing and when in the online portal.
+const BASEURL = window.location.origin;
 
 export default function PDBSettings(props) {
 
@@ -29,6 +30,20 @@ export default function PDBSettings(props) {
         <TextField name='startingBase' label='Starting Base Pair' variant='filled' onChange={props.handleChange} required/>
         <TextField name='endingBase' label='Ending Base Pair' variant='filled' onChange={props.handleChange} required/>
       </Box>
+      <br/>
+      <div style={{ textAlign: 'left' }}>
+        <p>
+          <a
+            className='App-link'
+            href={ BASEURL + '/rnamake_portal/faq' } 
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color:'#4C5F94'}}
+          >
+            What are base pair names?
+          </a>
+        </p>    
+      </div>
       <br/>
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs

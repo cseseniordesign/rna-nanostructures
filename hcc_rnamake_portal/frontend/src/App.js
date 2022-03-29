@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navigation,  Workspace, PastExperiments, NewExperiment, FileUpload, FAQ } from './index.js';
 // import helix from './Graphics/helix.svg';
 import './App.css';
+import JobSummary from './pages/JobSummary.jsx';
 
 
 function App() {
@@ -18,11 +19,12 @@ function App() {
           <Router>
               <Navigation />
               <Switch>
-                  <Route path="/" exact component={() => <Workspace />} />
-                  <Route path="/past-experiments" exact component={() => <PastExperiments />} />
-                  <Route path="/file-upload" exact component={() => <FileUpload />} />
-                  <Route path="/new-experiment" exact component={() => <NewExperiment />} />
-                  <Route path="/FAQ" exact component={() => <FAQ />} />
+                  <Route path="/rnamake_portal/workspace" exact component={() => <Workspace />} />
+                  <Route path="/rnamake_portal/past-experiments" exact component={() => <PastExperiments />} />
+                  <Route path="/rnamake_portal/file-upload" exact component={() => <FileUpload />} />
+                  <Route path="/rnamake_portal/new-experiment" exact component={() => <NewExperiment />} />
+                  <Route path="/rnamake_portal/FAQ" exact component={() => <FAQ />} />
+                  <Route path="/rnamake_portal/job-summary/:experimentId" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
               </Switch>
           </Router>
           {/* <header className="App-header">

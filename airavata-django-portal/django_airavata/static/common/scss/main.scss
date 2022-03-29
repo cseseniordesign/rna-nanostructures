@@ -125,7 +125,7 @@ $header_height_with_border: $header_height + 1px;
 .main-content {
   flex-grow: 1;
   padding: 1rem;
-  max-width: 1200px;
+  // max-width: 1200px;
 
   &--with-sidebar {
     max-width: none;

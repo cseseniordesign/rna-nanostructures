@@ -15,7 +15,7 @@ import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
-import { responsiveProperty } from '@mui/material/styles/cssUtils';
+// import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 function Copyright() {
   return (
@@ -23,6 +23,9 @@ function Copyright() {
     </Typography>
   );
 }
+
+// to automate switching URLs when developing and when in the online portal.
+const BASEURL = window.location.origin;
 
 const steps = ['Description', 'Settings', 'Review'];
 
@@ -56,22 +59,24 @@ const theme = createTheme();
     // Construct experiment object
     console.log(info);
 
+    //Some sort of case statement to build experiment inputs for each profile type should go here
+    const input = 
+    {
+      "pdb" : info.localUpload,
+      "start_bp": info.startingBase,
+      "end_bp" : info.endingBase,
+      "designs" : info.designs,
+      "sequences_per_design" : info.scaffolds,
+      "search_cutoff" : info.searchCutoff,
+      "other_cli_arguments":"--dump_pdbs",
+      "log_level" : info.logLevel,
+    }
+
     const experimentData = await window.AiravataAPI.utils.ExperimentUtils.createExperiment({
         applicationInterfaceId: "RNAMake_8a3a6486-c6c5-4a37-8e98-ec14e3efdff4",
-        computeResourceName: "149.165.169.152",
+        computeResourceName: "149.165.171.24",
         experimentName: info.name,
-        experimentInputs: {
-          "pdb" : info.localUpload,
-          "start_bp": info.startingBase,
-          "end_bp" : info.endingBase,
-          "designs" : info.designs,
-          "sequences_per_design" : info.scaffolds,
-          "search_cutoff" : 15.0,
-          "dump_pdbs":"",
-          "skip_sequence_optimization": "",
-          "search_max_size":75,
-          
-      },
+        experimentInputs: input,
     });
     // Save experiment
     const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
@@ -84,12 +89,14 @@ export default function Checkout() {
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
-    designs:'',
-    scaffolds:'',
+    designs:'10',
+    scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
-    localUpload:''
+    localUpload:'',
+    searchCutoff:'5',
+    logLevel: "debug",
   });
 
   const handleChange = e => {
@@ -108,7 +115,7 @@ export default function Checkout() {
     formData.append('file', file);
     console.log(formData);
     console.log(Cookies.get('csrftoken'));
-    fetch("http://localhost:8000/api/upload",{
+    fetch(BASEURL + "/api/upload",{
       credentials: 'include',
       mode: 'cors',
       method: 'POST',
@@ -176,7 +183,7 @@ export default function Checkout() {
                   Job Submitted.
                 </Typography>
                 <Typography variant="subtitle1">
-                  <a href="/workspace">Return to portal</a>
+                  <a href="/rnamake_portal/workspace">Return to portal</a>
                 </Typography>
               </React.Fragment>
             ) : (
