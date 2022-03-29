@@ -170,23 +170,24 @@ The process documentation will include (release by release)
 3. Slowdown with ReactJS/Django integration
 
 #### Comments and Notes from Sponsors
-s
-Clean up dashboard
-	- 10 to 100 for # of designs
 
-	- sequences per scaffold should be removed and set to 1
+	Clean up dashboard
+	
+		- 10 to 100 for # of designs
 
-	- search type always mc 
+		- sequences per scaffold should be removed and set to 1
 
-	- motif path requires mc
+		- search type always mc 
 
-	- possibly different applications 
+		- motif path requires mc
 
-	- look at TTR example, those should be defaults
+		- possibly different applications 
 
-	- each test case is representative of a different use case
+		- look at TTR example, those should be defaults
 
-	- on output page show command that would be used to run to run command
+		- each test case is representative of a different use case
+
+		- on output page show command that would be used to run to run command
 
 ### Release 5
 
