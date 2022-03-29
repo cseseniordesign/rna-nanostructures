@@ -6,24 +6,24 @@ The process documentation will include (release by release)
 - Completed action items
 - Changing requirements
 
-## Overall Development plan
+# Overall Development plan
 
-### Release 1
+## Release 1
 
-#### Tasks Completed
+### Tasks Completed
 
 1. Development environments are setup
 2. Basic wireframes are completed
 3. User stories are added to Zenhub
 
-### Release 2: React frontend skeleton live demo
+## Release 2: React frontend skeleton live demo
 
-#### Overview
+### Overview
 
 1. Figma Mockup of Website
 2. Demoable ReactJS Implementation of Mockup
 
-#### Tasks Completed
+### Tasks Completed
 
 1. Figma Mockup-Development
 2. Team HCC Accounts Created and Verified
@@ -38,7 +38,7 @@ The process documentation will include (release by release)
     7. Groups
     8. File Upload
 
-#### Risks & Roadblocks
+### Risks & Roadblocks
 
 1. Development may be delayed due to time needed to move Airavata Django Portal to ReactJS from previous team’s code base
     1. Team will invest time in researching code base to resolve any issues now instead of later
@@ -49,9 +49,9 @@ The process documentation will include (release by release)
     2. Team members volunteered outside of team time to complete this release
 4. Backloaded Sprints
 
-### Release 3
+## Release 3
 
-#### Overview
+### Overview
 
 1. React Front End is attached to Django Backend
     1. No Functionality
@@ -62,7 +62,7 @@ The process documentation will include (release by release)
     2. User can choose which settings to apply to the job
     3. Job Submission Results can be viewed
 
-#### Tasks Completed
+### Tasks Completed
 
 1. Agreed on Project Vision: *To create a working web portal that is aesthetically pleasing and easy to use that contains a login page, ga uided RNA structure creation with options, a RNA structure creation summary, and a molecular viewer that shows a 3D rendering of the structure*
 2. Adjusted Project Direction from continuous communication with sponsors and Indiana
@@ -75,7 +75,7 @@ The process documentation will include (release by release)
 6. Minor Changes to UI
 5. Revamped Project Roadmap:
 
-##### Previous Roadmap
+#### Previous Roadmap
 
 **Release 3: Finishing backend Login, refine frontend**
 - React front end attached to django backend.
@@ -99,7 +99,7 @@ The process documentation will include (release by release)
 - RNA molecule viewer
 - Account Setting Functionality
 
-##### New Roadmap 
+#### New Roadmap 
 
 **Release 3: Django Development and Frontend Connection**
 - Demo integration of Team's React frontend with Django middleware via Cookiecutter
@@ -123,7 +123,8 @@ The process documentation will include (release by release)
 **Parking Lot**
 - RNA molecule viewer
 - Account Setting Functionality
-#### Roadblocks
+
+### Roadblocks
 
 1. Unable to add any new compute resources because only Scigap admins can access the pgadmin portal
 2. Indiana is on holiday, so we cannot install the Cookiecutter plugin which contains the React UI on their servers
@@ -132,9 +133,9 @@ The process documentation will include (release by release)
     1. Public Website located at: https://dev.rnamake.scigap.org/
 4. Once the team and Indiana is back from Holiday, work can resume on setting up the authorization
 
-### Release 4: Minimum Viable Product
+## Release 4: Minimum Viable Product
 
-#### Overview
+### Overview
 1. Minimum functionality for sponsors to use
 2. Functional Job Submission
     1. Jobs can be submitted
@@ -144,7 +145,7 @@ The process documentation will include (release by release)
     1. Remove user options for compute resources
     2. Base Pairs depending on Job Submission
 
-#### Tasks Completed
+### Tasks Completed
 1. Gateway front end changes in wagtail
     1. Contact and Home Page
     2. RNAMake Icon
@@ -156,12 +157,12 @@ The process documentation will include (release by release)
 7. Webhook for deployment
     1. Deploy without waiting for Indiana
 
-#### Tasks Not Completed
+### Tasks Not Completed
 
 1. Job Submission Results are available
 2. Base Pairs depending on Job Submission
 
-#### Risks & Roadblocks
+### Risks & Roadblocks
 
 1. HTCondor and Jetstream access
     1. Wait was on Indiana
@@ -169,7 +170,7 @@ The process documentation will include (release by release)
 2. Team was down with the sickness (not in a good way)
 3. Slowdown with ReactJS/Django integration
 
-#### Comments and Notes from Sponsors
+### Comments and Notes from Sponsors
 
 	Clean up dashboard
 	
@@ -189,24 +190,24 @@ The process documentation will include (release by release)
 
 		- on output page show command that would be used to run to run command
 
-### Release 5
+## Release 5
 
-#### Overview
-
-
-#### Tasks Completed
+### Overview
 
 
-#### Roadblocks
+### Tasks Completed
 
 
-### Release 6
-
-#### Overview
+### Roadblocks
 
 
-#### Tasks Completed
+## Release 6
+
+### Overview
 
 
-#### Roadblocks
+### Tasks Completed
+
+
+### Roadblocks
 
