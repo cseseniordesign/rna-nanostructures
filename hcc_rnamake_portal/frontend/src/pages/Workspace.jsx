@@ -3,7 +3,7 @@ import './Workspace.css';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import small_RNA_SVG from '../graphics/small_RNA_SVG.svg';
+import small_RNA_SVG from '../graphics/small_RNA_PNG.png';
 import { Button } from '../components/Button';
 import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
