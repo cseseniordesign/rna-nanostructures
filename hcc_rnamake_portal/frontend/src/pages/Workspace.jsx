@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Grid, ListItemButton, ListItemIcon, Typography } from "@mui/material";
-// import Helix from '../graphics/helix.svg';
 import rnaHelix from "../graphics/rna-helix.png";
 import ReportIcon from "@mui/icons-material/Report";
 import Divider from "@mui/material/Divider";
@@ -53,7 +52,6 @@ function BasicList() {
 
   useEffect(() => {
     loadExperiments()
-      // console.log(res)
       .then((result) => result.results)
       .then((result) => {
         setItems(result);
@@ -117,11 +115,13 @@ function Workspace() {
         >
           Design New RNA Scaffold
         </Button>
-        {/* <img src={small_RNA_SVG} alt="" style={{ height: "500px" }}></img> */}
       </Grid>
       <Grid item xs={4}>
         <Paper>
-          <Typography variant="h5">Recent Jobs</Typography>
+          <Typography variant="h5">
+            <br/>
+            Recent Jobs
+          </Typography>
           <BasicList />
         </Paper>
       </Grid>
