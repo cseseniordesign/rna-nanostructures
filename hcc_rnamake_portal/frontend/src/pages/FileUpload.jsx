@@ -6,6 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 /**
  * Page for File Upload (deprecated?)
@@ -84,16 +86,26 @@ function SearchTable() {
   }
 
 function FileUpload() {
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'right',
+  });
     return (
         <div className="file-upload">
             <div className="container">
-                <div className="row align-items-center my-5">
+                <div className="row align-items-center my-5"> 
                     <h1 className="font-weight-light">Upload Files to Cloud</h1>
                 </div>
                 <div className="row align-items-center my-5">
                     <SearchTable></SearchTable>
                 </div>
             </div>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                This is a success message!
+              </Alert>
+            </Snackbar>
         </div>
     );
 }
