@@ -23,12 +23,12 @@ function Navigation() {
                                     <span className="sr-only">(current)</span>
                                 </Link>
                             </li>
-                            <li className={`nav-item  /file-upload`} >
+                            {/* <li className={`nav-item  /file-upload`} >
                                 <Link class="nav-link" to="/rnamake_portal/file-upload">
                                     File Upload
                                     <span className="sr-only">(current)</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className={'nav-item /faq'}>
                                 <Link class="nav-link" to="/rnamake_portal/faq">
                                     FAQ
