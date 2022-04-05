@@ -55,8 +55,9 @@ export default function PDBSettings(props) {
       </Typography>
 
       {/* Upload for file, includes Cloud and Local Upload */}
+      {/*Cloud upload has been removed, to re-enable, set md of the localupload back to 6 and remove comments*/}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <input
             name='localUpload'
             accept="*"
@@ -74,6 +75,7 @@ export default function PDBSettings(props) {
           {/* Drag and Drop Box */}
             <MyDropline></MyDropline>
         </Grid>
+        {/*
         <Grid item xs={12} md={6}>
           <Button variant='contained' endIcon={ <CloudIcon/> } style={{ backgroundColor:'#4C5F94' }} onClick={() => {cloudUpload ? setCloudUpload(0): setCloudUpload(1)}}>
             Cloud Upload
@@ -82,6 +84,7 @@ export default function PDBSettings(props) {
         <Grid item xs={12}>
           <FileExplorer cloudUpload={cloudUpload} setCloudUpload={setCloudUpload} />
         </Grid>
+        */}
       </Grid>
     </React.Fragment>
   );
