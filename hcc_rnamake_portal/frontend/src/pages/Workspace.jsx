@@ -46,6 +46,14 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
+function goToExperiment(history, experimentId, experimentStatus)
+{
+  if(experimentStatus === "COMPLETED")
+  {
+    history.push("job-summary/" + experimentId);
+  }
+}
+
 function BasicList() {
   let history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -74,7 +82,8 @@ function BasicList() {
                 <ListItemButton
                   sx={{ height: "150px" }}
                   onClick={() => {
-                    history.push("job-summary/" + row.experimentId);
+                    //history.push("job-summary/" + row.experimentId);
+                    goToExperiment(history,row.experimentId,row.experimentStatus.name);
                   }}
                 >
                   <ListItemIcon>
