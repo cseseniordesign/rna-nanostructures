@@ -9,11 +9,13 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Grid, ListItemButton, ListItemIcon, Typography } from "@mui/material";
-// import Helix from '../graphics/helix.svg';
 import rnaHelix from "../graphics/rna-helix.png";
 import ReportIcon from "@mui/icons-material/Report";
 import Divider from "@mui/material/Divider";
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 async function loadExperiments() {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -46,11 +48,15 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
-function goToExperiment(history, experimentId, experimentStatus)
+function goToExperiment(history, experimentId, experimentStatus,setOpen)
 {
   if(experimentStatus === "COMPLETED")
   {
     history.push("job-summary/" + experimentId);
+  }
+  else
+  {
+    setOpen(true);
   }
 }
 
@@ -58,6 +64,15 @@ function BasicList() {
   let history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     loadExperiments()
@@ -83,9 +98,14 @@ function BasicList() {
                   sx={{ height: "150px" }}
                   onClick={() => {
                     //history.push("job-summary/" + row.experimentId);
-                    goToExperiment(history,row.experimentId,row.experimentStatus.name);
+                    goToExperiment(history,row.experimentId,row.experimentStatus.name,setOpen);
                   }}
                 >
+                  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+                    Job is not complete, please wait for it to finish executing.
+                  </Alert>
+                  </Snackbar>
                   <ListItemIcon>
                     {renderStatusIcon(row.experimentStatus.name)}
                   </ListItemIcon>
