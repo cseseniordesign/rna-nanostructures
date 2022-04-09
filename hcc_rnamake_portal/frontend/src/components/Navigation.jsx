@@ -14,17 +14,17 @@ function Navigation() {
         <AppBar position='static' sx={{backgroundColor: 'transparent', boxShadow: 'none'}}>
             <Container>
             <Toolbar disableGutters sx={{justifyContent: 'center'}}>
-                <Fab variant='extended' className='nav-item' onClick={() => {history.push("/rnamake_portal/workspace");}}>
-                    Workspace
+                <Fab variant='extended' sx={{margin: '2em 1em'}} onClick={() => {history.push("/rnamake_portal/workspace");}}>
                     <ScienceRoundedIcon/>
+                    Workspace
                 </Fab>
-                <Fab variant='extended' className='nav-item' onClick={() => {history.push("/rnamake_portal/past-experiments");}}>
-                    Past Experiments
+                <Fab variant='extended' sx={{margin: '2em 1em'}} onClick={() => {history.push("/rnamake_portal/past-experiments");}}>
                     <InsertDriveFileRoundedIcon/>
+                    Past Experiments
                 </Fab>
-                <Fab variant='extended' className='nav-item' onClick={() => {history.push("/rnamake_portal/faq");}}>
-                    FAQ
+                <Fab variant='extended' sx={{margin: '2em 1em'}} onClick={() => {history.push("/rnamake_portal/faq");}}>
                     <HelpRoundedIcon/>
+                    FAQ
                 </Fab>
             </Toolbar>
             </Container>
