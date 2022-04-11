@@ -1,3 +1,5 @@
+
+//import * as React from 'react';
 import React, { useState, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -11,11 +13,6 @@ import { ExpandMore } from '@mui/icons-material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox, textAlign } from '@mui/system';
-
-/**
- * Upload page for the Submitted PBD File
- * @returns PDBSettings Component
- */
 
 // to automate switching URLs when developing and when in the online portal.
 const BASEURL = window.location.origin;
@@ -36,7 +33,6 @@ export default function PDBSettings(props) {
       <br/>
       <div style={{ textAlign: 'left' }}>
         <p>
-          {/* redirects to FAQ*/}
           <a
             className='App-link'
             href={ BASEURL + '/rnamake_portal/faq' } 
@@ -52,11 +48,8 @@ export default function PDBSettings(props) {
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
       </Typography>
-
-      {/* Upload for file, includes Cloud and Local Upload */}
-      {/*Cloud upload has been removed, to re-enable, set md of the localupload back to 6 and remove comments*/}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={6}>
           <input
             name='localUpload'
             accept="*"
@@ -71,10 +64,10 @@ export default function PDBSettings(props) {
               Local Upload
             </Button>
           </label> 
-          {/* Drag and Drop Box */}
-            <MyDropline></MyDropline>
+          <FlexRow>
+              <MyDropline></MyDropline>
+          </FlexRow>
         </Grid>
-        {/*
         <Grid item xs={12} md={6}>
           <Button variant='contained' endIcon={ <CloudIcon/> } style={{ backgroundColor:'#4C5F94' }} onClick={() => {cloudUpload ? setCloudUpload(0): setCloudUpload(1)}}>
             Cloud Upload
@@ -83,7 +76,6 @@ export default function PDBSettings(props) {
         <Grid item xs={12}>
           <FileExplorer cloudUpload={cloudUpload} setCloudUpload={setCloudUpload} />
         </Grid>
-        */}
       </Grid>
 
       {/* <Accordion>
@@ -98,12 +90,9 @@ export default function PDBSettings(props) {
   );
 }
 
-/**
- * Drag and Drop functionality
- * @returns Interactive Drag and Drop item
- */
 function MyDropline() {
  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
    return acceptedFiles;
  }, [])
  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -130,3 +119,11 @@ function MyDropline() {
    </div>
  )
 }
+
+const FlexRow = styled.div`
+margin-top: 0px;
+margin-left: 100px;
+display: flex;
+align-items: flex-start;
+min-width: 996px;
+`;

@@ -21,12 +21,16 @@ function App() {
               <Switch>
                   <Route path="/rnamake_portal/workspace" exact component={() => <Workspace />} />
                   <Route path="/rnamake_portal/past-experiments" exact component={() => <PastExperiments />} />
-                  {/* <Route path="/rnamake_portal/file-upload" exact component={() => <FileUpload />} /> */}
+                  <Route path="/rnamake_portal/file-upload" exact component={() => <FileUpload />} />
                   <Route path="/rnamake_portal/new-experiment" exact component={() => <NewExperiment />} />
                   <Route path="/rnamake_portal/FAQ" exact component={() => <FAQ />} />
                   <Route path="/rnamake_portal/job-summary/:experimentId" exact component={(experimentId) => <JobSummary experimentId={experimentId}/>} />
               </Switch>
           </Router>
+          {/* <header className="App-header">
+              <img src={helix} className="App-logo" alt="logo" />
+            <p>RNAMake </p>
+          </header> */}
       </div>
   );
 }
