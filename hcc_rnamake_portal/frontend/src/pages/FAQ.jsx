@@ -3,11 +3,6 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography} from '
 import { ExpandMore } from '@mui/icons-material';
 import basepair from "../images/basepair.png";
 
-/**
- * Page for Frequently Asked Questions during Job Submission
- * @returns FAQ Component
- */
-
 function FAQ() {
     return (
         <Grid className='faq'>
@@ -96,6 +91,5 @@ function FAQ() {
         </Grid>
     );
 }
-
 
 export default FAQ;
