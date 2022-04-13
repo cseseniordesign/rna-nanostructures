@@ -14,6 +14,8 @@ import JobName from './JobName';
 import PDBSettings from './PDBSettings';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
+import Snackbar from '@mui/material/Snackbar';
+import Grow from '@mui/material/Grow';
 
 
 function Copyright() {
@@ -55,6 +57,7 @@ function getStepContent(step, handleChange, settings, handleUpload) {
   }
 }
 
+let fileName;
 
 const theme = createTheme();
 
@@ -99,6 +102,7 @@ async function submitExperiment(info) {
  */
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
@@ -137,9 +141,12 @@ export default function Checkout() {
       },
       body : formData,
     })
-    .then(result => result.json())
+    .then(result => result.json()
+    )
     .then(
       (result)=> {
+        fileName = name;
+        setOpen(true);
         console.log(result['data-product']['productUri']);
         setSubmissionInfo(prevState => ({
           ...prevState,
@@ -148,9 +155,12 @@ export default function Checkout() {
       }
     )
     console.log({name, file});
+
   };
 
-
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -176,7 +186,7 @@ export default function Checkout() {
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
-      </AppBar>
+      </AppBar>ize(string) expects a string argument.
       <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
@@ -218,6 +228,9 @@ export default function Checkout() {
           </React.Fragment>
         </Paper>
         <Copyright />
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{'bottom':'center'}} TransitionEvent={Grow}>
+                    {fileName} has been successfully uploaded!
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );
