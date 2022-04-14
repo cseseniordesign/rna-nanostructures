@@ -16,13 +16,17 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Cookies from 'js-cookie';
+
+
+const BASEURL = window.location.origin;
 
 async function loadExperiments() {
-  const data = await window.AiravataAPI.services.ExperimentSearchService.list({
-    limit: 5,
-    [window.AiravataAPI.models.ExperimentSearchFields.USER_NAME.name]:
-      window.AiravataAPI.session.Session.username,
-  });
+const data = fetch(BASEURL + "/api/experiment-search/?limit=5&offset=0&USER_NAME="+ window.AiravataAPI.session.Session.username,{
+  credentials: 'include',
+  mode: 'cors',
+  method: 'GET',
+});
   return data;
 }
 
@@ -50,7 +54,7 @@ function renderStatusIcon(experimentStatus) {
 
 function goToExperiment(history, experimentId, experimentStatus,setOpen)
 {
-  if(experimentStatus === "COMPLETED")
+  if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED")
   {
     history.push("job-summary/" + experimentId);
   }
@@ -76,12 +80,24 @@ function BasicList() {
 
   useEffect(() => {
     loadExperiments()
-      // console.log(res)
-      .then((result) => result.results)
+      .then((result) => result.json())
       .then((result) => {
-        setItems(result);
+        console.log(result);
+        setItems(result['results']);
         setIsLoaded(true);
       });
+
+      const interval=setInterval(()=>{
+        loadExperiments()
+        .then((result) => result.json())
+        .then((result) => {
+        console.log(result['results']);
+        setItems(result['results']);
+      });
+       },10000)
+        
+      return()=>clearInterval(interval)
+
   }, []);
 
   if (!isLoaded) {
@@ -98,7 +114,7 @@ function BasicList() {
                   sx={{ height: "150px" }}
                   onClick={() => {
                     //history.push("job-summary/" + row.experimentId);
-                    goToExperiment(history,row.experimentId,row.experimentStatus.name,setOpen);
+                    goToExperiment(history,row.experimentId,row.experimentStatus,setOpen);
                   }}
                 >
                   <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -107,11 +123,11 @@ function BasicList() {
                   </Alert>
                   </Snackbar>
                   <ListItemIcon>
-                    {renderStatusIcon(row.experimentStatus.name)}
+                    {renderStatusIcon(row.experimentStatus)}
                   </ListItemIcon>
                   <ListItemText
                     primary={row.name}
-                    secondary={row.experimentStatus.name}
+                    secondary={row.experimentStatus}
                     style={{ textAlign: "center" }}
                   />
                 </ListItemButton>
