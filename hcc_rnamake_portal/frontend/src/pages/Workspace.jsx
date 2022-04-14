@@ -162,11 +162,13 @@ function Workspace() {
         >
           Design New RNA Scaffold
         </Button>
-        {/* <img src={small_RNA_SVG} alt="" style={{ height: "500px" }}></img> */}
       </Grid>
       <Grid item xs={4}>
         <Paper>
-          <Typography variant="h5">Recent Jobs</Typography>
+          <Typography variant="h5">
+            <br/>
+            Recent Jobs
+          </Typography>
           <BasicList />
         </Paper>
       </Grid>

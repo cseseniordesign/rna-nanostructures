@@ -1,3 +1,5 @@
+
+//import * as React from 'react';
 import React, { useState, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -11,11 +13,6 @@ import { ExpandMore } from '@mui/icons-material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox, textAlign } from '@mui/system';
-
-/**
- * Upload page for the Submitted PBD File
- * @returns PDBSettings Component
- */
 
 // to automate switching URLs when developing and when in the online portal.
 const BASEURL = window.location.origin;
@@ -36,7 +33,6 @@ export default function PDBSettings(props) {
       <br/>
       <div style={{ textAlign: 'left' }}>
         <p>
-          {/* redirects to FAQ*/}
           <a
             className='App-link'
             href={ BASEURL + '/rnamake_portal/faq' } 
@@ -49,7 +45,6 @@ export default function PDBSettings(props) {
         </p>    
       </div>
       <br/>
-
       <Typography variant="h6" gutterBottom>
         PDB file and Base Pairs
       </Typography>
@@ -86,16 +81,22 @@ export default function PDBSettings(props) {
         </Grid>
         */}
       </Grid>
+
+      {/* <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content">
+          <Typography>Advanced settings</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <TextField id='cli-args' label='CLI Arguments' variant='filled'/>
+        </AccordionDetails>
+      </Accordion> */}
     </React.Fragment>
   );
 }
 
-/**
- * Drag and Drop functionality
- * @returns Interactive Drag and Drop item
- */
 function MyDropline() {
  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
    return acceptedFiles;
  }, [])
  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})

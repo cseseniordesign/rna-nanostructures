@@ -13,11 +13,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 
-/**
- * 
- * @param {*} experimentId 
- * @returns 
- */
 async function loadExperimentDetails(experimentId) {
   const data = await window.AiravataAPI.utils.FetchUtils.get(
       "/api/experiment-storage/"+experimentId,
@@ -29,11 +24,6 @@ async function loadExperimentDetails(experimentId) {
   return data;
 }
 
-/**
- * Fetch URI Data
- * @param {*} uri 
- * @returns 
- */
 async function getUriData(uri) {
     const result = await window.AiravataAPI.utils.FetchUtils.get(
       uri,
@@ -45,12 +35,6 @@ async function getUriData(uri) {
     return result;
 }
 
-/**
- * Formats links (unused)
- * @param {*} design 
- * @param {*} index 
- * @returns 
- */
 function formatDesignLinks(design, index) {
     if(index % 10 === 0 && index !== 0) {
       return (
@@ -63,11 +47,6 @@ function formatDesignLinks(design, index) {
     }
 }
 
-/**
- * Experiment Details Summary
- * @param {*} props 
- * @returns Summary or Loading message
- */
 function GetSummary(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [stdOut, setStdOut] = useState();
@@ -95,7 +74,7 @@ function GetSummary(props) {
             } else if(result['files'][i]['name'].endsWith('stdout')) {
                 getUriData(result['files'][i]['downloadURL']).then((result)=> {setStdOut(result)});
             } else if(result['files'][i]['name'].startsWith('design')) {
-              //Doesn't respect reacts immutable state design paradigm but react doesn't respect my need to have nominally working code
+              //Doesn't respect reacts immutable state design paradighm but react doesn't respect my need to have nominally working code
               //Also, this literally will not change after first load so it's probably fine
               pdbCollection.push([result['files'][i]['name'], result['files'][i]['downloadURL']]);
             } else {
@@ -114,11 +93,16 @@ function GetSummary(props) {
       return (
         <Box component="div" sx={{ whiteSpace: 'normal'}}>
           <Grid container spacing={2} columns={16}>
+            {/* <Grid item xs={16} align={"left"}> 
+            <Typography>Download individual Designs</Typography>
+            </Grid>
+            <Grid item xs={16} align={"left"}> 
+            {(pdbCollection).map((design,index) => formatDesignLinks(design,index))}  
+            </Grid> */}
             <Grid item xs={16} align={"left"}> 
             <Typography variant='h3'>Download Job Results</Typography>
             </Grid>
             <Grid item xs={16} align={"left"}> 
-            {/* Zip File with Job Results for Download */}
             <Card sx={{maxWidth: 345}}>
               <CardActionArea href={archive}>
                 <CardMedia
@@ -136,14 +120,12 @@ function GetSummary(props) {
               </CardActionArea>
             </Card>
             </Grid>
-            {/* Standard Output */}
             <Grid item xs={8} align={"left"}>    
               <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
               <Collapse orientation="vertical" in={viewStdout}>
                 <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
               </Collapse>
             </Grid>
-            {/* Standard Error */}
             <Grid item xs={8} align={"left"}>
             <FormControlLabel control={<Switch checked={viewStderr} onChange={handleStdErrChange} />} label="Preview Standard Error"/>
               <Collapse orientation="vertical" in={viewStderr}>
@@ -157,10 +139,6 @@ function GetSummary(props) {
     }
 }
 
-/**
- * JobSummary
- * @returns Summary for ID
- */
 function JobSummary() {
     const params = useParams();
     return (
