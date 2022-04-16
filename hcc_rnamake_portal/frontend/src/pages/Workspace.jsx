@@ -21,6 +21,7 @@ import Cookies from 'js-cookie';
 
 const BASEURL = window.location.origin;
 
+// used fetch instead of airavata api to fetch the data because every time the airavata api is called it has a loading screen.
 async function loadExperiments() {
 const data = fetch(BASEURL + "/api/experiment-search/?limit=5&offset=0&USER_NAME="+ window.AiravataAPI.session.Session.username,{
   credentials: 'include',
@@ -52,14 +53,10 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
-function goToExperiment(history, experimentId, experimentStatus,setOpen)
-{
-  if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED")
-  {
+function goToExperiment(history, experimentId, experimentStatus,setOpen) {
+  if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED") {
     history.push("job-summary/" + experimentId);
-  }
-  else
-  {
+  } else {
     setOpen(true);
   }
 }
@@ -111,17 +108,11 @@ function BasicList() {
               <Divider />
               <ListItem disablePadding>
                 <ListItemButton
-                  sx={{ height: "150px" }}
+                  sx={{height: "150px"}}
                   onClick={() => {
-                    //history.push("job-summary/" + row.experimentId);
-                    goToExperiment(history,row.experimentId,row.experimentStatus,setOpen);
+                    goToExperiment(history, row.experimentId, row.experimentStatus, setOpen);
                   }}
                 >
-                  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                  <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
-                    Job is not complete, please wait for it to finish executing.
-                  </Alert>
-                  </Snackbar>
                   <ListItemIcon>
                     {renderStatusIcon(row.experimentStatus)}
                   </ListItemIcon>
@@ -133,6 +124,11 @@ function BasicList() {
                 </ListItemButton>
               </ListItem>
               <Divider />
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" variant="filled" sx={{width: '100%'}}>
+                  Job is not complete, please wait for it to finish executing.
+                </Alert>
+              </Snackbar>
             </React.Fragment>
           ))}
         </List>
