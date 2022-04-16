@@ -97,9 +97,8 @@ function BasicList() {
 function Workspace() {
   let history = useHistory(); // used for rerouting to another page.
   return (
-    <div className="workspace-background" style={{backgroundImage: `url(${small_RNA_PNG})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
     <Grid container spacing={1}>
-      <Grid item xs={8}>
+      <Grid item xs={8} style={{height: '800px', backgroundImage: `url(${small_RNA_PNG})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <Typography variant="h1">RNAMake</Typography>
         <Typography variant="h3">3D Design Toolkit</Typography>
         <br/>
@@ -126,7 +125,6 @@ function Workspace() {
         </Paper>
       </Grid>
     </Grid>
-    </div>
   );
 }
 
