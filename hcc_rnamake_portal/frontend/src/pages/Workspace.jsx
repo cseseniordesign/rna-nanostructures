@@ -70,9 +70,9 @@ function BasicList() {
               <Divider />
               <ListItem disablePadding>
                 <ListItemButton
-                  sx={{ height: "150px" }}
+                  sx={{height: "150px"}}
                   onClick={() => {
-                    history.push("job-summary/" + row.experimentId);
+                    history.push("/rnamake_portal/job-summary/" + row.experimentId);
                   }}
                 >
                   <ListItemIcon>
@@ -81,7 +81,7 @@ function BasicList() {
                   <ListItemText
                     primary={row.name}
                     secondary={row.experimentStatus.name}
-                    style={{ textAlign: "center" }}
+                    style={{textAlign: "center"}}
                   />
                 </ListItemButton>
               </ListItem>
