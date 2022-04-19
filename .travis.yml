@@ -4,6 +4,6 @@ node_js:
   - "14.17.6"
 
 script:
-    - cd hcc_rnamake_portal/frontend/
+    - cd rna-nanostructures/hcc_rnamake_portal/frontend/
     - npm i
     - yarn build
