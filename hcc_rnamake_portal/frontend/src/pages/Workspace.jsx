@@ -17,7 +17,14 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Cookies from 'js-cookie';
-
+async function loadExperiments() {
+  const data = await window.AiravataAPI.services.ExperimentSearchService.list({
+    limit: 5,
+    [window.AiravataAPI.models.ExperimentSearchFields.USER_NAME.name]:
+      window.AiravataAPI.session.Session.username,
+  });
+  return data;
+}
 
 const BASEURL = window.location.origin;
 
@@ -118,7 +125,7 @@ function BasicList() {
                   </ListItemIcon>
                   <ListItemText
                     primary={row.name}
-                    secondary={row.experimentStatus.name}
+                    secondary={row.experimentStatus}
                     style={{textAlign: "center"}}
                   />
                 </ListItemButton>
