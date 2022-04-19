@@ -100,7 +100,6 @@ const theme = createTheme();
         experimentName: info.name,
         experimentInputs: input,
     });
-    console.log(info);
     // Save experiment
     const experiment = await window.AiravataAPI.services.ExperimentService.create({ data: experimentData });
     // Launch experiment

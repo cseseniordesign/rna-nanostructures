@@ -134,6 +134,7 @@ function GetSummary(props) {
             </Grid>
           </Grid>
         </Box>
+
       );
     }
 }
