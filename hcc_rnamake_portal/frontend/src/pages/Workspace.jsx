@@ -13,13 +13,21 @@ import rnaHelix from "../graphics/rna-helix.png";
 import ReportIcon from "@mui/icons-material/Report";
 import Divider from "@mui/material/Divider";
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import Cookies from 'js-cookie';
 
+
+const BASEURL = window.location.origin;
+
+// used fetch instead of airavata api to fetch the data because every time the airavata api is called it has a loading screen.
 async function loadExperiments() {
-  const data = await window.AiravataAPI.services.ExperimentSearchService.list({
-    limit: 5,
-    [window.AiravataAPI.models.ExperimentSearchFields.USER_NAME.name]:
-      window.AiravataAPI.session.Session.username,
-  });
+const data = fetch(BASEURL + "/api/experiment-search/?limit=5&offset=0&USER_NAME="+ window.AiravataAPI.session.Session.username,{
+  credentials: 'include',
+  mode: 'cors',
+  method: 'GET',
+});
   return data;
 }
 
@@ -45,18 +53,48 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
+function goToExperiment(history, experimentId, experimentStatus,setOpen) {
+  if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED") {
+    history.push("/rnamake_portal/job-summary/" + experimentId);
+  } else {
+    setOpen(true);
+  }
+}
+
 function BasicList() {
   let history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     loadExperiments()
-      .then((result) => result.results)
+      .then((result) => result.json())
       .then((result) => {
-        setItems(result);
+        console.log(result);
+        setItems(result['results']);
         setIsLoaded(true);
       });
+
+      const interval=setInterval(()=>{
+        loadExperiments()
+        .then((result) => result.json())
+        .then((result) => {
+        console.log(result['results']);
+        setItems(result['results']);
+      });
+       },10000)
+        
+      return()=>clearInterval(interval)
+
   }, []);
 
   if (!isLoaded) {
@@ -72,11 +110,11 @@ function BasicList() {
                 <ListItemButton
                   sx={{height: "150px"}}
                   onClick={() => {
-                    history.push("/rnamake_portal/job-summary/" + row.experimentId);
+                    goToExperiment(history, row.experimentId, row.experimentStatus, setOpen);
                   }}
                 >
                   <ListItemIcon>
-                    {renderStatusIcon(row.experimentStatus.name)}
+                    {renderStatusIcon(row.experimentStatus)}
                   </ListItemIcon>
                   <ListItemText
                     primary={row.name}
@@ -86,6 +124,11 @@ function BasicList() {
                 </ListItemButton>
               </ListItem>
               <Divider />
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" variant="filled" sx={{width: '100%'}}>
+                  Job is not complete, please wait for it to finish executing.
+                </Alert>
+              </Snackbar>
             </React.Fragment>
           ))}
         </List>
