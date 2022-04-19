@@ -55,7 +55,7 @@ function renderStatusIcon(experimentStatus) {
 
 function goToExperiment(history, experimentId, experimentStatus,setOpen) {
   if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED") {
-    history.push("job-summary/" + experimentId);
+    history.push("/rnamake_portal/job-summary/" + experimentId);
   } else {
     setOpen(true);
   }
@@ -118,8 +118,8 @@ function BasicList() {
                   </ListItemIcon>
                   <ListItemText
                     primary={row.name}
-                    secondary={row.experimentStatus}
-                    style={{ textAlign: "center" }}
+                    secondary={row.experimentStatus.name}
+                    style={{textAlign: "center"}}
                   />
                 </ListItemButton>
               </ListItem>
@@ -140,9 +140,8 @@ function BasicList() {
 function Workspace() {
   let history = useHistory(); // used for rerouting to another page.
   return (
-    <div className="workspace-background" style={{backgroundImage: `url(${small_RNA_PNG})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
-    <Grid container spacing={1}>
-      <Grid item xs={8}>
+    <Grid container spacing={1} style={{minHeight: '1000px', height: 'auto'}}>
+      <Grid item xs={8} style={{backgroundImage: `url(${small_RNA_PNG})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <Typography variant="h1">RNAMake</Typography>
         <Typography variant="h3">3D Design Toolkit</Typography>
         <br/>
@@ -169,7 +168,6 @@ function Workspace() {
         </Paper>
       </Grid>
     </Grid>
-    </div>
   );
 }
 
