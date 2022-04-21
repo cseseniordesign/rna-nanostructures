@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Container, Grid, Typography} from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import basepair from "../images/basepair.png";
 import corner_swoosh from '../graphics/corner_swoosh.svg';
@@ -11,7 +11,7 @@ import corner_swoosh from '../graphics/corner_swoosh.svg';
 
 function FAQ() {
     return (
-        <div className="container">
+        <Container>
             <Grid className='faq'>
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMore />} aria-controls='panel1a-content'>
@@ -96,8 +96,7 @@ function FAQ() {
                 {/* To add more 2-column FAQ items, use the same grid format as above*/}
                 {/* For 1-column FAQ items, use lg={12} instead of lg={6} and just use one Grid item*/}
             </Grid>
-            <img src={corner_swoosh} alt="" width='100%'/>
-        </div>
+        </Container>
     );
 }
 
