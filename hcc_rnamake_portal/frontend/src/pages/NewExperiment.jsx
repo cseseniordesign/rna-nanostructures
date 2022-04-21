@@ -175,6 +175,7 @@ export default function Checkout() {
   };
 
   return (
+    <div>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar
@@ -227,11 +228,12 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{'bottom':'center'}} TransitionEvent={Grow}>
-                    {fileName} has been successfully uploaded!
-        </Snackbar>
+        <Copyright />  
       </Container>
     </ThemeProvider>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{'bottom':'center'}} TransitionEvent={Grow}>
+            {fileName} has been successfully uploaded!
+    </Snackbar>
+    </div>
   );
 }
