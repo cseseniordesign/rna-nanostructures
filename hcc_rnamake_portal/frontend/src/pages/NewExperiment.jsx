@@ -16,7 +16,7 @@ import Review from './Review.jsx';
 import Cookies from 'js-cookie';
 import Snackbar from '@mui/material/Snackbar';
 import Grow from '@mui/material/Grow';
-
+import Alert from '@mui/material/Alert';
 
 function Copyright() {
   return (
@@ -118,7 +118,7 @@ export default function Checkout() {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    console.log({name,value});
+    //console.log({name,value});
     setSubmissionInfo(prevState => ({
         ...prevState,
         [name]: value
@@ -130,8 +130,7 @@ export default function Checkout() {
     const file = e.target.files[0];
     const formData  = new FormData();
     formData.append('file', file);
-    console.log(formData);
-    console.log(Cookies.get('csrftoken'));
+    //console.log(formData);
     fetch(BASEURL + "/api/upload",{
       credentials: 'include',
       mode: 'cors',
@@ -145,7 +144,7 @@ export default function Checkout() {
     )
     .then(
       (result)=> {
-        fileName = name;
+        fileName = file['name'];
         setOpen(true);
         console.log(result['data-product']['productUri']);
         setSubmissionInfo(prevState => ({
@@ -231,9 +230,11 @@ export default function Checkout() {
         <Copyright />  
       </Container>
     </ThemeProvider>
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{'bottom':'center'}} TransitionEvent={Grow}>
-            {fileName} has been successfully uploaded!
-    </Snackbar>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
+                {fileName} has been successfully uploaded!
+                </Alert>
+              </Snackbar>
     </div>
   );
 }
