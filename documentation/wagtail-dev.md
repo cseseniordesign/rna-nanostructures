@@ -129,6 +129,22 @@ _Note_, when you save the CSS, it will automatically apply to the whole website.
 There are no drafts, so be careful.
 If you are applying a risky change, be sure to save the previous code.
 
+## Current Website
+
+### Home Page
+
+
+
+### Contacts Page
+
+
+
+### Documentation Page
+
+
+
+### About Page
+
 
 
 

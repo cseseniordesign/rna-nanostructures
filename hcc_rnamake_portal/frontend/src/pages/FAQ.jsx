@@ -4,11 +4,6 @@ import { ExpandMore } from '@mui/icons-material';
 import basepair from "../images/basepair.png";
 import corner_swoosh from '../graphics/corner_swoosh.svg';
 
-/**
- * Page for Frequently Asked Questions during Job Submission
- * @returns FAQ Component
- */
-
 function FAQ() {
     return (
         <Container>
@@ -99,6 +94,5 @@ function FAQ() {
         </Container>
     );
 }
-
 
 export default FAQ;
