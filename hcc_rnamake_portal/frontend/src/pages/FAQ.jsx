@@ -63,13 +63,16 @@ function FAQ() {
                             <br />
                             Generates RNAs of variable length based on a heuristic path finding algorithm.
                         <br />
+                        <br />
                         Known Topology Path (TTR mc):
                             <br />
                             Generates RNAs of a set composition of RNA motifs and helices. This should allow us to pick 2 throuh 6 junctions.
                         <br />
+                        <br />
                         Custom Motif in Path (TTR supply_motif):
                             <br />
                             Same as TTR mc but also allows you to include a known motif into the path that must be included in all solutions.
+                        <br />
                         <br />
                         Path Around Protein:
                             <br />
