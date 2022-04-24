@@ -73,7 +73,6 @@ function FAQ() {
                             <br />
                             Same as TTR mc but also allows you to include a known motif into the path that must be included in all solutions.
                         <br />
-                        <br />
                         Path Around Protein:
                             <br />
                             Generates a path around a protein. PDB must include a protein in it.
