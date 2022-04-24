@@ -12,7 +12,7 @@ import zipFileImage from '../images/zip-card-dark.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Accordion, AccordionDetails, AccordionSummary, CardActionArea, Container, Stack } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, CardActionArea, Container, Divider, Paper, Stack } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
@@ -51,7 +51,7 @@ function formatDesignLinks(design, index) {
     )
   } else {
     return (
-      <><span>&nbsp;</span><a class="action-link" href={design[1]}>{design[0]}</a></> 
+      <><span>&nbsp;&nbsp;&nbsp;</span><a class="action-link" href={design[1]}>{design[0]}</a></> 
     )
   }
 }
@@ -116,13 +116,11 @@ function GetSummary(props) {
           }
         }
         setArchive("/sdk/download-experiment-dir/"+props.experimentId+"/?path=ARCHIVE");
-        console.log(result);
         setIsLoaded(true);
       }
     )
     loadExperimentDetails(props.experimentId).then(
       (data) => {
-        console.log(data);
         setExperimentDetails(data);
       }
     )
@@ -132,11 +130,11 @@ function GetSummary(props) {
     return (<div></div>);
   } else {
     return (
-      <Stack alignItems='flex-start' spacing={1}>
-        <Typography>Job Summary: {experimentDetails.experimentName}</Typography>
-        <Typography>Job Status: {formatJobStatus(experimentDetails.experimentStatus.length)}</Typography>
-        <Typography>Creation Date: {formatDate(experimentDetails.creationTime)}</Typography>
-        <Typography>Download Job Results</Typography>
+      <Stack alignItems='flex-start' justifyContent='center' spacing={1} divider={<Divider orientation="horizontal" flexItem />}>
+        <Typography variant='h3'>Job Summary: {experimentDetails.experimentName}</Typography>
+        <Typography variant='h6'>Job Status: {formatJobStatus(experimentDetails.experimentStatus.length)}</Typography>
+        <Typography variant='h6'>Creation Date: {formatDate(experimentDetails.creationTime)}</Typography>
+        <Typography variant='h3'>Download Job Results</Typography>
         <Card sx={{maxWidth: 345}}>
           <CardActionArea href={archive}>
             <CardMedia
@@ -155,12 +153,31 @@ function GetSummary(props) {
         </Card>
         <Accordion sx={{width:'100%'}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content'>
-            <Typography>Download Individual PDBs</Typography>
+            <Typography variant='h5'>Download Individual Designs</Typography>
           </AccordionSummary>
           <AccordionDetails>
           {(pdbCollection).map((design,index) => formatDesignLinks(design,index))}
           </AccordionDetails>
         </Accordion>
+        <Typography variant='h3'>Job Information</Typography>
+        <Accordion sx={{width:'100%'}}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content'>
+            <Typography variant='h5'>Submission Summary</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+          <Typography variant='h6' align='left'>Starting base pair: {experimentDetails.experimentInputs[4].value}</Typography>
+          <Typography variant='h6' align='left'>Ending base pair: {experimentDetails.experimentInputs[0].value}</Typography>
+          <Typography variant='h6' align='left'>Number of designs: {experimentDetails.experimentInputs[1].value}</Typography>
+          </AccordionDetails>
+        </Accordion>
+        <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
+        <Collapse orientation="vertical" in={viewStdout}>
+          <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
+        </Collapse>
+        <FormControlLabel control={<Switch checked={viewStderr} onChange={handleStdErrChange} />} label="Preview Standard Error"/>
+        <Collapse orientation="vertical" in={viewStderr}>
+          <textarea wrap="off" id="stderrbox" rows="90" cols="120" name="w3review" readonly="true" value={stdErr}>  </textarea>
+        </Collapse>
       </Stack>
     );
   }
