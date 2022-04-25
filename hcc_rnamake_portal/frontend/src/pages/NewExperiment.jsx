@@ -30,12 +30,12 @@ const BASEURL = window.location.origin;
 const steps = ['Description', 'Settings', 'Review'];
 
 
-function getStepContent(step, handleChange, settings, handleUpload) {
+function getStepContent(step, handleChange, state, settings, handleUpload) {
   switch (step) {
     case 0:
-      return <JobName handleChange={handleChange} />;
+      return <JobName handleChange={handleChange} state={state}/>;
     case 1:
-      return <PDBSettings handleChange={handleChange} handleUpload={handleUpload}/>;
+      return <PDBSettings handleChange={handleChange} state={state} handleUpload={handleUpload}/>;
     case 2:
       return <Review settings={settings}/>;
   //  case 3:
@@ -113,14 +113,14 @@ export default function Checkout() {
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
-    designs:'10',
+    designs:'',
     scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
     localUpload:'',
     searchCutoff:'',
-    logLevel: "debug",
+    logLevel: 'debug',
     motifPath:'',
     preset:''
   });

@@ -27,8 +27,22 @@ export default function PDBSettings(props) {
         Application Configuration
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <TextField name='startingBase' label='Starting Base Pair' variant='filled' onChange={props.handleChange} required/>
-        <TextField name='endingBase' label='Ending Base Pair' variant='filled' onChange={props.handleChange} required/>
+        <TextField
+          required
+          name='startingBase'
+          label='Starting Base Pair'
+          variant='filled'
+          value={props.state.startingBase}
+          onChange={props.handleChange}
+        />
+        <TextField
+          required
+          name='endingBase'
+          label='Ending Base Pair'
+          variant='filled'
+          value={props.state.endingBase}
+          onChange={props.handleChange}
+        />
       </Box>
       <br/>
       <div style={{ textAlign: 'left' }}>
@@ -42,7 +56,7 @@ export default function PDBSettings(props) {
           >
             What are base pair names?
           </a>
-        </p>    
+        </p>
       </div>
       <br/>
       <Typography variant="h6" gutterBottom>
@@ -121,5 +135,5 @@ function MyDropline() {
         </p>
      }
    </div>
- )
+  )
 }
