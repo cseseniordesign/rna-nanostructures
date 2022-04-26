@@ -1,4 +1,5 @@
 import React from "react";
+// import { Button } from '../components/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,15 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-/**
- * Page for File Upload (deprecated?)
- * @returns File Upload Component via SearchTable
- */
 
-/**
- * SearchTable is a searchable table containing files names, uploader names, and the data uploaded
- * @returns SearchTable component
- */
 function SearchTable() {
     function createData(filename, user, uploadTime) {
         return {filename, user, uploadTime};
@@ -23,13 +16,11 @@ function SearchTable() {
 
     var search ='';
     
-    /* Temporary dummy data */
     var rows = [
         createData("file(1).txt", "default-admin", (new Date()).toString()),
         createData("file.txt", "default-admin", (new Date()).toString()),
     ];
 
-    /* Handles changes in the search box */
     const handleSearch = (event) => {
         event.preventDefault();
         search = event.target.value;
@@ -65,12 +56,11 @@ function SearchTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* Fills rows with items in the rows array that satisfy fitSearch */}
             {rows.filter(fitsSearch).map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              > 
+              >
                 <TableCell>{row.filename}</TableCell>
                 <TableCell align="right">{row.user}</TableCell>
                 <TableCell align="right">{row.uploadTime}</TableCell>

@@ -9,18 +9,24 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Grid, ListItemButton, ListItemIcon, Typography } from "@mui/material";
-// import Helix from '../graphics/helix.svg';
 import rnaHelix from "../graphics/rna-helix.png";
 import ReportIcon from "@mui/icons-material/Report";
 import Divider from "@mui/material/Divider";
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import Cookies from 'js-cookie';
 
+const BASEURL = window.location.origin;
+
+// used fetch instead of airavata api to fetch the data because every time the airavata api is called it has a loading screen.
 async function loadExperiments() {
-  const data = await window.AiravataAPI.services.ExperimentSearchService.list({
-    limit: 5,
-    [window.AiravataAPI.models.ExperimentSearchFields.USER_NAME.name]:
-      window.AiravataAPI.session.Session.username,
-  });
+const data = fetch(BASEURL + "/api/experiment-search/?limit=5&offset=0&USER_NAME="+ window.AiravataAPI.session.Session.username,{
+  credentials: 'include',
+  mode: 'cors',
+  method: 'GET',
+});
   return data;
 }
 
@@ -46,19 +52,48 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
+function goToExperiment(history, experimentId, experimentStatus,setOpen) {
+  if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED") {
+    history.push("/rnamake_portal/job-summary/" + experimentId);
+  } else {
+    setOpen(true);
+  }
+}
+
 function BasicList() {
   let history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     loadExperiments()
-      // console.log(res)
-      .then((result) => result.results)
+      .then((result) => result.json())
       .then((result) => {
-        setItems(result);
+        console.log(result);
+        setItems(result['results']);
         setIsLoaded(true);
       });
+
+      const interval=setInterval(()=>{
+        loadExperiments()
+        .then((result) => result.json())
+        .then((result) => {
+        console.log(result['results']);
+        setItems(result['results']);
+      });
+       },10000)
+        
+      return()=>clearInterval(interval)
+
   }, []);
 
   if (!isLoaded) {
@@ -72,22 +107,27 @@ function BasicList() {
               <Divider />
               <ListItem disablePadding>
                 <ListItemButton
-                  sx={{ height: "150px" }}
+                  sx={{height: "150px"}}
                   onClick={() => {
-                    history.push("job-summary/" + row.experimentId);
+                    goToExperiment(history, row.experimentId, row.experimentStatus, setOpen);
                   }}
                 >
                   <ListItemIcon>
-                    {renderStatusIcon(row.experimentStatus.name)}
+                    {renderStatusIcon(row.experimentStatus)}
                   </ListItemIcon>
                   <ListItemText
                     primary={row.name}
-                    secondary={row.experimentStatus.name}
-                    style={{ textAlign: "center" }}
+                    secondary={row.experimentStatus}
+                    style={{textAlign: "center"}}
                   />
                 </ListItemButton>
               </ListItem>
               <Divider />
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" variant="filled" sx={{width: '100%'}}>
+                  Job is not complete, please wait for it to finish executing.
+                </Alert>
+              </Snackbar>
             </React.Fragment>
           ))}
         </List>
@@ -99,9 +139,8 @@ function BasicList() {
 function Workspace() {
   let history = useHistory(); // used for rerouting to another page.
   return (
-    <div className="workspace-background" style={{backgroundImage: `url(${small_RNA_PNG})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
-    <Grid container spacing={1}>
-      <Grid item xs={8}>
+    <Grid container spacing={1} style={{minHeight: '1000px', height: 'auto'}}>
+      <Grid item xs={8} style={{backgroundImage: `url(${small_RNA_PNG})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <Typography variant="h1">RNAMake</Typography>
         <Typography variant="h3">3D Design Toolkit</Typography>
         <br/>
@@ -117,16 +156,17 @@ function Workspace() {
         >
           Design New RNA Scaffold
         </Button>
-        {/* <img src={small_RNA_SVG} alt="" style={{ height: "500px" }}></img> */}
       </Grid>
       <Grid item xs={4}>
         <Paper>
-          <Typography variant="h5">Recent Jobs</Typography>
+          <Typography variant="h5">
+            <br/>
+            Recent Jobs
+          </Typography>
           <BasicList />
         </Paper>
       </Grid>
     </Grid>
-    </div>
   );
 }
 
