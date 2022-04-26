@@ -67,9 +67,7 @@ const theme = createTheme();
  */
 async function submitExperiment(info) {
   
-  while(info.localUpload==='');
   // Construct experiment object
-  console.log(info);
 
   //Some sort of case statement to build experiment inputs for each profile type should go here
   const input = 
