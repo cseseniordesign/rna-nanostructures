@@ -16,15 +16,21 @@ import FormLabel from '@mui/material/FormLabel';
 
 function conditionalComponents(props,preset,pathLength,path,handlePathLengthChange)
 {
-  if(preset==="TTR")
+  if(props.state.preset==="TTR")
   {
     return(
       <Grid item xs={12} sx={{alignProperty:"center", width:"50%"}}>
-              <BasicSelect name="searchCutoff" handleChange={props.handleChange} label="Precision" items={{5 : "Normal",10:"Loose", 15:"Very Loose"}}></BasicSelect>
+        <BasicSelect
+          name="searchCutoff"
+          handleChange={props.handleChange}
+          label="Precision"
+          items={{5 : "Normal",10:"Loose", 15:"Very Loose"}}
+          value={props.state.searchCutoff}
+        />
       </Grid>
     );
   }
-  if(preset==="TTR_MC")
+  if(props.state.preset==="TTR_MC")
   {
     return(
     <Grid item xs={12} sx={{alignProperty:"center", width:"50%"}}>
@@ -33,8 +39,8 @@ function conditionalComponents(props,preset,pathLength,path,handlePathLengthChan
       <RadioGroup
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="motifPath"
-        value={pathLength}
-        onChange={handlePathLengthChange}
+        value={props.state.motifPath}
+        onChange={handlePathLengthChange, props.handleChange}
       >
         <FormControlLabel value="1" control={<Radio />} label="1" />
         <FormControlLabel value="2" control={<Radio />} label="2" />
@@ -51,7 +57,7 @@ function conditionalComponents(props,preset,pathLength,path,handlePathLengthChan
 
 export default function JobName(props) {
   const [preset, setPreset] = React.useState('');
-  const [pathLength, setPathLength] = React.useState('');
+  const [pathLength, setPathLength] = React.useState(0);
   const [path, setPath] = React.useState('');
 
   const handlePresetChange = (event) => {
@@ -99,6 +105,7 @@ export default function JobName(props) {
             fullWidth
             alignProperty="center"
             onChange={props.handleChange}
+            value={props.state.name}
             variant="filled"
           />
         </Grid>
@@ -111,6 +118,7 @@ export default function JobName(props) {
             multiline
             maxRows = "5"
             onChange={props.handleChange}
+            value={props.state.description}
             variant="filled"
           />
         </Grid>
@@ -121,12 +129,27 @@ export default function JobName(props) {
           <Typography textAlign="left" id="designCount" gutterBottom>
             Number of Designs
           </Typography>
-          <InputSlider name="designs" value={30} min={10} max = {100} step={1} sliderChange={props.handleChange} marks={marks} sx={{width:100}} />
+          <InputSlider
+            name="designs"
+            min={10}
+            max = {100}
+            step={1}
+            sliderChange={props.handleChange}
+            value={props.state.designs}
+            marks={marks}
+            sx={{width:100}}
+          />
         </Grid>
         <Grid item xs={12} sx={{alignProperty:"center", width:"100%"}}>
-          <BasicSelect name="preset" handleChange={handlePresetChange} label="Preset" items={{"TTR" : "TTR","TTR_MC":"TTR Monte Carlo"}}></BasicSelect>
+          <BasicSelect
+            name="preset"
+            handleChange={handlePresetChange}
+            label="Preset"
+            items={{"TTR" : "TTR","TTR_MC":"TTR Monte Carlo"}}
+            value={props.state.preset}
+          />
         </Grid>
-        {conditionalComponents(props,preset,pathLength,path,handlePathLengthChange)}
+        {conditionalComponents(props,pathLength,path,handlePathLengthChange)}
       </Grid>
     </React.Fragment>
   );
