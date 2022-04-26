@@ -13,22 +13,35 @@ import { ExpandMore } from '@mui/icons-material';
 import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox, textAlign } from '@mui/system';
-
+import CircularProgress from '@mui/material/CircularProgress';
 // to automate switching URLs when developing and when in the online portal.
 const BASEURL = window.location.origin;
 
 export default function PDBSettings(props) {
 
   const [cloudUpload, setCloudUpload] = useState(0);
-
   return (
     <React.Fragment>
       <Typography variant='h6' gutterBottom>
         Application Configuration
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <TextField name='startingBase' label='Starting Base Pair' variant='filled' onChange={props.handleChange} required/>
-        <TextField name='endingBase' label='Ending Base Pair' variant='filled' onChange={props.handleChange} required/>
+        <TextField
+          required
+          name='startingBase'
+          label='Starting Base Pair'
+          variant='filled'
+          value={props.state.startingBase}
+          onChange={props.handleChange}
+        />
+        <TextField
+          required
+          name='endingBase'
+          label='Ending Base Pair'
+          variant='filled'
+          value={props.state.endingBase}
+          onChange={props.handleChange}
+        />
       </Box>
       <br/>
       <div style={{ textAlign: 'left' }}>
@@ -42,7 +55,7 @@ export default function PDBSettings(props) {
           >
             What are base pair names?
           </a>
-        </p>    
+        </p>
       </div>
       <br/>
       <Typography variant="h6" gutterBottom>
@@ -68,7 +81,7 @@ export default function PDBSettings(props) {
             </Button>
           </label> 
           {/* Drag and Drop Box */}
-            <MyDropline></MyDropline>
+            <MyDropline fileState = {props.fileState}></MyDropline>
         </Grid>
         {/*
         <Grid item xs={12} md={6}>
@@ -94,32 +107,43 @@ export default function PDBSettings(props) {
   );
 }
 
-function MyDropline() {
+function MyDropline(fileState) {
  const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
    return acceptedFiles;
  }, [])
- const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-
- return (
-   <div {...getRootProps()}>
-     <img src = {dragNDropBox}/>
-     <input {...getInputProps()} />
-     {
-       isDragActive ?
-        <p>
-          <a>Submision requires a PDB containing RNA
-            <br></br> that has at least two basepair ends
-            <br></br> (Drag and drop here)
-          </a>
-        </p> :
-        <p>
-          <a>Submision requires a PDB containing RNA
-            <br></br> that has at least two basepair ends
-            <br></br> (Drag and drop here)
-          </a>
-        </p>
-     }
-   </div>
- )
+ const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+ console.log(fileState.fileState);
+ if(fileState.fileState==="UPLOADING")    // end my pain please
+ {
+   return(    //This needs to be centered but i don't know how to do it
+    <Box sx={{ display: 'flex' }}>
+    <CircularProgress />
+  </Box>
+   )
+ }
+ else
+ {
+  return (
+    <div {...getRootProps()}>
+      <img src = {dragNDropBox}/>
+      <input {...getInputProps()} />
+      {
+        isDragActive ?
+         <p>
+           <a>Submision requires a PDB containing RNA
+             <br></br> that has at least two basepair ends
+             <br></br> (Drag and drop here)
+           </a>
+         </p> :
+         <p>
+           <a>Submision requires a PDB containing RNA
+             <br></br> that has at least two basepair ends
+             <br></br> (Drag and drop here)
+           </a>
+         </p>
+      }
+    </div>
+   )
+ }
 }

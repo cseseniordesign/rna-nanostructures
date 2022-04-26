@@ -74,6 +74,11 @@ function SearchTable() {
   }
 
 function FileUpload() {
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'right',
+  });
     return (
         <div className="file-upload">
             <div className="container">

@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function BasicSelect(props) {
-    const [value, setValue] = React.useState('');
+    const [value, setValue] = React.useState(props.preset);
 
 
     const update = (event) => {
@@ -17,7 +17,7 @@ export default function BasicSelect(props) {
     function returnMenuItems(items)
     {
         var rows = []
-        for (const [key, value] of Object.entries(items)) 
+        for (const [key, value] of Object.entries(items))
         {
             rows.push(<MenuItem value={key}>{value}</MenuItem>)
         }
@@ -30,7 +30,7 @@ export default function BasicSelect(props) {
         <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>
         <Select
           name={props.name}
-          value={value}
+          value={props.value}
           label={props.label}
           onChange={update}
         > 
