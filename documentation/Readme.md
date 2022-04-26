@@ -17,4 +17,4 @@ Included in this documentation folder is
     - `user-manual.md`
 
 
-Documentation is also available in the [repository wiki](https://github.com/cseseniordesign/rna-nanostructures/wiki)
+Documentation is also available in the [repository wiki](https://github.com/cseseniordesign/rna-nanostructures/wiki/Documentation)
