@@ -178,7 +178,7 @@ The purposes of these classes is commented directly in the CSS.
 
 To edit HTML, see the __Editing Elements__ section above. This section will detail any possibly confusing sections of design.
 
-
+The Contacts page utilizes some custom HTML blocks as containers. For more information, see the __Home page__ section.
 
 ### Documentation Page
 
