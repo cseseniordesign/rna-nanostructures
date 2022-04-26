@@ -113,7 +113,7 @@ Wagtail will not code-check these blocks, so make sure nothing crashes the webpa
 Once you add a block, fill out the necessary information.
 The majority of them will give you a space that says *Custom Class*.
 Enter a specific and unique name for the class and you should be able to apply custom CSS later.
-Wagtail uses Bootstrap, so you can also use Bootstrap classes for my customization. Each element is in a row, so you can use Bootstrap Column classes for organization.
+**Wagtail uses Bootstrap, so you can also use Bootstrap classes for customization.** Each element is in a row, so you can use Bootstrap Column classes for organization.
 
 
 ### Editing CSS
@@ -129,6 +129,8 @@ _Note_, when you save the CSS, it will automatically apply to the whole website.
 There are no drafts, so be careful.
 If you are applying a risky change, be sure to save the previous code.
 
+As stated above, bootstrap classes are also used for styling. To learn more about the classes, see [Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+
 ## Current Website
 
 
@@ -140,19 +142,30 @@ If you are applying a risky change, be sure to save the previous code.
 * The overall aesthetic of the program
 It needs to be eye-catching, but not overwhelming
 
-**Specific Code**: 
+#### Specific Code
 
+To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Home Page ---` and contains the following classes currently: `home-heading`, `home-heading-text`, `home-heading-img`, `page-preview-wrapper`, `top-margin-big`, `home-heading-container`, `preview-col`
 ### Contacts Page
 
 **Purpose**: The purpose of the contacts page is to introduce the maintainers of the project as well as the developers. It needs to provide the users with points of contact in case something goes wrong or in case they want more information.
 
-**Specific Code**: 
+#### Specific Code
+
+To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Home Page ---` and contains the following classes currently: `contact-header`, `contact-heading-block`, `contact-container`, `contact-card-caption`, `caption-container`, `team-contact-container`, `team-contact-img`
+
+The purposes of these classes is commented directly in the CSS.
 
 ### Documentation Page
 
 **Purpose**: The purpose of the documentation page is to provide users with any open-source information regarding the project. This could be repositories, access to the console app, or information on how to use the application.
 
-**Specific Code**: 
+#### Specific Code
+
+To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Documentation Page ---` and contains two classes currently: `doc-header` and `doc-section`.
+
+**`doc-header`**: class used for the header of the documentation page. It currently centers the header and adds 50px of space below the header.
+
+**`doc-section`**: class used for each individual section of documentation. This class should be used for all future sections as well to maintain styling. It currently adds 20px of space below the element.
 
 ### About Page
 
