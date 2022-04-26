@@ -129,6 +129,31 @@ _Note_, when you save the CSS, it will automatically apply to the whole website.
 There are no drafts, so be careful.
 If you are applying a risky change, be sure to save the previous code.
 
+## Current Website
 
 
+### Home Page
 
+**Purpose**: The purpose of the home page is to quickly introduce new users to 
+* The purpose of the RNAMake Toolkit
+* Links to pages describing relevant information in more detail
+* The overall aesthetic of the program
+It needs to be eye-catching, but not overwhelming
+
+**Specific Code**: 
+
+### Contacts Page
+
+**Purpose**: The purpose of the contacts page is to introduce the maintainers of the project as well as the developers. It needs to provide the users with points of contact in case something goes wrong or in case they want more information.
+
+**Specific Code**: 
+
+### Documentation Page
+
+**Purpose**: The purpose of the documentation page is to provide users with any open-source information regarding the project. This could be repositories, access to the console app, or information on how to use the application.
+
+**Specific Code**: 
+
+### About Page
+
+**Purpose**: The purpose of the about page is to provide users with non-tutorial information about the project such as funding sources, lab information, news stories, or related papers/conference presentations.
