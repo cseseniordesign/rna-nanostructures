@@ -146,6 +146,20 @@ It needs to be eye-catching, but not overwhelming
 
 To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Home Page ---` and contains the following classes currently: `home-heading`, `home-heading-text`, `home-heading-img`, `page-preview-wrapper`, `top-margin-big`, `home-heading-container`, `preview-col`
 
+**`contact-header`**: class is used for the home page heading. It currently aligns the text in the center.
+
+**`home-heading-text`**: class is used for the main text box on the home page. Right now it just colors the heading text.
+
+**`home-heading-img`**: class is used for centering the RNA picture within its Bootstrap column. 
+
+**`page-preview-wrapper`**: class is used for positioning the container for "page previews" which are the hexagonal links to other pages.
+
+**`top-margin-big`**: class is used for creating a large top margin to maintain adequate spacing. It can be used anywhere in the project.
+
+**`home-heading-container`**: class is a container for the top portion of the page and is used for positioning the background image. It changes the opacity of the background at <600px
+
+**`preview-col`**: class is used for further positioning of the "page previews"
+
 #### HTML
 
 To edit HTML, see the __Editing Elements__ section above. This section will detail any possibly confusing sections of design.
