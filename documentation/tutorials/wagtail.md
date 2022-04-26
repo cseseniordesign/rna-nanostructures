@@ -142,30 +142,49 @@ As stated above, bootstrap classes are also used for styling. To learn more abou
 * The overall aesthetic of the program
 It needs to be eye-catching, but not overwhelming
 
-#### Specific Code
+#### CSS
 
 To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Home Page ---` and contains the following classes currently: `home-heading`, `home-heading-text`, `home-heading-img`, `page-preview-wrapper`, `top-margin-big`, `home-heading-container`, `preview-col`
+
+#### HTML
+
+To edit HTML, see the __Editing Elements__ section above. This section will detail any possibly confusing sections of design.
+
+
+
 ### Contacts Page
 
 **Purpose**: The purpose of the contacts page is to introduce the maintainers of the project as well as the developers. It needs to provide the users with points of contact in case something goes wrong or in case they want more information.
 
-#### Specific Code
+#### CSS
 
 To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Home Page ---` and contains the following classes currently: `contact-header`, `contact-heading-block`, `contact-container`, `contact-card-caption`, `caption-container`, `team-contact-container`, `team-contact-img`
 
 The purposes of these classes is commented directly in the CSS.
 
+#### HTML
+
+To edit HTML, see the __Editing Elements__ section above. This section will detail any possibly confusing sections of design.
+
+
+
 ### Documentation Page
 
 **Purpose**: The purpose of the documentation page is to provide users with any open-source information regarding the project. This could be repositories, access to the console app, or information on how to use the application.
 
-#### Specific Code
+#### CSS
 
 To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation page is under the CSS Comment `--- Documentation Page ---` and contains two classes currently: `doc-header` and `doc-section`.
 
 **`doc-header`**: class used for the header of the documentation page. It currently centers the header and adds 50px of space below the header.
 
 **`doc-section`**: class used for each individual section of documentation. This class should be used for all future sections as well to maintain styling. It currently adds 20px of space below the element.
+
+#### HTML
+
+To edit HTML, see the __Editing Elements__ section above. This section will detail any possibly confusing sections of design.
+
+Each Paragraph section can be duplicated and formatting will be preserved. Just ensure the classes `doc-section col-6` are the same in each new section. `col-6` is a bootstrap class that uses half the page (6/12 units of the page to be exact). If you would like to use a different proportion of the page, you can replace the number `6` with another number out of 12 to have the unit take up that proportion of space. Make sure any group of elements have column numbers adding up to 12 or else formatting will be wrong. if you would like to have one element on a line but have it take up less than 12 units of space, add a blank element and have  it cover the remaining columns.
 
 ### About Page
 
