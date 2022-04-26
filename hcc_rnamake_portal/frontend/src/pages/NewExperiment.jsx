@@ -32,14 +32,14 @@ const BASEURL = window.location.origin;
 const steps = ['Description', 'Settings', 'Review'];
 
 
-function getStepContent(step, handleChange, state, settings, handleUpload) {
+function getStepContent(step, handleChange, state, handleUpload, fileState) {
   switch (step) {
     case 0:
       return <JobName handleChange={handleChange} state={state}/>;
     case 1:
-      return <PDBSettings handleChange={handleChange} state={state} handleUpload={handleUpload}/>;
+      return <PDBSettings handleChange={handleChange} state={state} handleUpload={handleUpload} fileState = {fileState}/>;
     case 2:
-      return <Review settings={settings}/>;
+      return <Review settings={state}/>;
   //  case 3:
   //    return <Designs />;
   //  case 4:
@@ -113,6 +113,7 @@ const theme = createTheme();
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [open, setOpen] = React.useState(false);
+  const [fileState, setFileState] = React.useState("NONE");
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
@@ -141,8 +142,8 @@ export default function Checkout() {
     const name = e.target.name;
     const file = e.target.files[0];
     const formData  = new FormData();
+    setFileState("UPLOADING");
     formData.append('file', file);
-    //console.log(formData);
     fetch(BASEURL + "/api/upload",{
       credentials: 'include',
       mode: 'cors',
@@ -158,6 +159,7 @@ export default function Checkout() {
       (result)=> {
         fileName = file['name'];
         setOpen(true);
+        setFileState("COMPLETE");
         console.log(result['data-product']['productUri']);
         setSubmissionInfo(prevState => ({
           ...prevState,
@@ -223,7 +225,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, handleChange, submissionInfo, handleUpload)}
+                {getStepContent(activeStep, handleChange, submissionInfo, handleUpload,fileState)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button style={{ color:'#4C5F94' }} onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
