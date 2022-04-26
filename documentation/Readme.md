@@ -14,5 +14,7 @@ Included in this documentation folder is
 - User Manual
     - `user-manual.md`
 
+The `airavata-docs` folder contains documentation for the Airavata Portal specifically.
+
 
 Documentation is also available in the [repository wiki](https://github.com/cseseniordesign/rna-nanostructures/wiki/Documentation)
