@@ -15,13 +15,9 @@ import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
-<<<<<<< HEAD
 import Snackbar from '@mui/material/Snackbar';
 import Grow from '@mui/material/Grow';
 import Alert from '@mui/material/Alert';
-=======
-// import { responsiveProperty } from '@mui/material/styles/cssUtils';
->>>>>>> dev
 
 function Copyright() {
   return (
