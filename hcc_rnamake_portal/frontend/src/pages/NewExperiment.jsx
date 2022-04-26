@@ -15,7 +15,9 @@ import PDBSettings from './PDBSettings';
 //import PaymentForm from './PaymentForm';
 import Review from './Review.jsx';
 import Cookies from 'js-cookie';
-// import { responsiveProperty } from '@mui/material/styles/cssUtils';
+import Snackbar from '@mui/material/Snackbar';
+import Grow from '@mui/material/Grow';
+import Alert from '@mui/material/Alert';
 
 function Copyright() {
   return (
@@ -30,14 +32,14 @@ const BASEURL = window.location.origin;
 const steps = ['Description', 'Settings', 'Review'];
 
 
-function getStepContent(step, handleChange, settings, handleUpload) {
+function getStepContent(step, handleChange, state, handleUpload, fileState) {
   switch (step) {
     case 0:
-      return <JobName handleChange={handleChange} />;
+      return <JobName handleChange={handleChange} state={state}/>;
     case 1:
-      return <PDBSettings handleChange={handleChange} handleUpload={handleUpload}/>;
+      return <PDBSettings handleChange={handleChange} state={state} handleUpload={handleUpload} fileState = {fileState}/>;
     case 2:
-      return <Review settings={settings}/>;
+      return <Review settings={state}/>;
   //  case 3:
   //    return <Designs />;
   //  case 4:
@@ -49,6 +51,7 @@ function getStepContent(step, handleChange, settings, handleUpload) {
   }
 }
 
+let fileName;
 
 
 const theme = createTheme();
@@ -109,25 +112,26 @@ const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
-  //This is becoming something of a God object
+  const [open, setOpen] = React.useState(false);
+  const [fileState, setFileState] = React.useState("NONE");
   const [submissionInfo, setSubmissionInfo] = React.useState({
     name:'',
     description:'',
-    designs:'10',
+    designs:'',
     scaffolds:'1',
     timeLimit:'',
     startingBase:'',
     endingBase:'',
     localUpload:'',
     searchCutoff:'',
-    logLevel: "debug",
+    logLevel: 'debug',
     motifPath:'',
     preset:''
   });
 
   const handleChange = e => {
     const { name, value } = e.target;
-    console.log({name,value});
+    //console.log({name,value});
     setSubmissionInfo(prevState => ({
         ...prevState,
         [name]: value
@@ -138,9 +142,8 @@ export default function Checkout() {
     const name = e.target.name;
     const file = e.target.files[0];
     const formData  = new FormData();
+    setFileState("UPLOADING");
     formData.append('file', file);
-    console.log(formData);
-    console.log(Cookies.get('csrftoken'));
     fetch(BASEURL + "/api/upload",{
       credentials: 'include',
       mode: 'cors',
@@ -150,9 +153,13 @@ export default function Checkout() {
       },
       body : formData,
     })
-    .then(result => result.json())
+    .then(result => result.json()
+    )
     .then(
       (result)=> {
+        fileName = file['name'];
+        setOpen(true);
+        setFileState("COMPLETE");
         console.log(result['data-product']['productUri']);
         setSubmissionInfo(prevState => ({
           ...prevState,
@@ -161,9 +168,12 @@ export default function Checkout() {
       }
     )
     console.log({name, file});
+
   };
 
-
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -178,6 +188,7 @@ export default function Checkout() {
   };
 
   return (
+    <div>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar
@@ -189,7 +200,7 @@ export default function Checkout() {
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
-      </AppBar>
+      </AppBar>ize(string) expects a string argument.
       <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
@@ -214,7 +225,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, handleChange, submissionInfo, handleUpload)}
+                {getStepContent(activeStep, handleChange, submissionInfo, handleUpload,fileState)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
                     <Button style={{ color:'#4C5F94' }} onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
@@ -230,8 +241,14 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
+        <Copyright />  
       </Container>
     </ThemeProvider>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
+                {fileName} has been successfully uploaded!
+                </Alert>
+              </Snackbar>
+    </div>
   );
 }
