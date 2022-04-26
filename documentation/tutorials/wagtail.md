@@ -150,7 +150,19 @@ To Edit CSS, see the __Edit CSS__ section above. The CSS for the documentation p
 
 To edit HTML, see the __Editing Elements__ section above. This section will detail any possibly confusing sections of design.
 
-
+The Home page utilizes some custom HTML blocks in order to maintain positioning and flexibility. These are used to add surrounding `div`s (containers) to elements. There will be pairs of blocks surrounding the elements with the first containing one or more divs like follows:
+```HTML
+<div class="classes">
+```
+and the second will have the exact same number of closing tags as follows
+```HTML
+</div>
+```
+or it will also contain a new opening tag which will be closed in a subsequent blocl
+```HTML
+</div>
+<div class="classes">
+```
 
 ### Contacts Page
 
