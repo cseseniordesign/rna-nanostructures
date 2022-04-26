@@ -165,9 +165,8 @@ The process documentation will include (release by release)
 ### Risks & Roadblocks
 
 1. HTCondor and Jetstream access
-    1. Wait was on Indiana
-    2. No longer and issue, the team has access now
-2. Team was down with the sickness (not in a good way)
+    1. Wait was due to external support delay and team has access now
+2. Team was sick
 3. Slowdown with ReactJS/Django integration
 
 ## Release 5
