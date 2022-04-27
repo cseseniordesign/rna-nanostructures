@@ -1,30 +1,35 @@
 import React, { useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Collapse from '@mui/material/Collapse';
-import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import corner_swoosh from '../graphics/corner_swoosh.svg';
-import LinearProgress from '@mui/material/LinearProgress';
 import zipFileImage from '../images/zip-card-dark.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Accordion, AccordionDetails, AccordionSummary, CardActionArea, Container, Divider, Paper, Stack } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, CardActionArea, Divider, Paper, Stack } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
+/**
+ * asynchronous loadExperimentDetails()
+ * @param {*} experimentId 
+ * @returns experiment details based on experiment ID
+ */
 async function loadExperimentDetails(experimentId) {
   const data = await window.AiravataAPI.utils.FetchUtils.get(
     "/api/experiments/" + experimentId,
     ""
   );
-  // console.log(data);
   return data;
 }
 
+/**
+ * asynchronous loadExperimentFiles()
+ * @param {*} experimentId 
+ * @returns experiment files based on experiment ID
+ */
 async function loadExperimentFiles(experimentId) {
   const data = await window.AiravataAPI.utils.FetchUtils.get(
     "/api/experiment-storage/" + experimentId,
@@ -33,6 +38,11 @@ async function loadExperimentFiles(experimentId) {
   return data;
 }
 
+/**
+ * asynchronous getUriData()
+ * @param {*} uri 
+ * @returns URI data from Airavata API call
+ */
 async function getUriData(uri) {
   const result = await window.AiravataAPI.utils.FetchUtils.get(
     uri,
@@ -44,6 +54,12 @@ async function getUriData(uri) {
   return result;
 }
 
+/**
+ * formatDesignLinks
+ * @param {*} design 
+ * @param {*} index 
+ * @returns formatted links to the designs
+ */
 function formatDesignLinks(design, index) {
   if(index % 10 === 0 && index !== 0) {
     return (
@@ -51,21 +67,38 @@ function formatDesignLinks(design, index) {
     )
   } else {
     return (
+      // the span creates adequate spacing
       <><span>&nbsp;&nbsp;&nbsp;</span><a class="action-link" href={design[1]}>{design[0]}</a></> 
     )
   }
 }
 
+/**
+ * formatDate
+ * @param {*} creationTime 
+ * @returns basic formatted date for creation time
+ */
 const formatDate = (creationTime) => {
   const date = creationTime.split("T");
   return date[0];
 }
 
+/**
+ * formatZipName
+ * @param {*} experimentName 
+ * @returns zip file name with the format experimentName_ARCHIVE.zip
+ */
 const formatZipName = (experimentName) => {
   const zipName = experimentName.replace(" ", "_") + "_ARCHIVE.zip";
   return zipName;
 }
 
+/**
+ * formatJobStatus
+ * @param {*} experimentStatusLength 
+ * @returns COMPLETED (a formatted notification span) if the status length is 4, 
+ *          FAILED otherwise
+ */
 const formatJobStatus = (experimentStatusLength) => {
   const COMPLETED = <span style={{color:'green'}}>COMPLETED</span>
   const FAILED = <span style={{color:'#d01818'}}>FAILED</span>
@@ -77,6 +110,11 @@ const formatJobStatus = (experimentStatusLength) => {
   }
 }
 
+/**
+ * GetSummary()
+ * @param {*} props 
+ * @returns Summary of job submission results
+ */
 function GetSummary(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [stdOut, setStdOut] = useState();
@@ -98,8 +136,10 @@ function GetSummary(props) {
     setViewStderr((prev) => !prev);
   }
 
+  /**
+   * Load the files (stderr, stdout, design, and pdb files) for an experiment by the experiment ID
+   */
   useEffect(()=>{
-    // let response;
     loadExperimentFiles(props.experimentId).then(
       (result) => {
         for (var i=0; i<result['files'].length; i++) {
@@ -126,6 +166,9 @@ function GetSummary(props) {
     )
   },[])
   
+  /**
+   * returns a Loading notification if the elements aren't ready and otherwise returns a summary of the job
+   */
   if (!isLoaded) {
     return (<div></div>);
   } else {
@@ -136,6 +179,7 @@ function GetSummary(props) {
         <Typography variant='h6'>Creation Date: {formatDate(experimentDetails.creationTime)}</Typography>
         <Typography variant='h3'>Download Job Results</Typography>
         <Card sx={{maxWidth: 345}}>
+          {/* Zip File */}
           <CardActionArea href={archive}>
             <CardMedia
             component='img'
@@ -151,6 +195,7 @@ function GetSummary(props) {
             </CardContent>
           </CardActionArea>
         </Card>
+        {/* Individual PDB Download */}
         <Accordion sx={{width:'100%'}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content'>
             <Typography variant='h5'>Download Individual Designs</Typography>
@@ -170,10 +215,12 @@ function GetSummary(props) {
           <Typography variant='h6' align='left'>Number of designs: {experimentDetails.experimentInputs[1].value}</Typography>
           </AccordionDetails>
         </Accordion>
+        {/* Stdout */}
         <FormControlLabel control={<Switch checked={viewStdout} onChange={handleStdOutChange} />} label="Preview Standard Output"/>
         <Collapse orientation="vertical" in={viewStdout}>
           <textarea wrap="off" id="stdoutbox" rows="90" cols="120" name="w3review" readonly="true" value={stdOut}>  </textarea>
         </Collapse>
+        {/* Stderr */}
         <FormControlLabel control={<Switch checked={viewStderr} onChange={handleStdErrChange} />} label="Preview Standard Error"/>
         <Collapse orientation="vertical" in={viewStderr}>
           <textarea wrap="off" id="stderrbox" rows="90" cols="120" name="w3review" readonly="true" value={stdErr}>  </textarea>
@@ -183,6 +230,10 @@ function GetSummary(props) {
   }
 }
 
+/**
+ * JobSummary()
+ * @returns one element with the job summary information
+ */
 function JobSummary() {
   const params = useParams();
   return (
