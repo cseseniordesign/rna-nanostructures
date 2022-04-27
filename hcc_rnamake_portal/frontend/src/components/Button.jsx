@@ -8,6 +8,11 @@ const STYLES = [
 
 const SIZES = ["btn--medium", "btn--large", 'btn--xlarge'];
 
+/**
+ * Button
+ * @param {*} param0 
+ * @returns dynamic buttom
+ */
 export const Button = ({
   id,
   children,

@@ -8,6 +8,11 @@ import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRound
 import AppBar from '@mui/material/AppBar';
 import { Container, Toolbar } from '@mui/material';
 
+/**
+ * Navigation()
+ * self explanatory
+ * @returns Navigation Bar
+ */
 function Navigation() {
     let history = useHistory();
     return (

@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -17,10 +16,27 @@ import { FixedSizeList } from 'react-window';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 /* eslint-disable react/prop-types */ // TODO: this should not be necessary but i have no idea what i'm doing and this makes things work
+
+/**
+ * Use this component to help implement Cloud Upload
+ */
+
+/**
+ * createData()
+ * @param {*} name 
+ * @param {*} size 
+ * @param {*} time 
+ * @returns relevant data in the correct data type
+ */
 function createData(name, size, time) {
   return { name, size, time };
 }
 
+/**
+ * FileExplorer()
+ * @param {*} props 
+ * @returns file list formatted in a table
+ */
 export default function FileExplorer(props)
 {
   const [fileChosen, setFileChosen] = useState("none");
