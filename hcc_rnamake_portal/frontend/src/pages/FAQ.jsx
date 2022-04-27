@@ -2,8 +2,11 @@ import React from "react";
 import { Accordion, AccordionDetails, AccordionSummary, Container, Grid, Typography} from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import basepair from "../images/basepair.png";
-import corner_swoosh from '../graphics/corner_swoosh.svg';
 
+/**
+ * FAQ()
+ * @returns Entire FAQ page
+ */
 function FAQ() {
     return (
         <Container>
@@ -90,8 +93,17 @@ function FAQ() {
                         </a>
                     </AccordionDetails>
                 </Accordion>
-                {/* To add more 2-column FAQ items, use the same grid format as above*/}
-                {/* For 1-column FAQ items, use lg={12} instead of lg={6} and just use one Grid item*/}
+                {/* To add more 2-column FAQ items, use the same generic accordion format as below*/}
+                {/**
+                 * <Accordion>
+                 *      <AccordionSummary expandIcon={<ExpandMore />} aria-controls='panel1b'>
+                 *          <Typography variant='h5' align='left'>FAQ ITEM TITLE</Typography>
+                 *      </AccordionSummary>
+                 *      <AccordionDetails align={'left'}>
+                 *          FAQ ANSWER
+                 *      </AccordionDetails>
+                 * </Accordion>
+                 */}
             </Grid>
         </Container>
     );

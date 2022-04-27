@@ -8,14 +8,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+/**
+ * FileUpload Page is not currently in use, but could be modified to maintain cloud uploads
+ */
 
+/**
+ * SearchTable()
+ * @returns a searchable table with manually entered data
+ */
 function SearchTable() {
+    /**
+     * Creates data in the correct format for the table
+     * @param {*} filename 
+     * @param {*} user 
+     * @param {*} uploadTime 
+     * @returns 
+     */
     function createData(filename, user, uploadTime) {
         return {filename, user, uploadTime};
     }
 
     var search ='';
     
+    // Test Data
     var rows = [
         createData("file(1).txt", "default-admin", (new Date()).toString()),
         createData("file.txt", "default-admin", (new Date()).toString()),
@@ -25,7 +40,12 @@ function SearchTable() {
         event.preventDefault();
         search = event.target.value;
     };
-
+    
+    /**
+     * fitsSearch(val)
+     * @param {int} val search query
+     * @returns a boolean regarding if a filename includes a search term
+     */
     function fitsSearch(val) {
         return val.filename.includes(search);
     }
@@ -36,6 +56,7 @@ function SearchTable() {
           <TableHead className="FileUploadHeader">
             <TableRow>
                 <TableCell colSpan={2}>
+                    {/* Search Box */}
                     <label htmlFor="search">
                         Search Files: &nbsp; &nbsp; 
                         <input type="text" id="search" onChange={() => handleSearch} />
@@ -43,6 +64,7 @@ function SearchTable() {
                 </TableCell>
                 <TableCell colSpan={2}>
                     <label htmlFor="search">
+                        {/* File Upload */}
                         Upload Files: &nbsp; &nbsp; 
                         <input type="file" id="file" multiple/>
                     </label>
@@ -56,6 +78,7 @@ function SearchTable() {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* Dynamically fills table with information that fits the search from the element `rows` */}
             {rows.filter(fitsSearch).map((row) => (
               <TableRow
                 key={row.name}
@@ -73,6 +96,10 @@ function SearchTable() {
     );
   }
 
+/**
+ * FileUpload()
+ * @returns formatted Search Table
+ */
 function FileUpload() {
   const [state, setState] = React.useState({
     open: false,

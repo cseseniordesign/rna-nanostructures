@@ -9,18 +9,10 @@ import Paper from '@mui/material/Paper';
 import corner_swoosh from '../graphics/corner_swoosh.svg';
 import { Link } from 'react-router-dom';
 
-//function createData(name, application, user, creationTime, status, actions) {
-//  return {name, application, user, creationTime, status, actions};
-//}
-
-//const rows = [
-//  createData('Clone of Design RNA Scaffold on May 25, 2021 4:11 PM', "Design RNA Scaffold", "default-admin", "3 days ago", "Canceling", "Clone"),
-//  createData('Clone of Design RNA Scaffold on May 25, 2021 4:12 PM', "Design RNA Scaffold", "default-admin", "3 days ago", "Creating", "Clone"),
-//  createData('Design RNA Scaffold on May 25, 2021 4:11 PM', "Design RNA Scaffold", "default-admin", "3 days ago", "Failed", "Clone"),
-//  createData('Clone of Design RNA Scaffold on Apr 30, 2021 4:25 AM', "Design RNA Scaffold", "default-admin", "3 days ago", "Created", "Clone"),
-//  createData('Clone of Clone of Clone of Design RNA Scaffold on Apr 30, 2021 4:25 AM', "Design RNA Scaffold", "default-admin", "3 days ago", "Created", "Clone"),
-//];
-
+/**
+ * loadExperiments()
+ * @returns Experiments run by the current session's user
+ */
 async function loadExperiments()
 {
   const data = await window.AiravataAPI.services.ExperimentSearchService.list({
@@ -30,14 +22,19 @@ async function loadExperiments()
   return data;
 }
 
+/**
+ * BasicTable()
+ * @returns Past Experiments table with Name, Creation Time, and Status
+ */
 function BasicTable() {
-  //const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
+  /**
+   * Load Experiments
+   */
   useEffect(()=>{
     loadExperiments()
-   // console.log(res)
     .then(result => result.results)
     .then(
       (result) =>{
@@ -46,11 +43,11 @@ function BasicTable() {
         setIsLoaded(true);
       }
     )
-    //console.log(results);
-   // setItems(results.json());
-   // setIsLoaded(true);
   },[])
 
+  /**
+   * Return table with loaded experiment data if said data has loaded yet. Otherwise return a loading notification
+   */
  if (!isLoaded)
   {
     return <div>Loading...</div>;
@@ -79,9 +76,12 @@ function BasicTable() {
             {items.map((row) =>
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
+                  {/* Link to the experiment summary */}
                   <Link to={'job-summary/' + row.experimentId}>{row.name}</Link>
-                  </TableCell>
+              </TableCell>
+              {/* Dynamically generated creation time */}
               <TableCell align="center">{row.creationTime.toDateString() + " " + row.creationTime.toTimeString()}</TableCell>
+              {/* Dynamically generated status */}
               <TableCell align="center">{row.experimentStatus.name}</TableCell>
             </TableRow>
             )}
@@ -92,6 +92,10 @@ function BasicTable() {
   }
 }
 
+/**
+ * PastExperiments()
+ * @returns Table of Past Experiments
+ */
 function PastExperiments() {
   return (
       <div className="past-experiments">

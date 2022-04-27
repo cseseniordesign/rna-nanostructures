@@ -2,7 +2,6 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-// import BasicMenu from '../components/BasicMenu';
 import InputSlider from '../components/InputSlider';
 import BasicSelect from '../components/BasicSelect';
 import Radio from '@mui/material/Radio';
@@ -10,10 +9,17 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-// import { useState } from 'react';
 
-// const scaffoldCount = 1;
 
+/**
+ * conditionalComponents()
+ * @param {*} props 
+ * @param {*} preset 
+ * @param {*} pathLength 
+ * @param {*} path 
+ * @param {*} handlePathLengthChange 
+ * @returns certain component choices based on the preset given
+ */
 function conditionalComponents(props,preset,pathLength,path,handlePathLengthChange)
 {
   if(props.state.preset==="TTR")
@@ -55,6 +61,11 @@ function conditionalComponents(props,preset,pathLength,path,handlePathLengthChan
   
 }
 
+/**
+ * JobName()
+ * @param {*} props 
+ * @returns initial job information form
+ */
 export default function JobName(props) {
   const [preset, setPreset] = React.useState('');
   const [pathLength, setPathLength] = React.useState(0);
@@ -80,6 +91,7 @@ export default function JobName(props) {
       setPathLength(event.target.value);
   };
 
+  // range of values for number of designs
   const marks = [
     {
       value: 10,
@@ -96,6 +108,7 @@ export default function JobName(props) {
         Project Name/Description
       </Typography>
       <Grid container spacing={3}>
+        {/* Job Name Textbox */}
         <Grid item xs={12} sm={8} sx={{alignProperty:"left", width:"50%"}}>
           <TextField
             required
@@ -109,6 +122,7 @@ export default function JobName(props) {
             variant="filled"
           />
         </Grid>
+        {/* Job Description Textbox */}
         <Grid item xs={12} sm={8} sx={{alignProperty:"center", width:"100%"}}>
           <TextField
             id="description"
@@ -129,6 +143,7 @@ export default function JobName(props) {
           <Typography textAlign="left" id="designCount" gutterBottom>
             Number of Designs
           </Typography>
+          {/* Design number slider, uses marks defined above */}
           <InputSlider
             name="designs"
             min={10}
@@ -141,6 +156,7 @@ export default function JobName(props) {
           />
         </Grid>
         <Grid item xs={12} sx={{alignProperty:"center", width:"100%"}}>
+          {/* Preset */}
           <BasicSelect
             name="preset"
             handleChange={handlePresetChange}
@@ -149,6 +165,7 @@ export default function JobName(props) {
             value={props.state.preset}
           />
         </Grid>
+        {/* Generates additional options based on preset */}
         {conditionalComponents(props,pathLength,path,handlePathLengthChange)}
       </Grid>
     </React.Fragment>

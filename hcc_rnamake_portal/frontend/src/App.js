@@ -1,7 +1,6 @@
 import {React,useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navigation,  Workspace, PastExperiments, NewExperiment, FileUpload, FAQ } from './index.js';
-// import helix from './Graphics/helix.svg';
 import './App.css';
 import JobSummary from './pages/JobSummary.jsx';
 
@@ -21,6 +20,7 @@ function App() {
               <Switch>
                   <Route path="/rnamake_portal/workspace" exact component={() => <Workspace />} />
                   <Route path="/rnamake_portal/past-experiments" exact component={() => <PastExperiments />} />
+                  {/* Uncomment the below line to add File Upload to the routing */}
                   {/* <Route path="/rnamake_portal/file-upload" exact component={() => <FileUpload />} /> */}
                   <Route path="/rnamake_portal/new-experiment" exact component={() => <NewExperiment />} />
                   <Route path="/rnamake_portal/FAQ" exact component={() => <FAQ />} />

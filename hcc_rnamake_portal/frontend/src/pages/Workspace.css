@@ -19,6 +19,7 @@
   justify-content: center;
 }
 
+/* formatting for table */
 .recent-exp {
   background-color: #fff;
   width: 20%;
@@ -30,25 +31,29 @@
   width: 50%;
 }
 
+/* Positioning of RNA SVG */
 .rna-svg {
   float: right;
-  /* width: 25%; */
 }
 
+/* Font for experiments */
 .exp-font {
   font-family: "Chivo";
   font-size: 24px;
 }
 
+/* Positioning for scaffold button */
 .scaffold-button {
   margin-top: 50%;
 }
 
+/* helix icon for running experiments */
 .helix-icon {
   height: 80px;
   pointer-events: none;
 }
 
+/* Spin of helix */
 @media (prefers-reduced-motion: no-preference) {
   .helix-icon {
     animation: helix-icon-spin infinite 2s linear;

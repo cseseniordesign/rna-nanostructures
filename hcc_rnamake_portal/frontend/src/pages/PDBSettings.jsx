@@ -1,5 +1,3 @@
-
-//import * as React from 'react';
 import React, { useState, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -14,9 +12,15 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import { Box, flexbox, textAlign } from '@mui/system';
 import CircularProgress from '@mui/material/CircularProgress';
+
 // to automate switching URLs when developing and when in the online portal.
 const BASEURL = window.location.origin;
 
+/**
+ * PDBSettings()
+ * @param {*} props 
+ * @returns form for base pair and pdb submission
+ */
 export default function PDBSettings(props) {
 
   const [cloudUpload, setCloudUpload] = useState(0);
@@ -26,6 +30,7 @@ export default function PDBSettings(props) {
         Application Configuration
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        {/* Starting Base Pair */}
         <TextField
           required
           name='startingBase'
@@ -34,6 +39,7 @@ export default function PDBSettings(props) {
           value={props.state.startingBase}
           onChange={props.handleChange}
         />
+        {/* Ending Base Pair */}
         <TextField
           required
           name='endingBase'
@@ -107,6 +113,11 @@ export default function PDBSettings(props) {
   );
 }
 
+/**
+ * MyDropline()
+ * @param {*} fileState 
+ * @returns Drag and Drop Box
+ */
 function MyDropline(fileState) {
  const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
