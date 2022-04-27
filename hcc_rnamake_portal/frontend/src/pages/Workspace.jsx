@@ -13,14 +13,16 @@ import rnaHelix from "../graphics/rna-helix.png";
 import ReportIcon from "@mui/icons-material/Report";
 import Divider from "@mui/material/Divider";
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import Cookies from 'js-cookie';
 
 const BASEURL = window.location.origin;
 
-// used fetch instead of airavata api to fetch the data because every time the airavata api is called it has a loading screen.
+/**
+ * asynchronous loadExperiments()
+ * used fetch instead of airavata api to fetch the data because every time the airavata api is called it has a loading screen.
+ * @returns experiments for the session user
+ */
 async function loadExperiments() {
 const data = fetch(BASEURL + "/api/experiment-search/?limit=5&offset=0&USER_NAME="+ window.AiravataAPI.session.Session.username,{
   credentials: 'include',
@@ -30,6 +32,11 @@ const data = fetch(BASEURL + "/api/experiment-search/?limit=5&offset=0&USER_NAME
   return data;
 }
 
+/**
+ * renderStatusIcon()
+ * @param {*} experimentStatus 
+ * @returns correct and formatted icon depending on status
+ */
 function renderStatusIcon(experimentStatus) {
   if (experimentStatus === "LAUNCHED" || experimentStatus === "EXECUTING") {
     return (
@@ -52,6 +59,14 @@ function renderStatusIcon(experimentStatus) {
   }
 }
 
+/**
+ * goToExperiment()
+ * opens experiment page if the experiment is done running
+ * @param {*} history 
+ * @param {*} experimentId 
+ * @param {*} experimentStatus 
+ * @param {*} setOpen 
+ */
 function goToExperiment(history, experimentId, experimentStatus,setOpen) {
   if(experimentStatus === "COMPLETED" || experimentStatus === "FAILED") {
     history.push("/rnamake_portal/job-summary/" + experimentId);
@@ -60,20 +75,27 @@ function goToExperiment(history, experimentId, experimentStatus,setOpen) {
   }
 }
 
+/**
+ * BasicList()
+ * @returns List/Table of Recent Experiments
+ */
 function BasicList() {
   let history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
-  const [open, setOpen] = React.useState(false);
+  // determines whether to open the experiments page based on status
+  const [open, setOpen] = React.useState(false); 
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
+  /**
+   * Fetch results
+   */
   useEffect(() => {
     loadExperiments()
       .then((result) => result.json())
@@ -102,19 +124,23 @@ function BasicList() {
     return (
       <Box>
         <List>
+          {/* Information for each recent experiment */}
           {items.map((row) => (
             <React.Fragment>
               <Divider />
               <ListItem disablePadding>
+                {/* Link to experiment information */}
                 <ListItemButton
                   sx={{height: "150px"}}
                   onClick={() => {
                     goToExperiment(history, row.experimentId, row.experimentStatus, setOpen);
                   }}
                 >
+                  {/* Status Icon */}
                   <ListItemIcon>
                     {renderStatusIcon(row.experimentStatus)}
                   </ListItemIcon>
+                  {/* Status verbiage */}
                   <ListItemText
                     primary={row.name}
                     secondary={row.experimentStatus}
@@ -123,6 +149,7 @@ function BasicList() {
                 </ListItemButton>
               </ListItem>
               <Divider />
+              {/* Incomplete Job Error */}
               <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" variant="filled" sx={{width: '100%'}}>
                   Job is not complete, please wait for it to finish executing.
@@ -136,6 +163,10 @@ function BasicList() {
   }
 }
 
+/**
+ * Workspace()
+ * @returns full Workspace page
+ */
 function Workspace() {
   let history = useHistory(); // used for rerouting to another page.
   return (
@@ -146,6 +177,7 @@ function Workspace() {
         <br/>
         <br/>
         <br/>
+        {/* New Experiment Button */}
         <Button
           onClick={() => {
             history.push("/rnamake_portal/new-experiment");
@@ -159,6 +191,7 @@ function Workspace() {
       </Grid>
       <Grid item xs={4}>
         <Paper>
+          {/* List of Recent Experiments */}
           <Typography variant="h5">
             <br/>
             Recent Jobs
