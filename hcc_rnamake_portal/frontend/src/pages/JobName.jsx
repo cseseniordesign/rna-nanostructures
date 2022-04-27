@@ -64,7 +64,7 @@ function conditionalComponents(props,preset,pathLength,path,handlePathLengthChan
 /**
  * JobName()
  * @param {*} props 
- * @returns job form
+ * @returns initial job information form
  */
 export default function JobName(props) {
   const [preset, setPreset] = React.useState('');
